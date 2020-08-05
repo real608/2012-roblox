@@ -1,0 +1,701 @@
+<%- include('../header'); %>
+
+<div id="profile-info" data-user-id="<%= userId %>"></div>
+
+<!-- My Roblox subMenu; show if user logged in -->
+
+<div class="MyRobloxContainer">
+
+    <div style="width:900px;height:30px;font-family:Verdana, Helvetica, Sans-Serif; clear:both; display:none;">
+        <span id="ctl00_cphRoblox_rbxHeaderPane_nameRegion"
+            style="font-size:20px; font-weight:bold;"><%= username %></span>
+    </div>
+
+
+
+
+    <div style="clear: both; margin: 0; padding: 0;">
+    </div>
+    <!--[if IE 6]>
+              <table><tr><td width="450px" valign="top">
+              <![endif]-->
+    <div class="Column1d">
+
+
+        <div class="StandardBoxHeader">
+            <span id="ctl00_cphRoblox_rbxUserPane_lUserRobloxURL"><%= username %>'s Profile</span></div>
+        <div class="StandardBox" style="position: relative">
+
+            <div style="width: 100%">
+                <div id="ctl00_cphRoblox_rbxUserPane_onlineStatusRow">
+                    <div style="text-align: center;">
+
+                        <span id="ctl00_cphRoblox_rbxUserPane_lUserOnlineStatus" class="UserOfflineMessage">[ Offline
+                            ]</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <center>
+                            <div style="margin-bottom: 10px;">
+                                <span style="font-size: 13px;">
+                                    <a id="ctl00_cphRoblox_rbxUserPane_hlUserRobloxURL"
+                                        href="User.aspx?ID=2">http://www.roblox.com/User.aspx?ID=2</a></span><br />
+
+                            </div>
+                            <a id="ctl00_cphRoblox_rbxUserPane_AvatarImage" disabled="disabled" title="<%= username %>"
+                                onclick="return false" style="display:inline-block;height:200px;width:200px;"><img
+                                    src="/Thumbnail/User.ashx?id=<%= userId %>" height="200" width="200" border="0"
+                                    onerror="return Roblox.Controls.Image.OnError(this)" alt="<%= username %>" /></a>
+                            <br />
+
+
+
+                            <br />
+                            <div class="UserBlurb" style="overflow-y: auto; max-height: 450px;">
+                                <span
+                                    id="ctl00_cphRoblox_rbxUserPane_rbxPublicUser_lBlurb"><%= profileDescription %></span>
+                            </div>
+                            <style type="text/css">
+                                .useroptionslink {
+                                    display: inline;
+                                }
+                            </style>
+
+                            <div style="font-weight:bold; font-size:13px;text-align:center;">
+                                <div class="useroptionslink">
+                                    <a id="party_link" style="display:none;" href="#"
+                                        onclick="ChatBar.ShowFriends();Party.InviteUser('<%= username %>');return false;">Invite
+                                        To Party</a>&nbsp;&nbsp;
+                                </div>
+                                <div class="useroptionslink">
+                                    <a id="chat_link" style="display:none;" href="#"
+                                        onclick="ChatBar.ShowFriends();ChatBar.ToggleChat('2', '<%= username %>');return false;">Start
+                                        Chatting</a>&nbsp;&nbsp;
+                                </div>
+                                <div class="useroptionslink">
+
+                                    &nbsp;&nbsp;
+                                </div>
+                                <div class="useroptionslink">
+
+
+
+
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                            <br />
+                            <div class="ProfileAlertPanel"
+                                style="display: none; margin: 15px auto 0px auto; width: 205px;">
+
+                                <br />
+                            </div>
+
+
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="StandardTabWhite">
+            <span>ROBLOX Badges</span>
+        </div>
+
+        <div class="StandardBoxWhite">
+            <table id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges" cellspacing="0" align="Center" border="0"
+                style="border-collapse:collapse;">
+                <tr>
+                    <td>
+                        <div class="Badge">
+                            <div class="BadgeImage"><a id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl00_hlHeader"
+                                    href="Badges.aspx"><img id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl00_iBadge"
+                                        src="/img/Badges/Veteran.png?v=2"
+                                        alt="This decoration is awarded to all citizens who have played ROBLOX for at least a year. It recognizes stalwart community members who have stuck with us over countless releases and have helped shape ROBLOX into the game that it is today. These medalists are the true steel, the core of the Robloxian history ... and its future."
+                                        style="height:75px;border-width:0px;" /></a></div>
+                            <div class="BadgeLabel"><a id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl00_HyperLink1"
+                                    href="Badges.aspx">Veteran</a></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="Badge">
+                            <div class="BadgeImage"><a id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl01_hlHeader"
+                                    href="Badges.aspx"><img id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl01_iBadge"
+                                        src="/img/Badges/Friendship.png?v=2"
+                                        alt="This badge is given to players who have embraced the Roblox community and have made at least 20 friends. People who have this badge are good people to know and can probably help you out if you are having trouble."
+                                        style="height:75px;border-width:0px;" /></a></div>
+                            <div class="BadgeLabel"><a id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl01_HyperLink1"
+                                    href="Badges.aspx">Friendship</a></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="Badge">
+                            <div class="BadgeImage"><a id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl02_hlHeader"
+                                    href="Badges.aspx"><img id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl02_iBadge"
+                                        src="/img/Badges/Inviter.png?v=2"
+                                        alt="Robloxia is a vast uncharted realm, as large as the imagination. Individuals who invite others to join in the effort of mapping this mysterious region are honored in Robloxian society. Citizens who successfully recruit three or more fellow explorers via the Share Roblox with a Friend mechanism are awarded with this badge."
+                                        style="height:75px;border-width:0px;" /></a></div>
+                            <div class="BadgeLabel"><a id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl02_HyperLink1"
+                                    href="Badges.aspx">Inviter</a></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="Badge">
+                            <div class="BadgeImage"><a id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl03_hlHeader"
+                                    href="Badges.aspx"><img id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl03_iBadge"
+                                        src="/img/Badges/CombatInitiation.png?v=2"
+                                        alt="This badge is given to any player who has proven his or her combat abilities by accumulating 10 victories in battle. Players who have this badge are not complete newbies and probably know how to handle their weapons."
+                                        style="height:75px;border-width:0px;" /></a></div>
+                            <div class="BadgeLabel"><a id="ctl00_cphRoblox_rbxUserBadgesPane_dlBadges_ctl03_HyperLink1"
+                                    href="Badges.aspx">Combat Initiation</a></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div id="BadgesDisplayPane" style="clear: both;">
+
+
+
+
+            <div class="StandardTabWhite"><span>Player Badges</span></div>
+            <div class="StandardBoxWhite" style="">
+
+                <div id="ctl00_cphRoblox_rbxBadgesDisplay_BadgesUpdatePanel" class="BadgesUpdatePanel">
+
+                    <div class="BadgesLoading_Container"></div>
+                    <div class="BadgesListView_Container">
+
+                        <div class="NoResults">This user hasn't earned any user-created badges.</div>
+
+                    </div>
+
+                    <div class="BadgesPager_Container" style="clear:both;text-align:center;bottom: 5px;left: 75px;">
+
+                    </div>
+
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+
+            <script type="text/javascript">
+                $('#' + 'ctl00_cphRoblox_rbxBadgesDisplay_BadgesUpdatePanel').bind('click', function (e) {
+                    var target = $(e.target);
+                    if (target.parentsUntil('.BadgesUpdatePanel', '.BadgesPager_Container').length > 0 && target[0].tagName == 'A') {
+                        //put up loading sign
+                        $('.BadgesListView_Container').html("");
+
+                        window.setTimeout(function () {
+                            if ($('.BadgesListView_Container').html() == "") {
+                                $('.BadgesLoading_Container').html('<div style="text-align: center;margin-top: 25px;"><img src="/images/spinners/spinner100x100.gif" alt="Loading..." /></div>');
+                            }
+                        }, 1000);
+                    }
+                });
+            </script>
+        </div>
+
+
+        <style>
+            .statsLabel {
+                font-weight: bold;
+                width: 200px;
+                text-align: right;
+                padding-right: 10px;
+            }
+
+            .statsValue {
+                font-weight: normal;
+                width: 200px;
+                text-align: left;
+            }
+
+            .statsTable {
+                width: 400px;
+            }
+        </style>
+        <div class="StandardTabWhite"><span>Statistics</span></div>
+
+        <div class="StandardBoxWhite">
+            <table class="statsTable">
+                <tr>
+                    <td class="statsLabel">
+                        <acronym title="The number of this user's friends.">Friends</acronym>:
+                    </td>
+                    <td class="statsValue">
+                        <span id="ctl00_cphRoblox_rbxUserStatisticsPane_lFriendsStatistics"><%= friends.length %></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="statsLabel"><acronym
+                            title="The number of posts this user has made to the ROBLOX forum.">Forum Posts</acronym>:
+                    </td>
+                    <td class="statsValue"><span
+                            id="ctl00_cphRoblox_rbxUserStatisticsPane_lForumPostsStatistics">0</span></td>
+                </tr>
+                <tr>
+                    <td class="statsLabel"><acronym
+                            title="The number of times this user's profile has been viewed.">Profile Views</acronym>:
+                    </td>
+                    <td class="statsValue"><span
+                            id="ctl00_cphRoblox_rbxUserStatisticsPane_lProfileViewsStatistics">164,195</span></td>
+                </tr>
+                <tr>
+                    <td class="statsLabel"><acronym
+                            title="The number of times this user's place has been visited.">Place Visits</acronym>:</td>
+                    <td class="statsValue"><span
+                            id="ctl00_cphRoblox_rbxUserStatisticsPane_lPlaceVisitsStatistics">0</span></td>
+                </tr>
+                <tr>
+                    <td class="statsLabel"><acronym
+                            title="The number of times this user's character has destroyed another user's character in-game.">Knockouts</acronym>:
+                    </td>
+                    <td class="statsValue"><span id="ctl00_cphRoblox_rbxUserStatisticsPane_lKillsStatistics">85</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="statsLabel"><acronym
+                            title="The all-time highest voting accuracy this user has achieved when voting in contests.">Highest
+                            Ever Voting Accuracy</acronym>:</td>
+                    <td class="statsValue"><span
+                            id="ctl00_cphRoblox_rbxUserStatisticsPane_lHighestEverVotingAccuracyStatistics">50</span>%
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div id="UserGroupsPane" style="clear: both;">
+            <div class="StandardTabWhite">
+                <span>Groups</span></div>
+
+
+            <div class="StandardBoxWhite" style="clear:both;">
+                <div id="ctl00_cphRoblox_rbxUserGroupsPane_pNoResults">
+
+                    <p class="NoResults"><span id="ctl00_cphRoblox_rbxUserGroupsPane_lNoResults"><%= username %> is not
+                            in any groups.</span></p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--[if IE 6]>
+              </td><td width="450px" valign="top">
+              <![endif]-->
+    <div class="Column2d" style="overflow: hidden">
+        <div class="StandardBoxHeader">
+            <span>Active Places
+
+            </span>
+        </div>
+        <div id="UserPlacesPane" class="StandardBox">
+
+            <div id="ctl00_cphRoblox_rbxUserPlacesPane_pnlUserPlaces">
+
+                <div id="UserPlaces" style="overflow: visible;">
+
+
+                    <div id="user-places-accordion">
+
+                    </div>
+
+
+                    <div id="ctl00_cphRoblox_rbxUserPlacesPane_ShowcaseFooter" class="PanelFooter">
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div style="margin-top:10px;" class="StandardTabWhite"><span><%= username %>'s Friends (<a
+                    href="Friends.aspx?UserID=<%= userId %>">See all <%= friends.length %></a>)</span></div>
+        <div class="StandardBoxWhite">
+
+
+            <table id="ctl00_cphRoblox_rbxFriendsPane_dlFriends" cellspacing="0" align="Center" border="0"
+                style="border-collapse:collapse;">
+                <% for (const row of chunkedFriends) { %>
+                <tr>
+                    <% for (const friend of row) { %>
+                    <td>
+                        <div class="Friend">
+                            <div class="Avatar">
+                                <a id="ctl00_cphRoblox_rbxFriendsPane_dlFriends_ctl00_hlAvatar" title="TheJoker21"
+                                    href="/User.ashx?id=<%= friend.id %>"
+                                    style="display:inline-block;height:100px;width:100px;cursor:pointer;">
+                                    <img src="/Thumbnail/User.ashx?id=<%= friend.id %>" height="100" width="100"
+                                        border="0" onerror="return Roblox.Controls.Image.OnError(this)"
+                                        alt="<%= friend.name %>" />
+                                    <img src="/img/overlay_bcOnly.png" style="position:relative;top:-19px;"
+                                        align="left">
+                                </a>
+                            </div>
+                            <div class="Summary">
+                                <span class="OnlineStatus"><img
+                                        id="ctl00_cphRoblox_rbxFriendsPane_dlFriends_ctl00_iOnlineStatus"
+                                        src="/img/offline.png"
+                                        alt="TheJoker21 is offline (last seen at 3/25/2012 10:05:59 AM)."
+                                        style="border-width:0px;" /></span>
+                                <span class="Name"><a id="ctl00_cphRoblox_rbxFriendsPane_dlFriends_ctl00_hlFriend"
+                                        href="/User.aspx?ID=<%= friend.id %>"><%= friend.name %></a></span>
+                            </div>
+                        </div>
+                    </td>
+                    <% } %>
+                </tr>
+                <% } %>
+            </table>
+
+        </div>
+        <div style="clear: both; margin-bottom: 10px;">
+            <div class="StandardTabWhite">
+                <span>Favorites</span></div>
+            <div id="ctl00_cphRoblox_rbxFavoritesPane_FavoritesPane">
+
+                <div class="StandardBoxWhite">
+
+                    <div id="FavoritesContent">
+
+
+                        <div id="ctl00_cphRoblox_rbxFavoritesPane_NoResultsPanel" class="NoResults">
+
+                            <span id="ctl00_cphRoblox_rbxFavoritesPane_NoResultsLabel" class="NoResults"><%= username %>
+                                has not chosen any favorite places.</span>
+
+                        </div>
+
+                    </div>
+                    <div class="PanelFooter">
+                        Category:&nbsp;
+                        <select name="ctl00$cphRoblox$rbxFavoritesPane$AssetCategoryDropDownList"
+                            id="ctl00_cphRoblox_rbxFavoritesPane_AssetCategoryDropDownList">
+                            <option value="17">Heads</option>
+                            <option value="18">Faces</option>
+                            <option value="19">Gear</option>
+                            <option value="8">Hats</option>
+                            <option value="2">T-Shirts</option>
+                            <option value="11">Shirts</option>
+                            <option value="12">Pants</option>
+                            <option value="13">Decals</option>
+                            <option value="10">Models</option>
+                            <option selected="selected" value="9">Places</option>
+
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div style="clear: both">
+
+
+            <div id="ctl00_cphRoblox_BigUglyAd_OutsideAdPanel" class="AdPanel">
+
+                <iframe id="ctl00_cphRoblox_BigUglyAd_AsyncAdIFrame" allowtransparency="true" frameborder="0"
+                    scrolling="no" height="250" src="/user-sponsorship/3" width="300"></iframe>
+
+            </div>
+            <a id="ctl00_cphRoblox_BigUglyAd_ReportAdButton" title="click to report an offensive ad" class="BadAdButton"
+                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$BigUglyAd$ReportAdButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))">[
+                report ]</a>
+
+
+
+        </div>
+    </div>
+    <!--[if IE 6]>
+              </td></tr></table>
+              <![endif]-->
+    <br clear="all" />
+
+</div>
+<div id="UserContainer">
+    <div id="UserAssetsPane">
+        <div id="ctl00_cphRoblox_rbxUserAssetsPane_upUserAssetsPane">
+
+            <div class="StandardBoxHeader">
+                <span>Stuff</span></div>
+            <div id="UserAssets" class="StandardBox">
+                <div id="AssetsMenu">
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Heads</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Faces</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Gear</a>
+                    </div>
+                    <div class="AssetsMenuItem AssetsMenuItem_Selected">
+                        <a class="AssetsMenuButton">Hats</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">T-Shirts</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Shirts</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Pants</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Decals</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Models</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Places</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Badges</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Left Arms</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Right Arms</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Left Legs</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Right Legs</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Torsos</a>
+                    </div>
+                    <div class="AssetsMenuItem">
+                        <a class="AssetsMenuButton">Packages</a>
+                    </div>
+                </div>
+                <div id="AssetsContent">
+
+
+                    <table id="ctl00_cphRoblox_rbxUserAssetsPane_UserAssetsDataList" cellspacing="0" border="0"
+                        style="border-collapse:collapse;">
+                    </table>
+                    <div id="ctl00_cphRoblox_rbxUserAssetsPane_FooterPagerPanel" class="FooterPager">
+                        <a id="inventory-previous-page" href="#" style="display:none;"><span
+                                class="NavigationIndicators">&lt;&lt;</span> Previous</a>
+                        <span id="ctl00_cphRoblox_rbxUserAssetsPane_FooterPagerLabel">Page 1</span>
+                        <a id="inventory-next-page" href="#" style="display:none;">Next <span
+                                class="NavigationIndicators">&gt;&gt;</span></a>
+                    </div>
+                    <div>
+
+                        <div class="StandardTabWhite"><span>Recommendations</span></div>
+                        <div class="StandardBoxWhite">
+
+                            <div style="font-size: x-small;">Here are some other Hats that we think you might like.
+                            </div>
+                            <table id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets" cellspacing="0"
+                                align="Center" border="0" style="height:200px;width:100px;border-collapse:collapse;">
+                                <tr>
+                                    <td>
+                                        <div class="PortraitDiv" style="width: 140px; height: 190px; overflow: hidden;"
+                                            visible="True">
+                                            <div class="AssetThumbnail">
+                                                <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl00_AssetThumbnailHyperLink"
+                                                    title="Cadet Cap"
+                                                    href="/web/20120326013852/http://www.roblox.com/Cadet-Cap-item?id=39072345"
+                                                    style="display:inline-block;height:110px;width:110px;cursor:pointer;"><img
+                                                        src="https://web.archive.org/web/20120326013852im_/http://t5ak.roblox.com/ee5ac0c2a017b20b2bb2c41242323a4d"
+                                                        height="110" width="110" border="0"
+                                                        onerror="return Roblox.Controls.Image.OnError(this)"
+                                                        alt="Cadet Cap" /></a>
+                                            </div>
+                                            <div class="AssetDetails">
+                                                <div class="AssetName">
+                                                    <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl00_AssetNameHyperLinkPortrait"
+                                                        href="/web/20120326013852/http://www.roblox.com/Cadet-Cap-item?id=39072345">Cadet
+                                                        Cap</a>
+                                                </div>
+                                                <div class="AssetCreator">
+                                                    <span class="Label">Creator:</span> <span class="Detail"><a
+                                                            id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl00_CreatorHyperLinkPortrait"
+                                                            href="User.aspx?ID=1">ROBLOX</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="PortraitDiv" style="width: 140px; height: 190px; overflow: hidden;"
+                                            visible="True">
+                                            <div class="AssetThumbnail">
+                                                <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl01_AssetThumbnailHyperLink"
+                                                    title="Brrr..."
+                                                    href="/web/20120326013852/http://www.roblox.com/Brrr-item?id=43656416"
+                                                    style="display:inline-block;height:110px;width:110px;cursor:pointer;"><img
+                                                        src="https://web.archive.org/web/20120326013852im_/http://t3ak.roblox.com/e8533f9b08f43c35a3d518adcd408832"
+                                                        height="110" width="110" border="0"
+                                                        onerror="return Roblox.Controls.Image.OnError(this)"
+                                                        alt="Brrr..." /></a>
+                                            </div>
+                                            <div class="AssetDetails">
+                                                <div class="AssetName">
+                                                    <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl01_AssetNameHyperLinkPortrait"
+                                                        href="/web/20120326013852/http://www.roblox.com/Brrr-item?id=43656416">Brrr...</a>
+                                                </div>
+                                                <div class="AssetCreator">
+                                                    <span class="Label">Creator:</span> <span class="Detail"><a
+                                                            id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl01_CreatorHyperLinkPortrait"
+                                                            href="User.aspx?ID=1">ROBLOX</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="PortraitDiv" style="width: 140px; height: 190px; overflow: hidden;"
+                                            visible="True">
+                                            <div class="AssetThumbnail">
+                                                <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl02_AssetThumbnailHyperLink"
+                                                    title="Opened Gift of Birthday Fun"
+                                                    href="/web/20120326013852/http://www.roblox.com/Opened-Gift-of-Birthday-Fun-item?id=34115865"
+                                                    style="display:inline-block;height:110px;width:110px;cursor:pointer;"><img
+                                                        src="https://web.archive.org/web/20120326013852im_/http://t5ak.roblox.com/879a67d168e20ca2ab838d31976150c9"
+                                                        height="110" width="110" border="0"
+                                                        onerror="return Roblox.Controls.Image.OnError(this)"
+                                                        alt="Opened Gift of Birthday Fun" /></a>
+                                            </div>
+                                            <div class="AssetDetails">
+                                                <div class="AssetName">
+                                                    <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl02_AssetNameHyperLinkPortrait"
+                                                        href="/web/20120326013852/http://www.roblox.com/Opened-Gift-of-Birthday-Fun-item?id=34115865">Opened
+                                                        Gift of Birthday Fun</a>
+                                                </div>
+                                                <div class="AssetCreator">
+                                                    <span class="Label">Creator:</span> <span class="Detail"><a
+                                                            id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl02_CreatorHyperLinkPortrait"
+                                                            href="User.aspx?ID=1">ROBLOX</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="PortraitDiv" style="width: 140px; height: 190px; overflow: hidden;"
+                                            visible="True">
+                                            <div class="AssetThumbnail">
+                                                <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl03_AssetThumbnailHyperLink"
+                                                    title="Kuddle E. Koala"
+                                                    href="/web/20120326013852/http://www.roblox.com/Kuddle-E-Koala-item?id=44113968"
+                                                    style="display:inline-block;height:110px;width:110px;cursor:pointer;"><img
+                                                        src="https://web.archive.org/web/20120326013852im_/http://t4ak.roblox.com/d7a99a5d9f5e83c67ea1eab497fa27d8"
+                                                        height="110" width="110" border="0"
+                                                        onerror="return Roblox.Controls.Image.OnError(this)"
+                                                        alt="Kuddle E. Koala" /></a>
+                                            </div>
+                                            <div class="AssetDetails">
+                                                <div class="AssetName">
+                                                    <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl03_AssetNameHyperLinkPortrait"
+                                                        href="/web/20120326013852/http://www.roblox.com/Kuddle-E-Koala-item?id=44113968">Kuddle
+                                                        E. Koala</a>
+                                                </div>
+                                                <div class="AssetCreator">
+                                                    <span class="Label">Creator:</span> <span class="Detail"><a
+                                                            id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl03_CreatorHyperLinkPortrait"
+                                                            href="User.aspx?ID=1">ROBLOX</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="PortraitDiv" style="width: 140px; height: 190px; overflow: hidden;"
+                                            visible="True">
+                                            <div class="AssetThumbnail">
+                                                <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl04_AssetThumbnailHyperLink"
+                                                    title="Welding Mask"
+                                                    href="/web/20120326013852/http://www.roblox.com/Welding-Mask-item?id=10832141"
+                                                    style="display:inline-block;height:110px;width:110px;cursor:pointer;"><img
+                                                        src="https://web.archive.org/web/20120326013852im_/http://t6ak.roblox.com/ba6b1968c5490667b7c5c3253d0403dd"
+                                                        height="110" width="110" border="0"
+                                                        onerror="return Roblox.Controls.Image.OnError(this)"
+                                                        alt="Welding Mask" /></a>
+                                            </div>
+                                            <div class="AssetDetails">
+                                                <div class="AssetName">
+                                                    <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl04_AssetNameHyperLinkPortrait"
+                                                        href="/web/20120326013852/http://www.roblox.com/Welding-Mask-item?id=10832141">Welding
+                                                        Mask</a>
+                                                </div>
+                                                <div class="AssetCreator">
+                                                    <span class="Label">Creator:</span> <span class="Detail"><a
+                                                            id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl04_CreatorHyperLinkPortrait"
+                                                            href="User.aspx?ID=1">ROBLOX</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="PortraitDiv" style="width: 140px; height: 190px; overflow: hidden;"
+                                            visible="True">
+                                            <div class="AssetThumbnail">
+                                                <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl05_AssetThumbnailHyperLink"
+                                                    title="WWII General's Helmet (Limited Edition)"
+                                                    href="/web/20120326013852/http://www.roblox.com/WWII-Generals-Helmet-Limited-Edition-item?id=10911965"
+                                                    style="display:inline-block;height:110px;width:110px;cursor:pointer;"><img
+                                                        src="https://web.archive.org/web/20120326013852im_/http://t1ak.roblox.com/40a904afc8a3461359822da1be50fcc4"
+                                                        height="110" width="110" border="0"
+                                                        onerror="return Roblox.Controls.Image.OnError(this)"
+                                                        alt="WWII General's Helmet (Limited Edition)" /></a>
+                                            </div>
+                                            <div class="AssetDetails">
+                                                <div class="AssetName">
+                                                    <a id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl05_AssetNameHyperLinkPortrait"
+                                                        href="/web/20120326013852/http://www.roblox.com/WWII-Generals-Helmet-Limited-Edition-item?id=10911965">WWII
+                                                        General&#39;s Helmet (Limited Edition)</a>
+                                                </div>
+                                                <div class="AssetCreator">
+                                                    <span class="Label">Creator:</span> <span class="Detail"><a
+                                                            id="ctl00_cphRoblox_rbxUserAssetsPane_AssetRec_dlAssets_ctl05_CreatorHyperLinkPortrait"
+                                                            href="User.aspx?ID=1">ROBLOX</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div style="clear: both;">
+                </div>
+            </div>
+            <div id="ctl00_cphRoblox_rbxUserAssetsPane_CreateSetPanelDiv" class="createSetPanelPopup"
+                style="width: 400px; height: 100%; padding: 0px; float: left; display: none">
+
+
+
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<script src="/js/pages/user.js"></script>
+
+<%- include('../footer'); %>

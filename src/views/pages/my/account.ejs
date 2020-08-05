@@ -1,0 +1,135 @@
+<%- include('../../header'); %>
+
+<div id="processing" style="display:none;">
+    <img id="ctl00_cphRoblox_ProcessingFreePurchaseIconImage" src="/img/ProgressIndicator2.gif" alt="Processing..."
+        align="middle" style="border-width:0px;margin:0 auto;display: block;padding-top:41px;" />
+</div>
+
+<div style="width: 550px;border-right:4px solid #e1e1e1;float:left;">
+    <div style="padding: 5px 5px;">
+        <h3 style="font-weight:700;font-size:18px;">ACCOUNT SETTINGS</h3>
+        <div style="padding-top:10px;">
+            <table class="user-settings-table">
+                <tr>
+                    <td style="width: 150px;">
+                        <p style="font-weight:600;font-size:13px;">Birthday:</p>
+                    </td>
+                    <td>
+                        <select id="birth-month" class="birth-selects" disabled="disabled">
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <select id="birth-day" class="birth-selects" disabled="disabled">
+                            <option value="1">1</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                        <select id="birth-year" class="birth-selects" disabled="disabled">
+                            <% for (let i = page.currentYear; i > (page.currentYear - 100); i--) { %>
+                            <option value="<%= i %>"><%= i %></option>
+                            <% } %>
+                        </select>
+                        <p>Updating age to under 13 will enabled Privacy Mode</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="font-weight:600;font-size:13px;">Gender:</p>
+                    </td>
+                    <td>
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male">Male</label><br>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="font-weight:600;font-size:13px;">Email address:</p>
+                    </td>
+                    <td>
+                        <p>
+                            <%= page.email.emailAddress %>
+                            <% if (page.email.verified) {%>
+                            <span style="color:green;font-weight:700;">&emsp;Verified</span>
+                            <% }else{ %>
+                            <span style="color:rgb(179, 161, 2);font-weight:700;">&emsp;Unverified</span>
+                            <% } %>
+                            &emsp;
+                            <button id="change-email-click">Change Email</button>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="font-weight:600;font-size:13px;">Personal blurb:</p>
+                    </td>
+                    <td>
+                        <textarea rows="6" style="width:95%;" disabled="disabled" id="blurb"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <button id="update-settings-submit" style="margin-top:1rem;">Update Settings</button>
+    </div>
+</div>
+
+<div style="float:left;width: 346px;">
+    <div style="padding: 5px 5px 20px 5px;">
+        <h3 style="font-weight:700;font-size:18px;">UPGRADE ACCOUNT</h3>
+        <p style="margin-bottom:5px;" id="membership-status">Loading membership status...</p>
+        <div style="padding-bottom:10px;padding-top:10px;">
+            <a class="generic-button b-green" href="/Membership/Upgrade.aspx">Upgrade BC</a>
+        </div>
+        <div sty>
+            <a class="generic-button b-grey" href="/Robux.aspx">Buy ROBUX</a>
+        </div>
+    </div>
+    <div style="border-top:4px solid #e1e1e1;">
+        <div style="margin-top:20px;padding-left:20px;">
+            <iframe height="250" id="ctl00_cphRoblox_BigUglyAd_AsyncAdIFrame" allowtransparency="true" frameborder="0"
+                scrolling="no" src="/user-sponsorship/3" width="300"></iframe>
+        </div>
+    </div>
+</div>
+
+<script src="/js/pages/my/account.js"></script>
+
+<%- include('../../footer'); %>

@@ -1,0 +1,1321 @@
+<%- include('../header'); %>
+
+<div id="ItemContainer">
+    <div class="StandardBoxHeader" style="width: 709px;">
+        <span class="item-header">
+            <div id="ctl00_cphRoblox_FavStar" cssclass="favorited"></div>
+            <%= name %>
+        </span>
+    </div>
+    <div id="Item" class="StandardBox" style="width: 709px; background-image: none;">
+        <div id="Details">
+
+
+            <div id="assetContainer">
+                <div id="Thumbnail">
+                    <a id="ctl00_cphRoblox_AssetThumbnailImage" disabled="disabled" title="<%= name %>"
+                        onclick="return false" style="display:inline-block;height:420px;width:420px;"><img
+                            src="https://www.roblox.com/thumbs/asset.ashx?width=420&height=420&assetid=<%= assetId %>"
+                            height="420" width="420" border="0" onerror="return Roblox.Controls.Image.OnError(this)"
+                            alt="<%= name %>" /></a>
+
+                    <% if (isCollectibleUnique) { %>
+                    <img src="/img/overlay_limitedUnique_big.png" id="ctl00_cphRoblox_ItemLimitedOverlay"
+                        alt="Limited Unique" style="position: relative; top: -38px;" />
+                    <% }else if (isCollectible) { %>
+                    <img src="/img/overlay_limited_big.png" id="ctl00_cphRoblox_ItemLimitedOverlay" alt="Limited"
+                        style="position: relative; top: -38px;" />
+                    <% } %>
+                </div>
+
+            </div>
+
+            <!-- details -->
+            <div id="Summary" style="float: right;">
+                <h3>
+                    ROBLOX <%= category %>
+                </h3>
+                <div>
+                    <b>
+                    </b>
+
+
+                    <div id="ctl00_cphRoblox_RobuxPurchasePanel">
+                        <div id="RobuxPurchase">
+                            <% if (isCollectible)  {%>
+                            <div id="ctl00_cphRoblox_LimitedEditionInfo">
+                                <b>COLLECTIBLE ITEM. <br />
+                                    <% if(typeof totalSellers !== 'undefined') { %>
+                                    <a href="#tabRegion">
+                                        See <%= (totalSellers >= 100 ? '100+' : totalSellers) %> private sellers
+                                    </a>
+                                    <% }else{ %>
+                                    <a href="/Login/Default.aspx">Login to view private sellers</a>
+                                    <% } %>
+                                </b>
+                                <br />
+                                <br />
+                            </div>
+                            <div id="PriceInRobux">
+                                Was R$: <%= (originalPrice || 'N/A') %>
+                            </div>
+                            <div id="BuyWithRobux">
+
+
+                            </div>
+                            <% }else if (isForSale) { %>
+                            <div id="PriceInRobux">
+                                <%= (typeof price === 'number' && price > 0 ? 'R$: '+price : 'Free') %>
+                            </div>
+                            <div id="BuyWithRobux">
+                                <!-- idk what goes here yet -->
+                                <a id="ctl00_cphRoblox_PurchaseWithRobuxButton" class="Button PurchaseButton"
+                                    original-title="You already own this item."><%= typeof price === 'number' && price > 0 ?'Buy with R$' : 'Take' %></a>
+                            </div>
+                            <% }else{ %>
+                            <div id="PriceInRobux">
+                                Was R$:
+                                <%= (typeof originalPrice !== 'undefined' ? originalPrice : undefined || 'N/A') %>
+                            </div>
+                            <div id="BuyWithRobux">
+                                <!-- idk what goes here yet -->
+                                <a id="ctl00_cphRoblox_PurchaseWithRobuxButton"
+                                    class="Button PurchaseButton PurchaseButtonDisabled"
+                                    original-title="You already own this item.">Not For Sale</a>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="clear">
+                    </div>
+                </div>
+                <!-- timer -->
+
+                <div id="Creator" class="Creator section">
+                    <div class="Avatar">
+
+                        <a id="ctl00_cphRoblox_AvatarImage" class="tooltip-right" title="<%= creatorName %>"
+                            href="<%= creatorType === 'User' ? '/User.aspx?ID=' : '/Group.aspx?ID=' %><%= creatorId %>"
+                            style="display:inline-block;height:100px;width:100px;cursor:pointer;">
+                            <img src="/Thumbnail/<%= creatorType %>.ashx?id=<%= creatorId %>" height="100" width="100"
+                                border="0" onerror="return Roblox.Controls.Image.OnError(this)"
+                                alt="<%= creatorName %>" />
+                            <% if (creatorType === 'User') { %>
+                            <img src="/api/v1/builders-club/users/<%= creatorId %>/redirect-to-icon" align="left"
+                                style="position:relative;top:-19px;" /></a>
+                        <% } %>
+                    </div>
+                    <span class="label creator-name">Creator:</span>
+                    <a id="ctl00_cphRoblox_CreatorHyperLink"
+                        href="<%= creatorType === 'User' ? '/User.aspx?ID=' : '/Group.aspx?ID=' %><%= creatorId %>"><%= creatorName %></a>
+                </div>
+                <div class="item-detail">
+                    <div>
+                        <span class="label">Created:</span>
+                        <%= createdAtFormat %>
+                    </div>
+                    <div id="LastUpdate">
+                        <span class="label">Updated:</span>
+                        <%= updatedAtFormat %>
+                    </div>
+                    <div id="Favorited">
+                        <span class="label">Favorited:</span>
+                        <%= favorites %> times</div>
+
+                    <div id="ctl00_cphRoblox_Sold_Limited">
+                        <span class="label">Total Sold:</span>
+                        <%= sales %>
+                    </div>
+                </div>
+                <div id="GenresDiv" class="box section">
+                    <div id="ctl00_cphRoblox_Genres">
+
+                        <div class="head label">
+                            Genres:</div>
+                        <div class="body GenreInfo">
+
+
+                            <div>
+
+
+
+
+
+
+
+
+
+
+
+                                <% for (const genre of genres) { %>
+
+                                <div id="ctl00_cphRoblox_GenresDisplayTest_AssetGenreRepeater_ctl03_AssetGenreRepeaterPanel"
+                                    class="AssetGenreRepeater_Container">
+                                    <div class="GamesInfoIcon <%= genre %>"></div>
+                                    <div>
+                                        <a
+                                            href="http://www.roblox.com/<%= genre.toLowerCase().replace(' ', '-') %>-games"><%= genre %></a>
+                                    </div>
+                                </div>
+                                <% } %>
+
+
+
+
+                                <div style="clear:both;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div id="ctl00_cphRoblox_DescriptionPanel" class="box section">
+
+                    <div class="head label">
+                        Description:</div>
+                    <pre class="Description body"
+                        style="max-height: 200px; overflow-x: hidden;"><%= itemDescription %></pre>
+
+                </div>
+
+                <div class="ReportAbuse">
+                    <div id="ctl00_cphRoblox_AbuseReportButton1_AbuseReportPanel" class="ReportAbuse">
+
+                        <span class="AbuseIcon"><a id="ctl00_cphRoblox_AbuseReportButton1_ReportAbuseIconHyperLink"
+                                href="https://www.roblox.com/AbuseReport/Asset.aspx?ID=22546563&amp;RedirectUrl=http%3a%2f%2fwww.roblox.com%2fitem.aspx%3fseoname%3dGold-Ollie%26id%3d22546563"><img
+                                    src="/img/abuse.PNG?v=2" alt="Report Abuse" style="border-width:0px;" /></a></span>
+                        <span class="AbuseButton"><a id="ctl00_cphRoblox_AbuseReportButton1_ReportAbuseTextHyperLink"
+                                href="https://www.roblox.com/AbuseReport/Asset.aspx?ID=22546563&amp;RedirectUrl=http%3a%2f%2fwww.roblox.com%2fitem.aspx%3fseoname%3dGold-Ollie%26id%3d22546563">Report
+                                Abuse</a></span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div id="ctl00_cphRoblox_FBLikeButton_fblike" class="fblike">
+                <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+                <fb:like
+                    href="http://www.roblox.com/item.aspx?seoname=Gold-Ollie&amp;id=22546563&amp;rbx_source=facebook&amp;rbx_medium=Direct&amp;rbx_campaign=fblike"
+                    show_faces="false" width="425" font="arial"></fb:like>
+            </div>
+
+
+
+
+
+            <div class="clear"></div>
+        </div>
+        <% if (isCollectible)  {%>
+        <div id="ctl00_cphRoblox_PriceGraph">
+
+
+            <!--[if IE 6]>
+    
+    <![endif]-->
+
+            <![if !IE 6]>
+
+
+
+            <div class="ProductHistoryData" style="margin-left: 10px;">
+                <h3><%= name %> Market Data</h3>
+                <br>
+
+                Recent Average Price: <span style="color: Green;"><b><%= rap %> R$</b></span>
+                <br />
+                <br />
+                <div id="placeholder" style="width:680px;height:300px;"></div>
+                <div id="volumegraph" style="width:680px;height:60px;"></div>
+
+                <div style="margin-left: 40px;">
+                    <input id="30days" type="radio" checked="checked" name="group1" style="margin: 5px;">30 Days</input>
+                    <input id="90days" type="radio" name="group1" style="margin: 5px;">90 Days</input>
+                    <input id="180days" type="radio" name="group1" style="margin: 5px;">180 Days</input>
+
+                    <br />
+                    <!-- idk what to do here. im pretty sure getting this data is impossible nowadays -->
+                    <table class="pricestats" style="display: none;">
+                        <tr>
+                            <td>Span</td>
+                            <td>Average Price</td>
+                            <td>Change</td>
+                            <td>Volume</td>
+                        </tr>
+                        <tr>
+                            <td>30 Days</td>
+                            <td>51312 R$</td>
+                            <td>
+                                <font color="#800000">-6.8%</font>
+                            </td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>90 Days</td>
+                            <td>75099 R$</td>
+                            <td>
+                                <font color="#800000">-36.3%</font>
+                            </td>
+                            <td>28</td>
+                        </tr>
+                        <tr>
+                            <td>180 Days</td>
+                            <td>41953 R$</td>
+                            <td>
+                                <font color="#008000">+14.0%</font>
+                            </td>
+                            <td>73</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <script>
+
+                    console.log('doc ready below');
+                    $(function () {
+                        try {
+                            console.log('jquery inner function working');
+
+                            // d1 is sale price
+                            // d2 is volume
+                            var d1 = <%= JSON.stringify(charts.rap) %>
+                                    var d2 = <%= JSON.stringify(charts.volume) %>
+
+                                $.plot($("#placeholder"), [
+                                    { data: d1, label: "Avg Sales Price (R$)", color: "#008000", lines: { lineWidth: 3 } }
+
+                                ],
+                                    {
+                                        xaxis: { mode: 'time', min: <%= chartsMin30 %> },
+                                    legend: { position: 'nw' },
+                                    yaxis: { labelWidth: 40, tickFormatter: function (v, axis) { return v.toFixed(axis.tickDecimals) + "R$" } }
+                                                            });
+
+                    $.plot($("#volumegraph"), [
+                        { data: d2, label: "Volume", yaxis: 1, color: "#A4A4C8", bars: { show: true } }
+                    ],
+                        {
+                            xaxis: { mode: 'time', ticks: [], min: <%= chartsMin30 %> },
+                        legend: { position: 'nw' },
+                        yaxis: { labelWidth: 40, minTickSize: 1, tickDecimals: 0, ticks: [] }
+                                                            });
+
+
+                    $("#180days").click(function () {
+                        $.plot($("#placeholder"), [
+                            { data: d1, label: "Avg Sales Price (R$)", color: "#008000", lines: { lineWidth: 3 } }
+
+                        ],
+                            {
+                                xaxis: { mode: 'time', min: <%= chartsMin180 %> },
+                            legend: { position: 'nw' },
+                            yaxis: { labelWidth: 40, tickFormatter: function (v, axis) { return v.toFixed(axis.tickDecimals) + "R$" } }
+                                                                });
+
+                    $.plot($("#volumegraph"), [
+                        { data: d2, label: "Volume", yaxis: 1, color: "#A4A4C8", bars: { show: true } }
+                    ],
+                        {
+                            xaxis: { mode: 'time', ticks: [], min: <%= chartsMin90 %> },
+                        legend: { position: 'nw' },
+                        yaxis: { labelWidth: 40, minTickSize: 1, tickDecimals: 0, ticks: [] }
+                                                                });
+                                    });
+
+                    $("#30days").click(function () {
+
+                        $.plot($("#placeholder"), [
+                            { data: d1, label: "Avg Sales Price (R$)", color: "#008000", lines: { lineWidth: 3 } }
+
+                        ],
+                            {
+                                xaxis: { mode: 'time', min: <%= chartsMin30 %> },
+                            legend: { position: 'nw' },
+                            yaxis: { labelWidth: 40, tickFormatter: function (v, axis) { return v.toFixed(axis.tickDecimals) + "R$" } }
+                                                            });
+
+                    $.plot($("#volumegraph"), [
+                        { data: d2, label: "Volume", yaxis: 1, color: "#A4A4C8", bars: { show: true } }
+                    ],
+                        {
+                            xaxis: { mode: 'time', ticks: [], min: <%= chartsMin30 %> },
+                        legend: { position: 'nw' },
+                        yaxis: { labelWidth: 40, minTickSize: 1, tickDecimals: 0, ticks: [] }
+                                                            });                      
+                                    });
+
+                    $("#90days").click(function () {
+
+                        $.plot($("#placeholder"), [
+                            { data: d1, label: "Avg Sales Price (R$)", color: "#008000", lines: { lineWidth: 3 } }
+
+                        ],
+                            {
+                                xaxis: { mode: 'time', min: <%= chartsMin90 %> },
+                            legend: { position: 'nw' },
+                            yaxis: { labelWidth: 40, tickFormatter: function (v, axis) { return v.toFixed(axis.tickDecimals) + "R$" } }
+                                                            });
+
+                    $.plot($("#volumegraph"), [
+                        { data: d2, label: "Volume", yaxis: 1, color: "#A4A4C8", bars: { show: true } }
+                    ],
+                        {
+                            xaxis: { mode: 'time', ticks: [], min: <%= chartsMin90 %> },
+                        legend: { position: 'nw' },
+                        yaxis: { labelWidth: 40, minTickSize: 1, tickDecimals: 0, ticks: [] }
+                                                            });                      
+                                    });
+                    console.log('inner done');
+                                }catch (err) {
+                        console.error(err);
+                    }
+                            
+                                });
+
+
+                </script>
+
+
+            </div>
+
+
+
+            <![endif]>
+        </div>
+        <% } %>
+
+        <div style="margin-top: 10px;">
+            <div>
+
+                <div class="StandardTabWhite"><span>Recommendations</span></div>
+                <div class="StandardBoxWhite">
+
+                    <div style="font-size: x-small;">Here are some other Hats that we think you might
+                        like.</div>
+                    <table id="ctl00_cphRoblox_AssetRec_dlAssets" cellspacing="0" align="Center" border="0"
+                        style="height:200px;width:600px;border-collapse:collapse;">
+                        <tr>
+                            <% for (const sim of similar) { %>
+                            <td>
+                                <div class="PortraitDiv" style="width: 140px; height: 180px; overflow: hidden;"
+                                    visible="True">
+                                    <div class="AssetThumbnail">
+                                        <a title="<%= sim.name %>" href="/Item.aspx?id=<%= sim.assetId %>"
+                                            style="display:inline-block;height:110px;width:110px;cursor:pointer;">
+                                            <img src="https://www.roblox.com/thumbs/asset.ashx?width=420&height=420&assetid=<%= sim.assetId %>"
+                                                height="110" width="110" border="0" onerror="console.log(this)"
+                                                alt="<%= sim.name %>"
+                                                blankurl="http://t2ak.roblox.com/p1-blank-110x110.gif" />
+                                        </a>
+                                    </div>
+                                    <div class="AssetDetails">
+                                        <div class="AssetName">
+                                            <a id="ctl00_cphRoblox_AssetRec_dlAssets_ctl00_AssetNameHyperLinkPortrait"
+                                                href="/Item.aspx?id=<%= sim.assetId %>"><%= sim.name %></a>
+                                        </div>
+                                        <div class="AssetCreator">
+                                            <span class="Label">Creator:</span> <span class="Detail"><a
+                                                    id="ctl00_cphRoblox_AssetRec_dlAssets_ctl00_CreatorHyperLinkPortrait"
+                                                    href="User.aspx?ID=<%= sim.userId %>"><%= sim.creator %></a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <% } %>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+        <a name="tabRegion">&nbsp;</a>
+
+        <div id="Tabs" style="width: 703px; margin-bottom: 10px">
+            <ul id="TabHeader"
+                style="height: 30px; list-style: none; margin-left: 0px; margin-bottom: 0px; padding-left: 0px">
+                <% if (isCollectible)  {%>
+                <li id="UserSalesTabHeader" class="StandardTabGrayActive ItemTabs">
+                    <span><a id="UserSalesLink" href="#UserSalesTab"
+                            style="font-size: 16px; font-family: Arial, Helvetica, sans-serif;">
+                            Private Sales</a></span></li>
+                <% } %>
+                <li id="CommentaryTabHeader"
+                    class="StandardTabGray<%= isCollectible === false ? 'Active' : '' %> ItemTabs">
+                    <span><a id="CommentaryLink" href="#CommentaryTab"
+                            style="font-size: 16px; font-family: Arial, Helvetica, sans-serif;">
+                            Commentary</a></span></li>
+            </ul>
+            <% if (isCollectible && typeof sellers !== 'undefined')  {%>
+            <div id="UserSalesTab" class="StandardBoxGray" style="display: none">
+
+
+                <table style="width: 680px;" class="ItemSalesTable">
+                    <tr style="font-weight: bold;">
+                        <td style="width: 100px;">Seller</td>
+                        <td style="width: 150px;">Serial Number</td>
+                        <td style="width: 100px;">Price</td>
+                        <td>&nbsp;</td>
+                    </tr>
+
+
+                    <% for (const seller of sellers) { %>
+                    <tr>
+                        <td>
+                            <a id="ctl00_cphRoblox_lstItemsForResale_ctrl0_AvatarImage2" title="<%= seller.username %>"
+                                href="http://www.roblox.com/User.aspx?ID=<%= seller.userId %>"
+                                style="display:inline-block;height:48px;width:48px;cursor:pointer;"><img
+                                    src="https://www.roblox.com/Thumbs/Avatar.ashx?x=420&y=420&userid=<%= seller.userId %>"
+                                    height="48" width="48" border="0"
+                                    onerror="return Roblox.Controls.Image.OnError(this)"
+                                    alt="<%= seller.username %>" /><img src="/img/overlay_bc_small.png" align="left"
+                                    style="position:relative;top:-12px;" /></a>
+                            <br />
+                            <a href="http://www.roblox.com/user.aspx?id=<%= seller.userId %>">
+                                <%= seller.username %>
+                            </a>
+                        </td>
+                        <td>
+                            <% if (isCollectibleUnique) { %>
+                            #<%= seller.serial || 'N/A' %> / <%= sold %>
+                            <% }else{ %>
+                            <span>N/A</span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <b style="color: Green;">R$<%= numberFormat(seller.price) %></b>
+                        </td>
+
+                        <td>
+                            <a class="Button PurchaseButton puchase-private-seller-item"
+                                data-price="<%= seller.price %>" data-uaid="<%= seller.userAssetId %>"
+                                data-sellerId="<%= seller.userId %>">Buy Now</a>
+                        </td>
+                    </tr>
+                    <% } %>
+
+                </table>
+
+                <!--
+                    temp disabled...
+                <span id="ctl00_cphRoblox_pgItemsForResale"><a disabled="disabled">First</a>&nbsp;<a
+                        disabled="disabled">Last</a>&nbsp;<a
+                        disabled="disabled">Previous</a>&nbsp;<span>1</span>&nbsp;<a
+                        disabled="disabled">Next</a>&nbsp;</span>
+                -->
+            </div>
+            <% } %>
+            <div id="ScriptReviewTab" class="StandardBoxGray" style="display: none">
+
+            </div>
+            <div id="CommentaryTab" class="StandardBoxGray" style="display:none;color: Black">
+                <div id="ctl00_cphRoblox_CommentsPane_CommentsUpdatePanel">
+
+                    <div class="CommentsContainer">
+                        <a id="ctl00_cphRoblox_CommentsPane_LoadCommentsButton" class="GreenButton"
+                            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$CommentsPane$LoadCommentsButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Load
+                                comments (21088)</span></a>
+
+
+
+                    </div>
+                    <script type="text/javascript" language="javascript">
+                        function limitText(limitField, limitNum) {
+                            if (limitField.value.length > limitNum) {
+                                limitField.value = limitField.value.substring(0, limitNum);
+                            }
+                            $('#CharsRemaining').html(Math.max(0, Math.min(200, limitNum - limitField.value.length)) + " characters remaining");
+                        }
+                    </script>
+
+                </div>
+
+            </div>
+        </div>
+        <style type="text/css">
+            .ui-tabs-hide {
+                display: none;
+            }
+        </style>
+
+        <div id="FreeGames">
+            <span><b>Other free games and items:</b></span>
+            <ul class="freegames" style="list-style: none; text-align: center;">
+                <li style="display: inline; margin-right: 10px;"><a
+                        href="http://www.roblox.com/impending-doom-item?id=22546463"
+                        title="Free Games: impending doom">impending doom</a></li>
+                <li style="display: inline; margin-right: 10px;"><a
+                        href="http://www.roblox.com/bobbadillas-Place-place?id=22546553" title="Free Games: bobbadilla"
+                        s place'>bobbadilla's Place</a></li>
+                <li style="display: inline; margin-right: 10px;"><a
+                        href="http://www.roblox.com/Plug10s-Place-place?id=22546562" title="Free Games: Plug10" s
+                        place'>Plug10's Place</a></li>
+                <li style="display: inline; margin-right: 10px;"><a
+                        href="http://www.roblox.com/Camouflage-v4-1-item?id=22546564"
+                        title="Free Games: Camouflage_v4[1]">Camouflage_v4[1]</a></li>
+                <li style="display: inline; margin-right: 10px;"><a
+                        href="http://www.roblox.com/gizzel18s-Place-place?id=22546573" title="Free Games: gizzel18" s
+                        place'>gizzel18's Place</a></li>
+                <li style="display: inline; margin-right: 10px;"><a
+                        href="http://www.roblox.com/Girls-Camo-tank-top-cute-and-cheap-item?id=22546663"
+                        title="Free Games: Girls Camo tank top *cute and cheap*">Girls Camo tank top
+                        *cute and cheap*</a></li>
+            </ul><span><b>Other game genres you may like:</b></span>
+            <ul class="freegames" style="list-style: none; text-align: center;">
+                <li style="display: inline; margin-right: 10px;"><a href="/sci-fi-games" title="Sci-Fi games">Sci-Fi
+                        games</a></li>
+                <li style="display: inline; margin-right: 10px;"><a href="/ninja-games" title="Ninja games">Ninja
+                        games</a></li>
+                <li style="display: inline; margin-right: 10px;"><a href="/scary-games" title="Scary games">Scary
+                        games</a></li>
+                <li style="display: inline; margin-right: 10px;"><a href="/pirate-games" title="Pirate games">Pirate
+                        games</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="Ads_WideSkyscraper">
+
+        <div id="ctl00_cphRoblox_adsWideSkyscraper_OutsideAdPanel" class="AdPanel">
+
+
+            <iframe id="ctl00_cphRoblox_adsWideSkyscraper_AsyncAdIFrame" allowtransparency="true" frameborder="0"
+                scrolling="no" class="IframeAdHide" height="612" src="/user-sponsorship/2" width="160"></iframe>
+            <a id="ctl00_cphRoblox_adsWideSkyscraper_ReportAdButton" title="click to report an offensive ad"
+                class="BadAdButton"
+                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$adsWideSkyscraper$ReportAdButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))">[
+                report ]</a>
+
+
+        </div>
+
+
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+
+
+
+
+
+<% if (typeof userInfo !== 'undefined') {%>
+<div id="ProcessPurchaseFreeView" class="modalPopup blueAndWhite" style="width: 300px;
+                min-height: 50px; display: none; position: absolute">
+    <div id="Processing_Free" style="margin: 15px auto; text-align: center; vertical-align: middle;">
+        <img id="ctl00_cphRoblox_ProcessingFreePurchaseIconImage" src="/img/ProgressIndicator2.gif" alt="Processing..."
+            align="middle" style="border-width:0px;" />&nbsp;&nbsp;
+        Processing transaction ...
+    </div>
+</div>
+<div id="PurchaseWithRobuxVerificationView" class="modalPopup blueAndWhite" style="width: 395px;
+                min-height: 100px; display: none; position: absolute">
+    <div id="ctl00_cphRoblox_Div7" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 400px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Purchase
+        Item:
+    </div>
+    <div id="ctl00_cphRoblox_VerifyPurchase_Robux"
+        style="margin: 0px 10px 0px 10px; text-align: center; font-size: 14px">
+        <p><b>
+                Would you like to
+                purchase
+                <%= category %>
+                "<%= name %>" from
+                <%= creatorName %>
+                for <%= price > 0 ? price : 'Free' %>?</b></p>
+    </div>
+    <div>
+        <a id="ctl00_cphRoblox_ProceedWithRobuxPurchaseButton" class="ImageButton btn-buynow"></a>
+        <input type="submit" name="ctl00$cphRoblox$Button3" value="" id="ctl00_cphRoblox_Button3"
+            style="display: none;" />
+    </div>
+    <div style="padding-top: 10px; text-align: center">
+        <a onclick="ModalClose('PurchaseWithRobuxVerificationView');" id="ctl00_cphRoblox_CancelRobuxPurchaseButton"
+            class="RedButton"><span>Cancel</span></a>
+    </div>
+    <div style="text-align: center">
+        <p>
+            Your balance after this transaction will be
+            <%= price > 0 ? 'R$: '+(userInfo.robux - price) : 'unaffected' %>.
+        </p>
+    </div>
+</div>
+<div id="ProcessPurchaseRobuxView" class="modalPopup blueAndWhite" style="width: 300px;
+                min-height: 50px; display: none; position: absolute;">
+    <div id="Processing_Robux" style="margin: 15px auto; text-align: center; vertical-align: middle;">
+        <img id="ctl00_cphRoblox_ProcessingRobuxPurchaseIconImage" src="/img/ProgressIndicator2.gif" alt="Processing..."
+            align="middle" style="border-width:0px;" />&nbsp;&nbsp;
+        Processing transaction ...
+    </div>
+</div>
+
+
+
+<div id="PurchaseWithTicketsVerificationView" class="modalPopup blueAndWhite" style="width: 395px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div13" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 400px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Purchase
+        Item:
+    </div>
+    <div id="ctl00_cphRoblox_VerifyPurchase_Tickets"
+        style="margin: 0px 10px 0px 10px; text-align: center; font-size: 14px">
+        <p><b>
+                Would you like to
+                purchase
+                <%= category %>
+                "<%= name %>" from
+                <%= creatorName %>
+                for
+                ?</b></p>
+    </div>
+    <div>
+        <a id="ctl00_cphRoblox_ProceedWithTicketsPurchaseButton" class="ImageButton btn-buynow"
+            onclick="ProcessPurchaseTicketsViewOpen()"></a>
+        <input type="submit" name="ctl00$cphRoblox$Button5" value=""
+            onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$Button5&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))"
+            id="ctl00_cphRoblox_Button5" style="display: none;" />
+    </div>
+    <div id="ctl00_cphRoblox_Div15" style="clear: left; padding-top: 10px; text-align: center;">
+        <a onclick="ModalClose('PurchaseWithTicketsVerificationView');" id="ctl00_cphRoblox_CancelTicketsPurchaseButton"
+            class="RedButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$CancelTicketsPurchaseButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+    </div>
+    <div style="text-align: center">
+        <p>
+            Your balance after this transaction will be Tx:
+            0.</p>
+    </div>
+</div>
+<div id="ProcessPurchaseTicketsView" class="modalPopup blueAndWhite" style="width: 300px;
+                min-height: 50px; display: none; position: absolute;">
+    <div id="Processing_Tickets" style="margin: 15px auto; text-align: center; vertical-align: middle;">
+        <img id="ctl00_cphRoblox_ProcessingTicketsPurchaseIconImage" src="/img/ProgressIndicator2.gif"
+            alt="Processing..." align="middle" style="border-width:0px;" />&nbsp;&nbsp;
+        Processing transaction ...
+    </div>
+</div>
+<div id="RenewForFreeVerificationView" class="modalPopup blueAndWhite" style="width: 395px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div16" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 400px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Renew Free Item:
+    </div>
+    <div id="ctl00_cphRoblox_VerifyRenew_Free" style="margin: 0px 10px 0px 10px;">
+        <p>
+            <%= category %>
+            "<%= name %>" from
+            <%= creatorName %>
+            has expired. Would you like to renew it for free?</p>
+    </div>
+    <div id="ctl00_cphRoblox_Div18" style="clear: left; padding-top: 10px; text-align: center;">
+        <a onclick="ProcessRenewFreeViewOpen();" id="ctl00_cphRoblox_ProceedWithFreeRenewButton" class="GreenButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$ProceedWithFreeRenewButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))">
+            <span>Renew It!</span></a>
+        <a onclick="ModalClose('RenewForFreeVerificationView');" id="ctl00_cphRoblox_CancelFreeRenewButton"
+            class="RedButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$CancelFreeRenewButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+    </div>
+</div>
+<div id="ProcessRenewFreeView" class="modalPopup blueAndWhite" style="width: 300px;
+                min-height: 50px; display: none; position: absolute;">
+    <div id="Processing_RenewFree" style="margin: 15px auto; text-align: center; vertical-align: middle;">
+        <img id="ctl00_cphRoblox_ProcessingFreeRenewIconImage" src="/img/ProgressIndicator2.gif" alt="Processing..."
+            align="middle" style="border-width:0px;" />&nbsp;&nbsp; Processing transaction
+        ...
+    </div>
+</div>
+<div id="RenewWithRobuxVerificationView" class="modalPopup blueAndWhite" style="width: 395px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div19" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 400px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Renew Item:
+    </div>
+    <div id="ctl00_cphRoblox_VerifyRenew_Robux" style="margin: 0px 10px 0px 10px;">
+        <p>
+            <%= category %>
+            "<%= name %>" from
+            <%= creatorName %>
+            has expired. Would you like to renew it for
+            Was R$: <%= price %>?</p>
+        <p>
+            Your balance after this transaction will be R$: <%= (userInfo.robux - price) %>.</p>
+    </div>
+    <div id="ctl00_cphRoblox_Div21" style="clear: left; padding-top: 10px; text-align: center;">
+        <a onclick="ProcessRenewRobuxViewOpen();" id="ctl00_cphRoblox_ProceedWithRobuxRenewButton" class="GreenButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$ProceedWithRobuxRenewButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))">
+            <span>Buy now!</span></a>
+        <a onclick="ModalClose('RenewWithRobuxVerificationView');" id="ctl00_cphRoblox_CancelRobuxRenewButton"
+            class="RedButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$CancelRobuxRenewButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+    </div>
+</div>
+<div id="ProcessRenewRobuxView" class="modalPopup blueAndWhite" style="width: 300px;
+                min-height: 50px; display: none; position: absolute;">
+    <div id="Processing_RenewRobux" style="margin: 15px auto; text-align: center; vertical-align: middle;">
+        <img id="ctl00_cphRoblox_ProcessingRobuxRenewIconImage" src="/img/ProgressIndicator2.gif" alt="Processing..."
+            align="middle" style="border-width:0px;" />&nbsp;&nbsp;
+        Processing transaction ...
+    </div>
+</div>
+<div id="RenewWithTicketsVerificationView" class="modalPopup blueAndWhite" style="width: 395px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div24" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 400px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Renew Item:
+    </div>
+    <div id="ctl00_cphRoblox_VerifyRenew_Tickets" style="margin: 0px 10px 0px 10px;">
+        <p>
+            <%= category %>
+            "<%= name %>" from
+            <%= creatorName %>
+            has expired. Would you like to renew it for
+            ?</p>
+        <p>
+            Your balance after this transaction will be Tx:
+            0.</p>
+    </div>
+    <div id="ctl00_cphRoblox_Div26" style="clear: left; padding-top: 10px; text-align: center;">
+        <a onclick="ProcessRenewTicketsViewOpen();" id="ctl00_cphRoblox_ProceedWithTicketsRenewButton"
+            class="GreenButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$ProceedWithTicketsRenewButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))">
+            <span>Renew Now!</span></a>
+        <a onclick="ModalClose('RenewWithTicketsVerificationView');" id="ctl00_cphRoblox_CancelTicketsRenewButton"
+            class="RedButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$CancelTicketsRenewButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+    </div>
+</div>
+<div id="ProcessRenewTicketsView" class="modalPopup blueAndWhite" style="width: 300px;
+                min-height: 50px; display: none; position: absolute;">
+    <div id="Processing_RenewTickets" style="margin: 15px auto; text-align: center; vertical-align: middle;">
+        <img id="ctl00_cphRoblox_ProcessingTicketsRenewIconImage" src="/img/ProgressIndicator2.gif" alt="Processing..."
+            align="middle" style="border-width:0px;" />&nbsp;&nbsp;
+        Processing transaction ...
+    </div>
+</div>
+<div id="PurchaseForFreeConfirmationView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div22" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Transaction Complete!
+    </div>
+    <div id="modal_success" class="SuccessBox">
+        <img src="/img/icon_success_50px.png" style="display: inline-block" /><span class="BoxTextAligned"
+            style="color: Black; font-size: 14px; display: inline-block; margin-left: 60px; margin-top: -20px">
+            <span class="success-message">
+                <b>You have successfully added
+                    Gear
+                    "<%= name %>" from
+                    ROBLOX
+                    to your inventory for free.</b>
+            </span>
+        </span>
+    </div>
+    <div id="ctl00_cphRoblox_Div23" style="text-align: center;">
+        <p><a href="/item.aspx?id=<%= assetId %>" id="ctl00_cphRoblox_Hyperlink10"
+                class="ImageButton btn-continueshopping"></a></p>
+        <p id="ctl00_cphRoblox_ChangeAvatar_Free">
+            <a id="ctl00_cphRoblox_Hyperlink3" href="My/Character.aspx" style="font-weight:bold;">Customize
+                Character</a></p>
+    </div>
+</div>
+<div id="PurchaseWithRobuxConfirmationView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div60" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Purchase Complete!
+    </div>
+    <div id="Div25" class="SuccessBox">
+        <img src="/img/icon_success_50px.png" style="display: inline-block" /><span class="BoxTextAligned"
+            style="color: Black; display: inline-block; margin-left: 60px; margin-top: -20px; font-size: 14px">
+            <span class="success-message">
+                <b>You have successfully
+                    purchased
+                    <%= category %>
+                    "<%= name %>" from
+                    <%= creatorName %>
+                    for <%= price > 0 ? price : 'free' %>.</b>
+            </span>
+        </span>
+    </div>
+    <div id="ctl00_cphRoblox_Div27" style="text-align: center;">
+        <p><a href="/item.aspx?id=<%= assetId %>" id="ctl00_cphRoblox_Hyperlink1"
+                class="ImageButton btn-continueshopping"></a></p>
+        <p id="ctl00_cphRoblox_ChangeAvatar_Robux">
+            <a id="ctl00_cphRoblox_Hyperlink2" href="/My/Character.aspx" style="font-weight:bold;">Customize
+                Character</a></p>
+    </div>
+</div>
+<div id="PurchaseUserAssetWithRobuxConfirmationView" class="modalPopup blueAndWhite"
+    style="width: 400px; min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div28" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Purchase Complete!
+    </div>
+    <div id="Div29" class="SuccessBox">
+        <img src="/img/icon_success_50px.png" style="display: inline-block" /><span class="BoxTextAligned"
+            style="color: Black; font-size: 14px; display: inline-block; margin-left: 60px; margin-top: -20px">
+            <span class="success-message">
+                <b>You have successfully purchased
+                    <%= category %>
+                    "<%= name %>".</b>
+            </span>
+        </span>
+    </div>
+    <div id="ctl00_cphRoblox_Div30" style="text-align: center;">
+        <p><a href="/item.aspx?id=<%= assetId %>" id="ctl00_cphRoblox_Hyperlink4"
+                class="ImageButton btn-continueshopping"></a></p>
+        <p id="ctl00_cphRoblox_P1">
+            <a id="ctl00_cphRoblox_Hyperlink5" href="My/Character.aspx" style="font-weight:bold;">Customize
+                Character</a></p>
+    </div>
+</div>
+<div id="PurchaseWithTicketsConfirmationView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div31" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Purchase Complete!
+    </div>
+    <div id="Div32" class="SuccessBox">
+        <img src="/img/icon_success_50px.png" style="display: inline-block" /><span class="BoxTextAligned"
+            style="color: Black; font-size: 14px; display: inline-block; margin-left: 60px; margin-top: -20px">
+            <b>You have successfully
+                purchased
+                Gear
+                "<%= name %>" from
+                ROBLOX
+                for
+                .</b>
+        </span>
+    </div>
+    <div id="ctl00_cphRoblox_Div33" style="text-align: center;">
+        <p><a href="/item.aspx?id=<%= assetId %>" id="ctl00_cphRoblox_Hyperlink6"
+                class="ImageButton btn-continueshopping"></a></p>
+        <p id="ctl00_cphRoblox_P5">
+            <a id="ctl00_cphRoblox_Hyperlink7" href="My/Character.aspx" style="font-weight:bold;">Customize
+                Character</a></p>
+    </div>
+</div>
+<div id="RenewForFreeConfirmationView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div34" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Transaction Complete!
+    </div>
+    <div id="Div35" class="SuccessBox">
+        <img src="/img/icon_success_50px.png" style="display: inline-block" /><span class="BoxTextAligned"
+            style="color: Black; font-size: 14px; display: inline-block; margin-left: 60px; margin-top: -20px">
+            <b>You have successfully renewed
+                Gear
+                "<%= name %>" from
+                ROBLOX
+                for free.</b>
+        </span>
+    </div>
+    <div id="ctl00_cphRoblox_Div36" style="text-align: center;">
+        <p><a href="/item.aspx?id=<%= assetId %>" id="ctl00_cphRoblox_Hyperlink8"
+                class="ImageButton btn-continueshopping"></a></p>
+        <p id="ctl00_cphRoblox_P2">
+            <a id="ctl00_cphRoblox_Hyperlink9" href="My/Character.aspx" style="font-weight:bold;">Customize
+                Character</a></p>
+    </div>
+</div>
+<div id="RenewWithRobuxConfirmationView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div37" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Purchase Complete!
+    </div>
+    <div id="Div38" class="SuccessBox">
+        <img src="/img/icon_success_50px.png" style="display: inline-block" /><span class="BoxTextAligned"
+            style="color: Black; font-size: 14px; display: inline-block; margin-left: 60px; margin-top: -20px">
+            <b>You have successfully renewed
+                Gear
+                "<%= name %>" from
+                ROBLOX
+                for R$: <%= price %>.</b>
+        </span>
+    </div>
+    <div id="ctl00_cphRoblox_Div39" style="text-align: center;">
+        <p><a href="/item.aspx?id=<%= assetId %>" id="ctl00_cphRoblox_Hyperlink11"
+                class="ImageButton btn-continueshopping"></a></p>
+        <p id="ctl00_cphRoblox_P3">
+            <a id="ctl00_cphRoblox_Hyperlink12" href="My/Character.aspx" style="font-weight:bold;">Customize
+                Character</a></p>
+    </div>
+</div>
+<div id="RenewWithTicketsConfirmationView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div40" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Purchase Complete!
+    </div>
+    <div id="Div41" class="SuccessBox">
+        <img src="/img/icon_success_50px.png" style="display: inline-block" /><span class="BoxTextAligned"
+            style="color: Black; font-size: 14px; display: inline-block; margin-left: 60px; margin-top: -20px">
+            <b>You have successfully renewed
+                Gear
+                "<%= name %>" from
+                ROBLOX
+                for <%= price %>.</b>
+        </span>
+    </div>
+    <div id="ctl00_cphRoblox_Div42" style="text-align: center;">
+        <p><a href="/item.aspx?id=<%= assetId %>" id="ctl00_cphRoblox_Hyperlink13"
+                class="ImageButton btn-continueshopping"></a></p>
+        <p id="ctl00_cphRoblox_P4">
+            <a id="ctl00_cphRoblox_Hyperlink14" href="My/Character.aspx" style="font-weight:bold;">Customize
+                Character</a></p>
+    </div>
+</div>
+<div id="InsufficientRobuxView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div43" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Insufficient Funds!
+    </div>
+    <div style="text-align: center">
+        <span class="funds-needed-message">
+            You need more ROBUX to purchase this item.
+        </span>
+    </div>
+    <div id="ctl00_cphRoblox_Div45" style="clear: left; padding-top: 10px; text-align: center;">
+        <p>
+            <a id="ctl00_cphRoblox_Hyperlink15" class="GreenButton" href="/Shop/Robux"><span>Buy ROBUX Now!</span></a>
+            <!--
+                        <a id="ctl00_cphRoblox_Hyperlink16" class="GreenButton" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$Hyperlink16&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Trade Currency</span></a></p>-->
+        <p>
+            <a onclick="ModalClose('InsufficientRobuxView');" id="ctl00_cphRoblox_CancelButton4" class="RedButton"
+                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$CancelButton4&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+    </div>
+</div>
+<div id="InsufficientTicketsView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div44" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Insufficient Funds!
+    </div>
+    <div style="text-align: center">
+        You need more Tickets to purchase this item.
+    </div>
+    <div id="ctl00_cphRoblox_Div46" style="clear: left; padding-top: 10px; text-align: center;">
+        <p>
+            <a id="ctl00_cphRoblox_Hyperlink18" class="GreenButton"
+                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$Hyperlink18&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Trade
+                    Currency</span></a>
+        </p>
+        <p>
+            <a onclick="ModalClose('InsufficientTicketsView');" id="ctl00_cphRoblox_LinkButton1" class="RedButton"
+                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$LinkButton1&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+        </p>
+    </div>
+</div>
+<div id="TicketsPriceHasChanged" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        The price of this item has changed!
+    </div>
+    <div style="text-align: center; font-size:14px; font-weight:bold;">
+        While you've been looking at this item, the price changed from <span
+            id="ctl00_cphRoblox_TicketsPriceHasChangedOriginal" style="color: #AA6611;"></span> to <span
+            id="ctl00_cphRoblox_PriceHasChangedNew" style="color: #AA6611;"></span>.
+    </div>
+    <div id="ctl00_cphRoblox_Div9" style="clear: left; padding-top: 10px; text-align: center;">
+        <p style="margin: 0; padding: 12px 0;">
+            <a id="ctl00_cphRoblox_LinkButton6" class="GreenButton"
+                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$LinkButton6&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Continue
+                    Buying Item</span></a>
+            <span style="padding: 0px 5px;"></span>
+            <a onclick="ModalClose('TicketsPriceHasChanged');" id="ctl00_cphRoblox_LinkButton7" class="RedButton"
+                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$LinkButton7&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+        </p>
+    </div>
+</div>
+<div id="RobuxPriceHasChanged" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div6" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        The price of this item has changed!
+    </div>
+    <div style="text-align: center; font-size:14px; font-weight:bold;">
+        While you've been looking at this item, the price changed from <span
+            id="ctl00_cphRoblox_RobuxPriceHasChangedOriginal" style="color: #008800">R$: </span> to <span
+            id="ctl00_cphRoblox_RobuxPriceHasChangedNew" style="color: #008800">R$: </span>.
+    </div>
+    <div id="ctl00_cphRoblox_Div8" style="clear: left; padding-top: 10px; text-align: center;">
+        <p style="margin: 0; padding: 12px 0;">
+            <a id="ctl00_cphRoblox_LinkButton8" class="GreenButton"
+                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$LinkButton8&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Continue
+                    Buying Item</span></a>
+            <span style="padding: 0px 5px;"></span>
+            <a onclick="ModalClose('RobuxPriceHasChanged');" id="ctl00_cphRoblox_LinkButton9" class="RedButton"
+                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$LinkButton9&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+        </p>
+    </div>
+</div>
+<div id="RedundantPurchaseView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div47" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Item Owned!
+    </div>
+    <div style="text-align: center;">
+        You already own this item.
+    </div>
+    <div id="ctl00_cphRoblox_Div48" style="clear: left; padding-top: 10px; text-align: center;">
+        <a onclick="ModalClose('RedundantPurchaseView');" id="ctl00_cphRoblox_LinkButton2"
+            class="RedButton"><span>Cancel</span></a>
+    </div>
+</div>
+<div id="AlreadySoldView" class="modalPopup blueAndWhite" style="width: 400px; min-height: 100px;
+                display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div49" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Item No Longer For Sale!
+    </div>
+    <div style="text-align: center;">
+        Transaction not completed. No money has been taken out of your Robux account, please
+        try again.
+    </div>
+    <div id="ctl00_cphRoblox_Div50" style="clear: left; padding-top: 10px; text-align: center;">
+        <a onclick="ModalClose('AlreadySoldView');" id="ctl00_cphRoblox_LinkButton3" class="RedButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$LinkButton3&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+    </div>
+</div>
+<div id="BCLevelTooLowView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div51" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        BC Level Too Low!
+    </div>
+    <div style="text-align: center;">
+        Your Builders Club level isn't high enough to purchase this item. <a href="/Upgrades/BuildersClub.aspx">
+            Upgrade</a> now!
+    </div>
+    <div id="ctl00_cphRoblox_Div52" style="clear: left; padding-top: 10px; text-align: center;">
+        <a onclick="ModalClose('BCLevelTooLowView');" id="ctl00_cphRoblox_LinkButton4" class="RedButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$LinkButton4&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+    </div>
+</div>
+<div id="GenericExceptionView" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div53" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Error!
+    </div>
+    <div style="text-align: center;">
+        Transaction not completed. No money has been taken out of your Robux account. Please
+        try again.
+    </div>
+    <div id="ctl00_cphRoblox_Div54" style="clear: left; padding-top: 10px; text-align: center;">
+        <a onclick="ModalClose('GenericExceptionView');" id="ctl00_cphRoblox_LinkButton5" class="RedButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$LinkButton5&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+    </div>
+</div>
+<div id="SalePriceConfirmPopupPanel" class="modalPopup blueAndWhite" style="width: 400px;
+                min-height: 100px; display: none; position: absolute;">
+    <div id="ctl00_cphRoblox_Div55" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 405px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Warning!
+    </div>
+    <div id="RobloxOffer" style="text-align: center;">
+        <p>
+            You are trying to sell this item for <b>
+                ERROR: No P2P offer price</b> ROBUX.</p>
+        <p>
+            This item normally sells for around <b>
+                957</b> ROBUX.</p>
+        <p>
+            If you want, ROBLOX will purchase this item from you instantly for <b>
+                95</b> ROBUX.</p>
+        <p>
+            Minus marketplace fees, your profit would be: <b>
+                ERROR: No P2P offer price</b> ROBUX</p>
+    </div>
+    <div id="ctl00_cphRoblox_Div56" style="clear: left; padding-top: 10px; text-align: center;">
+        <a onclick="ModalClose('SalePriceConfirmPopupPanel');" id="ctl00_cphRoblox_CancelAttemptedSale"
+            class="RedButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$CancelAttemptedSale&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel
+                Sale</span></a>
+        <a onclick="ProcessROBLOXPurchaseOpen();" id="ctl00_cphRoblox_SellItemToROBLOX" class="GreenButton"
+            href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$SellItemToROBLOX&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Sell
+                to ROBLOX</span></a>
+    </div>
+</div>
+<div id="ProcessROBLOXPurchaseView" class="modalPopup blueAndWhite" style="width: 300px;
+                min-height: 50px; display: none; position: absolute;">
+    <div id="Processing_ROBLOXPurchase" style="margin: 15px auto; text-align: center;
+                    vertical-align: middle;">
+        <img id="ctl00_cphRoblox_Image22" src="/img/ProgressIndicator2.gif" alt="Processing..." align="middle"
+            style="border-width:0px;" />&nbsp;&nbsp; Processing transaction
+        ...
+    </div>
+</div>
+<% } %>
+<div id="ctl00_cphRoblox_CreateSetPanelDiv" class="createSetPanelPopup">
+
+
+
+
+</div>
+
+<script type="text/javascript">
+
+    $("#Tabs").tabs();
+
+
+    $("#UserSalesTabHeader").addClass("StandardTabGrayActive");
+    $("#UserSalesTab").show();
+
+
+    var commentsLoaded = false;
+
+    $("#UserSalesLink").click(function () {
+        $(".ItemTabs").removeClass("StandardTabGrayActive");
+        $(".ItemTabs").addClass("StandardTabGray");
+        $("#UserSalesTabHeader").addClass("StandardTabGrayActive");
+        $("#ScriptReviewTab").hide();
+    });
+
+    $("#ScriptReviewLink").click(function () {
+        $(".ItemTabs").removeClass("StandardTabGrayActive");
+        $(".ItemTabs").addClass("StandardTabGray");
+        $("#ScriptReviewTabHeader").addClass("StandardTabGrayActive");
+        $("#ScriptReviewTab").show();
+    });
+
+    $("#CommentaryLink").click(function () {
+        $(".ItemTabs").removeClass("StandardTabGrayActive");
+        $(".ItemTabs").addClass("StandardTabGray");
+        $("#CommentaryTabHeader").addClass("StandardTabGrayActive");
+        $("#ScriptReviewTab").hide();
+        $("#CommentaryTab").show()
+        if (!commentsLoaded) {
+            __doPostBack('ctl00$cphRoblox$CommentsPane$LoadCommentsButton', '');
+            commentsLoaded = true;
+        }
+        return false;
+    });
+
+
+    function confirmDelete() {
+        return confirm("Are you sure you want to permanently DELETE this item from your inventory?");
+    }
+
+    function confirmSubmit() {
+        var resp = confirm("This will add a new badge giver model to your inventory. Are you sure you want to do this?");
+        if (resp) {
+            window.location.href = $('#ctl00_cphRoblox_btnSubmit').attr('href');
+        }
+    }
+
+    modalProperties = { escClose: true, opacity: 80, overlayCss: { backgroundColor: "#000" } };
+
+    // Code for Modal Popups
+
+
+    function ModalClose(popup) {
+        $.modal.close('.' + popup);
+    }
+    function ModalOpen(popup) {
+        $(popup).modal(modalProperties);
+    }
+
+    function UpdateSets(assetSetItemId, updateAllSets) {
+        $.get(
+            "/Sets/SetHandler.ashx?rqtype=getnewestversion&assetSetItemId=" + assetSetItemId + (updateAllSets ? "&allsets=true" : ""),
+            function () {
+                $('#ctl00_cphRoblox_UpdateSet').hide("slow");
+                if (updateAllSets) {
+                    $('#ctl00_cphRoblox_updateSetsDiv').slideToggle("slow");
+                }
+            });
+    }
+
+    function getItem(view) {
+        switch (view) {
+            case "PurchaseFree":
+                $('#ctl00_cphRoblox_Button2').click();
+                break;
+            case "PurchaseRobux":
+                $('#ctl00_cphRoblox_Button3').click();
+                break;
+            case "UAPurchaseRobux":
+                $('#ctl00_cphRoblox_Button4').click();
+                break;
+            case "PurchaseTickets":
+                $('#ctl00_cphRoblox_Button5').click();
+                break;
+        }
+    }
+</script>
+
+</div>
+</div>
+<%- include('../footer'); %>
