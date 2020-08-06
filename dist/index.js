@@ -11,12 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@tsed/common");
 const platform_express_1 = require("@tsed/platform-express");
-const Server_1 = require("./Server");
+const server_1 = require("./server");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             common_1.$log.debug("Start server...");
-            const platform = yield platform_express_1.PlatformExpress.bootstrap(Server_1.Server, {
+            const platform = yield platform_express_1.PlatformExpress.bootstrap(server_1.Server, {
             // extra settings
             });
             yield platform.listen();
