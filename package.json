@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "node utils/build.js",
-        "start:dev": "nodemon -r --ignore --exec ts-node-dev src/index.ts"
+        "start:dev": "nodemon -r --ignore --exec ts-node-dev src/index.ts",
+        "start": "cross-env ENV_FILE=production node ./dist/index.js"
     },
     "keywords": [],
     "author": "",
@@ -30,6 +31,7 @@
         "chalk": "^4.1.0",
         "compression": "^1.7.4",
         "cookie-parser": "^1.4.5",
+        "cross-env": "^7.0.2",
         "cryptr": "^6.0.2",
         "express": "^4.17.1",
         "fs-extra": "^9.0.1",
