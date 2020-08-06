@@ -5,6 +5,11 @@ class GamesService extends base_1.default {
     getGamesByUser(userId, accessFilter, cursor = '') {
         return this.get('https://games.roblox.com/v2/users/' + userId + '/games?accessFilter=' + accessFilter + '&sortOrder=Asc&limit=100&cursor=' + encodeURIComponent(cursor));
     }
+    multiGetGameInfo(universeIds) {
+        return this.get('https://games.roblox.com/v1/games?universeIds=' + encodeURIComponent(universeIds.join(','))).then(d => {
+            return d.data;
+        });
+    }
 }
 exports.default = GamesService;
 //# sourceMappingURL=Games.js.map

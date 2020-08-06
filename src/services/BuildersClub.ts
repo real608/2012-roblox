@@ -9,6 +9,9 @@ export default class BuildersClubService extends base {
      */
     @base.AddCookie()
     public async getType(userId: number): Promise<model.BuildersClub.SubscriptionType> {
+        if (userId === 1) {
+            return 'OBC';
+        }
         let cached = await this.redis.get('is_premium_' + userId) as 'true' | 'false' | null;
         if (typeof cached !== 'string') {
             cached = (await this.get('https://premiumfeatures.roblox.com/v1/users/' + userId + '/validate-membership') as boolean) === true ? 'true' : 'false';

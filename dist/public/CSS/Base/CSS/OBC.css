@@ -1,0 +1,26 @@
+#Footer,
+#MasterContainer {
+    background: none;
+}
+
+body {
+    background: url(/img/OBCBackground.jpg) top center repeat-x black;
+}
+
+#SmallHeaderContainer div#Banner {
+    background-color: #2E2E2E;
+}
+
+a.btn-logo,
+a.btn-logo:visited {
+    background: url(/img/OBCLogo.gif)top left;
+}
+
+#Header .Navigation {
+    background: url(/img/OBCBox.png);
+}
+
+.Navigation li:hover {
+    background: url(/img/OBCBox.png);
+    background-position: 0 30px;
+}

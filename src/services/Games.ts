@@ -20,4 +20,29 @@ export default class GamesService extends base {
         return this.get('https://games.roblox.com/v2/users/' + userId + '/games?accessFilter=' + accessFilter + '&sortOrder=Asc&limit=100&cursor=' + encodeURIComponent(cursor));
     }
 
+    public multiGetGameInfo(universeIds: number[]): Promise<{
+        id: number;
+        rootPlaceId: number;
+        name: string;
+        description: string;
+        creator: {
+            id: number;
+            name: string;
+            type: 'User' | 'Group';
+        };
+        price: number | null;
+        allowedGearGenres: string[];
+        allowedGearCategories: string[];
+        playing: number;
+        visits: number;
+        maxPlayers: number;
+        created: string;
+        updated: string;
+        genre: string;
+    }[]> {
+        return this.get('https://games.roblox.com/v1/games?universeIds=' + encodeURIComponent(universeIds.join(','))).then(d => {
+            return d.data;
+        })
+    }
+
 }

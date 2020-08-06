@@ -18,6 +18,7 @@ import BadgesService from '../services/Badges';
 import AccountSettingsService from '../services/AccountSettings';
 import AccountInformationService from '../services/AccountInformation';
 import BuildersClubService from '../services/BuildersClub';
+import PresenceService from '../services/Presence';
 
 export default class base extends HTTPExceptions {
     public moment: typeof moment;
@@ -37,6 +38,7 @@ export default class base extends HTTPExceptions {
     public AccountSettings: AccountSettingsService;
     public AccountInformation: AccountInformationService;
     public BuildersClub: BuildersClubService;
+    public Presence: PresenceService;
     constructor(extraData?: IExtraData) {
         super();
         this.moment = moment;
@@ -56,5 +58,6 @@ export default class base extends HTTPExceptions {
         this.AccountSettings = new AccountSettingsService(extraData);
         this.AccountInformation = new AccountInformationService(extraData);
         this.BuildersClub = new BuildersClubService(extraData);
+        this.Presence = new PresenceService(extraData);
     }
 }

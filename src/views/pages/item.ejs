@@ -1,5 +1,9 @@
 <%- include('../header'); %>
 
+<div id="ItemMetaData" data-product-id="<%= productId %>" data-creator-id="<%= creatorId %>" data-price="<%= price %>"
+    data-name="<%= name %>">
+</div>
+
 <div id="ItemContainer">
     <div class="StandardBoxHeader" style="width: 709px;">
         <span class="item-header">
@@ -490,7 +494,8 @@
                         <td>
                             <a class="Button PurchaseButton puchase-private-seller-item"
                                 data-price="<%= seller.price %>" data-uaid="<%= seller.userAssetId %>"
-                                data-sellerId="<%= seller.userId %>">Buy Now</a>
+                                data-sellerId="<%= seller.userId %>" data-sellerName="<%= seller.username %>">Buy
+                                Now</a>
                         </td>
                     </tr>
                     <% } %>
@@ -621,7 +626,7 @@
     </div>
     <div id="ctl00_cphRoblox_VerifyPurchase_Robux"
         style="margin: 0px 10px 0px 10px; text-align: center; font-size: 14px">
-        <p><b>
+        <p><b class="purchase-confirmation">
                 Would you like to
                 purchase
                 <%= category %>
@@ -640,6 +645,40 @@
     </div>
     <div style="text-align: center">
         <p>
+            Your balance after this transaction will be
+            <%= price > 0 ? 'R$: '+(userInfo.robux - price) : 'unaffected' %>.
+        </p>
+    </div>
+</div>
+<div id="PurchaseUserAssetWithRobuxVerificationView" class="modalPopup blueAndWhite" style="width: 395px;
+                min-height: 100px; display: none; position: absolute">
+    <div id="ctl00_cphRoblox_Div7" class="simplemodal-close">
+        <a class="ImageButton closeBtnCircle_35h" style="cursor: pointer; margin-left: 400px;
+                        position: absolute; top: -18px; left: -10px;"></a>
+    </div>
+    <div class="titleBar" style="text-align: center">
+        Purchase
+        Item:
+    </div>
+    <div id="ctl00_cphRoblox_VerifyPurchase_Robux"
+        style="margin: 0px 10px 0px 10px; text-align: center; font-size: 14px">
+        <p><b class="purchase-confirmation">
+                Would you like to
+                purchase
+                <%= category %>
+                "<%= name %>" from
+                <%= creatorName %>
+                for <%= price > 0 ? price : 'Free' %>?</b></p>
+    </div>
+    <div>
+        <a id="ctl100_roblox_PurchaseUserAsset" class="ImageButton btn-buynow"></a>
+    </div>
+    <div style="padding-top: 10px; text-align: center">
+        <a onclick="ModalClose('PurchaseUserAssetWithRobuxVerificationView');"
+            id="ctl00_cphRoblox_CancelUserAssetRobuxPurchaseButton" class="RedButton"><span>Cancel</span></a>
+    </div>
+    <div style="text-align: center">
+        <p class="balance-after" data-balance="<%= userInfo.robux %>">
             Your balance after this transaction will be
             <%= price > 0 ? 'R$: '+(userInfo.robux - price) : 'unaffected' %>.
         </p>
@@ -680,9 +719,8 @@
     <div>
         <a id="ctl00_cphRoblox_ProceedWithTicketsPurchaseButton" class="ImageButton btn-buynow"
             onclick="ProcessPurchaseTicketsViewOpen()"></a>
-        <input type="submit" name="ctl00$cphRoblox$Button5" value=""
-            onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$Button5&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))"
-            id="ctl00_cphRoblox_Button5" style="display: none;" />
+        <input type="submit" name="ctl00$cphRoblox$Button5" value="" id="ctl00_cphRoblox_Button5"
+            style="display: none;" />
     </div>
     <div id="ctl00_cphRoblox_Div15" style="clear: left; padding-top: 10px; text-align: center;">
         <a onclick="ModalClose('PurchaseWithTicketsVerificationView');" id="ctl00_cphRoblox_CancelTicketsPurchaseButton"
@@ -1027,7 +1065,7 @@
                         <a id="ctl00_cphRoblox_Hyperlink16" class="GreenButton" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$Hyperlink16&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Trade Currency</span></a></p>-->
         <p>
             <a onclick="ModalClose('InsufficientRobuxView');" id="ctl00_cphRoblox_CancelButton4" class="RedButton"
-                href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphRoblox$CancelButton4&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))"><span>Cancel</span></a>
+                href="#"><span>Cancel</span></a>
     </div>
 </div>
 <div id="InsufficientTicketsView" class="modalPopup blueAndWhite" style="width: 400px;

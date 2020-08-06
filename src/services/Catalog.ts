@@ -65,7 +65,8 @@ export default class CatalogService extends base {
         return this.get(`https://catalog.roblox.com/v1/favorites/assets/${assetId}/count`)
     }
 
-    public getSimilar(assetId: number, limit: number = 5): Promise<{
+    @base.AddCookie()
+    public getSimilar(assetId?: number, typeId: number = 8, limit: number = 5): Promise<{
         item: {
             assetId: number;
             name: string;
@@ -91,7 +92,7 @@ export default class CatalogService extends base {
             isFree: boolean;
         }
     }[]> {
-        return this.get(`https://catalog.roblox.com/v1/recommendations/asset/8?contextAssetId=${assetId}&numItems=${limit}`).then(d => {
+        return this.get(`https://catalog.roblox.com/v1/recommendations/asset/${typeId}?contextAssetId=${assetId || ''}&numItems=${limit}`).then(d => {
             return d.data;
         })
     }

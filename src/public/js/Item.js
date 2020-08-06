@@ -32,12 +32,12 @@ $(document).ready(function () {
 
 // Code for processing modal
 function showProcessingModal(closeClass) {
-    var modalProperties = { overlayClose: true, opacity: 80, overlayCss: { backgroundColor: "#000"} };
+    var modalProperties = { overlayClose: true, opacity: 80, overlayCss: { backgroundColor: "#000" } };
 
     if (typeof closeClass !== "undefined" && closeClass !== "") {
         $.modal.close("." + closeClass);
     }
-    
+
     $("#ProcessingView").modal(modalProperties);
 }
 
@@ -45,7 +45,7 @@ function showProcessingModal(closeClass) {
 
 // Code for Modal Popups
 
-var modalProperties = { overlayClose: true, escClose: true, opacity: 80, overlayCss: { backgroundColor: "#000"} };
+var modalProperties = { overlayClose: true, escClose: true, opacity: 80, overlayCss: { backgroundColor: "#000" } };
 
 ProcessPurchaseFreeViewOpen = function () {
     $("#ProcessPurchaseFreeView").modal(modalProperties);
@@ -91,19 +91,98 @@ var ProcessROBLOXPurchaseOpen = function () {
 };
 
 
-$(document).on('click', '#ctl00_cphRoblox_PurchaseWithRobuxButton', function(e) {
+$(document).on('click', '#ctl00_cphRoblox_PurchaseWithRobuxButton', function (e) {
     e.preventDefault();
     ModalOpen('#PurchaseWithRobuxVerificationView');
 });
 
-$(document).on('click', '#ctl00_cphRoblox_ProceedWithRobuxPurchaseButton', function(e) {
-    e.preventDefault();
-    ProcessPurchaseRobuxViewOpen()
-    console.log('purchase item');
-    setTimeout(() => {
-        ModalClose('ProcessPurchaseRobuxView');
-        ModalOpen('#PurchaseWithRobuxConfirmationView');
-    }, 100);
+$(document).ready(function () {
+    let itemMetaData = $('#ItemMetaData');
+    let sellerId = parseInt(itemMetaData.attr('data-creator-id'), 10);
+    let productId = parseInt($('#ItemMetaData').attr('data-product-id'), 10)
+    let price = parseInt(itemMetaData.attr('data-price'), 10);
+
+    let exceptionToView = {
+        'InsufficientFunds': '#InsufficientRobuxView',
+        'AlreadyOwned': '#RedundantPurchaseView',
+    }
+
+    $(document).on('click', '#ctl00_cphRoblox_ProceedWithRobuxPurchaseButton', function (e) {
+        e.preventDefault();
+        ProcessPurchaseRobuxViewOpen()
+        console.log('purchase item');
+        web.post('/economy/purchase/' + productId, {
+            expectedSellerId: sellerId,
+            expectedPrice: price,
+        }).then(d => {
+            console.log('success', d);
+            ModalClose('ProcessPurchaseRobuxView');
+            ModalOpen('#PurchaseWithRobuxConfirmationView');
+        }).catch(err => {
+            ModalClose('ProcessPurchaseRobuxView');
+            let code = err.responseJSON.error.code;
+            console.error(err);
+            let view = exceptionToView[code];
+            if (view) {
+                ModalOpen(view);
+            } else {
+                ModalOpen('#GenericExceptionView');
+            }
+        })
+    });
+
+    let privatePrice;
+    let uaid;
+    let seller;
+    let sellerName = '';
+    $(document).on('click', '.puchase-private-seller-item', function (e) {
+        e.preventDefault();
+        console.log('purchase private item');
+        $('#PurchaseUserAssetWithRobuxConfirmationView').find('.success-message').text(`You have successfully purchased this item.`);
+        privatePrice = parseInt($(this).attr('data-price'), 10);
+        uaid = parseInt($(this).attr('data-uaid'), 10);
+        seller = parseInt($(this).attr('data-sellerId'), 10);
+        sellerName = $(this).attr('data-sellerName');
+
+        let currentBalance = parseInt($('#PurchaseUserAssetWithRobuxVerificationView').find('.balance-after').attr('data-balance'), 10);
+        let newBalance = currentBalance - privatePrice;
+        if (newBalance < 0) {
+            ModalOpen(exceptionToView.InsufficientFunds);
+            return
+        }
+        $('#PurchaseUserAssetWithRobuxVerificationView').find('.purchase-confirmation').text(` Would you like to
+        purchase
+        "${itemMetaData.attr('data-name')}" from
+        ${sellerName}
+        for ${privatePrice > 0 ? 'R$ ' + privatePrice : 'Free'}?`);
+        $('#PurchaseUserAssetWithRobuxVerificationView').find('.balance-after').text(`Your balance after this transaction will be R${newBalance}.`);
+        ModalOpen('#PurchaseUserAssetWithRobuxVerificationView');
+    });
+    $(document).on('click', '#ctl100_roblox_PurchaseUserAsset', function (e) {
+        e.preventDefault();
+        console.log('buy asset');
+        ProcessPurchaseRobuxViewOpen()
+        console.log('purchase item');
+        web.post('/economy/purchase/' + productId, {
+            expectedSellerId: seller,
+            expectedPrice: privatePrice,
+            userAssetId: uaid,
+        }).then(d => {
+            console.log('success', d);
+            ModalClose('ProcessPurchaseRobuxView');
+            ModalOpen('#PurchaseUserAssetWithRobuxConfirmationView');
+        }).catch(err => {
+            ModalClose('ProcessPurchaseRobuxView');
+            let code = err.responseJSON.error.code;
+            console.error(err);
+            let view = exceptionToView[code];
+            if (view) {
+                ModalOpen(view);
+            } else {
+                ModalOpen('#GenericExceptionView');
+            }
+        })
+    })
 });
 
 /*

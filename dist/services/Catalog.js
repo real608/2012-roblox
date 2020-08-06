@@ -1,4 +1,13 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -39,8 +48,8 @@ class CatalogService extends base_1.default {
     countFavorites(assetId) {
         return this.get(`https://catalog.roblox.com/v1/favorites/assets/${assetId}/count`);
     }
-    getSimilar(assetId, limit = 5) {
-        return this.get(`https://catalog.roblox.com/v1/recommendations/asset/8?contextAssetId=${assetId}&numItems=${limit}`).then(d => {
+    getSimilar(assetId, typeId = 8, limit = 5) {
+        return this.get(`https://catalog.roblox.com/v1/recommendations/asset/${typeId}?contextAssetId=${assetId || ''}&numItems=${limit}`).then(d => {
             return d.data;
         });
     }
@@ -70,5 +79,11 @@ class CatalogService extends base_1.default {
         });
     }
 }
+__decorate([
+    base_1.default.AddCookie(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number, Number]),
+    __metadata("design:returntype", Promise)
+], CatalogService.prototype, "getSimilar", null);
 exports.default = CatalogService;
 //# sourceMappingURL=Catalog.js.map

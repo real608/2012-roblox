@@ -212,7 +212,7 @@ export class DefaultController extends base {
         }
         const [favorites, similar, details] = await Promise.all([
             this.Catalog.countFavorites(assetId),
-            this.Catalog.getSimilar(assetId, 5),
+            this.Catalog.getSimilar(assetId, undefined, 5),
             this.Catalog.getAssetDetails(assetId),
         ]);
 
@@ -224,6 +224,7 @@ export class DefaultController extends base {
 
 
         const data: any = {
+            productId: productInfo.ProductId,
             price: productInfo.PriceInRobux || 0,
             chartsMin30,
             chartsMin90,
@@ -316,15 +317,16 @@ export class DefaultController extends base {
     public async profile(
         @QueryParams('ID', Number) userId: number,
     ) {
-        let [robloxUserData, friends] = await Promise.all([
+        let [robloxUserData, friends, bcType] = await Promise.all([
             this.Users.getUserInfo(userId),
-            this.Friends.getFriends(userId)
+            this.Friends.getFriends(userId),
+            this.BuildersClub.getType(userId),
         ]);
         let username = robloxUserData.name;
         let createdGamesCount = 1;
         let favoritedGamesCount = 1;
-        console.log('setup view and return');
         let data = {
+            bcType,
             title: username + ' - ROBLOX',
             description: `View ${username}'s profile on ROBLOX.  ROBLOX is the place for free games online, where people like ROBLOX imagine, build, and share their creations with their friends in a kid-safe environment.  There are millions of free games on ROBLOX.  ${favoritedGamesCount} of them are ROBLOX's pics on ROBLOX for best free games.  ROBLOX is the creator of ${createdGamesCount} free games.  Visit ROBLOX now to play ${username}'s free games and discover thousands of others!`,
             keywords: `free games, online games, building games, virtual worlds, free mmo, gaming cloud, physics engine`,

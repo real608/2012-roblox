@@ -19,6 +19,7 @@ const methodOverride = require("method-override");
 const consolidate_1 = require("consolidate");
 const ErrorHandle_1 = require("./helpers/ErrorHandle");
 const express_1 = require("express");
+require("@tsed/swagger"); // import swagger Ts.ED module
 const Config_1 = require("./helpers/Config");
 const port = Config_1.default.port || process.env.PORT || 3000;
 const rootDir = __dirname;
@@ -77,6 +78,11 @@ Server = __decorate([
             logStart: false,
             level: 'off',
         },
+        swagger: [
+            {
+                path: "/docs"
+            }
+        ]
     })
 ], Server);
 exports.Server = Server;

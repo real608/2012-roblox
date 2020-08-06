@@ -23,7 +23,12 @@ let GamesController = class GamesController extends base_1.default {
         if (accessFilter !== 'Public') {
             accessFilter = 'Public';
         }
-        return this.Games.getGamesByUser(userId, accessFilter, cursor);
+        return this.Games.getGamesByUser(userId, accessFilter, cursor).then(games => {
+            if (games.data.length === 0) {
+                return [];
+            }
+            return this.Games.multiGetGameInfo(games.data.map(val => { return val.id; }));
+        });
     }
 };
 __decorate([

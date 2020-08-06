@@ -44,35 +44,8 @@
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
 
-    <% if (typeof userInfo !== 'undefined' && userInfo.theme === 1) { %>
-    <style>
-        #Footer,
-        #MasterContainer {
-            background: none;
-        }
-
-        body {
-            background: url(/img/OBCBackground.jpg) top center repeat-x black;
-        }
-
-        #SmallHeaderContainer div#Banner {
-            background-color: #2E2E2E;
-        }
-
-        a.btn-logo,
-        a.btn-logo:visited {
-            background: url(/img/OBCLogo.gif)top left;
-        }
-
-        #Header .Navigation {
-            background: url(/img/OBCBox.png);
-        }
-
-        .Navigation li:hover {
-            background: url(/img/OBCBox.png);
-            background-position: 0 30px;
-        }
-    </style>
+    <% if (typeof userInfo !== 'undefined' && userInfo.theme === 1 && (typeof bcType === 'undefined' || bcType !== 'OBC')) { %>
+    <link id="obc" rel="stylesheet" href="/CSS/Base/CSS/OBC.css" />
     <% } %>
 
 
@@ -184,8 +157,10 @@
                                 style="background-image:url('/img/PlayNow.png');"></a>
                         </div>
                         <% }else{ %>
-                        <span id="AuthenticatedUserName">Hi <%= userInfo.username %> <span class="AgeOptions"><span
-                                    id="Over12"><span class="age-btn">13+</span></span></span></span>
+                        <span id="AuthenticatedUserName"><a style="color:white;"
+                                href="/User.aspx?ID=<%= userInfo.userId %>">Hi
+                                <%= userInfo.username %></a> <span class="AgeOptions"><span id="Over12"><span
+                                        class="age-btn">13+</span></span></span></span>
 
                         <div id="Alerts">
                             <div class="SmallHeaderAlertSpaceLeft">

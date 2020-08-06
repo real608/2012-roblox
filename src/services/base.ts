@@ -2,19 +2,21 @@ import HTTPExceptions from '../helpers/HTTPExceptions';
 import axios from 'axios';
 import { IExtraData } from 'src/models/internal/base';
 import redis from '../helpers/Redis';
-const client = axios.create();
 import CookieManager from '../helpers/CookieManager';
 const Cookie = new CookieManager();
+import * as cheerio from 'cheerio';
 import { join } from 'path';
 let added = Cookie.readFromFileSync(join(__dirname, '../../cookies.txt'));
 console.log('[info] using', added, 'total cookies');
 
 import AxiosSetup from '../helpers/AxiosSetup';
-AxiosSetup(client);
+let client = axios.create();
+client = AxiosSetup(client);
 
 export default class ServicesBase extends HTTPExceptions {
     public axios = client;
     public redis = redis;
+    public cheerio = cheerio;
 
     /**
      * Add a cookie to the request.
@@ -25,9 +27,9 @@ export default class ServicesBase extends HTTPExceptions {
             const original = descriptor.value;
             if (typeof original === 'function') {
                 descriptor.value = function (...args: any[]) {
+                    let using = '.ROBLOSECURITY=' + Cookie.get() + ';';
                     // @ts-ignore
                     this.get = async (url) => {
-                        let using = '.ROBLOSECURITY=' + Cookie.get() + ';';
                         const request = await axios.get(url, {
                             headers: {
                                 cookie: using,
@@ -35,6 +37,12 @@ export default class ServicesBase extends HTTPExceptions {
                         });
                         return request.data;
                     }
+                    // @ts-ignore
+                    this.axios = AxiosSetup(axios.create({
+                        headers: {
+                            cookie: using,
+                        }
+                    }));
                     return original.apply(this, args);
                 }
             }
@@ -51,11 +59,11 @@ export default class ServicesBase extends HTTPExceptions {
 
         if (extraData) {
             if (extraData.cookie) {
-                this.axios = axios.create({
+                this.axios = AxiosSetup(axios.create({
                     headers: {
                         'cookie': '.ROBLOSECURITY=' + extraData.cookie,
                     }
-                })
+                }));
             }
         }
     }

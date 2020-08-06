@@ -27,6 +27,9 @@ class BuildersClubService extends base_1.default {
      */
     getType(userId) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (userId === 1) {
+                return 'OBC';
+            }
             let cached = yield this.redis.get('is_premium_' + userId);
             if (typeof cached !== 'string') {
                 cached = (yield this.get('https://premiumfeatures.roblox.com/v1/users/' + userId + '/validate-membership')) === true ? 'true' : 'false';

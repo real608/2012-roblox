@@ -12,26 +12,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const HTTPExceptions_1 = require("../helpers/HTTPExceptions");
 const axios_1 = require("axios");
 const Redis_1 = require("../helpers/Redis");
-const client = axios_1.default.create();
 const CookieManager_1 = require("../helpers/CookieManager");
 const Cookie = new CookieManager_1.default();
+const cheerio = require("cheerio");
 const path_1 = require("path");
 let added = Cookie.readFromFileSync(path_1.join(__dirname, '../../cookies.txt'));
 console.log('[info] using', added, 'total cookies');
 const AxiosSetup_1 = require("../helpers/AxiosSetup");
-AxiosSetup_1.default(client);
+let client = axios_1.default.create();
+client = AxiosSetup_1.default(client);
 class ServicesBase extends HTTPExceptions_1.default {
     constructor(extraData) {
         super();
         this.axios = client;
         this.redis = Redis_1.default;
+        this.cheerio = cheerio;
         if (extraData) {
             if (extraData.cookie) {
-                this.axios = axios_1.default.create({
+                this.axios = AxiosSetup_1.default(axios_1.default.create({
                     headers: {
                         'cookie': '.ROBLOSECURITY=' + extraData.cookie,
                     }
-                });
+                }));
             }
         }
     }
@@ -44,9 +46,9 @@ class ServicesBase extends HTTPExceptions_1.default {
             const original = descriptor.value;
             if (typeof original === 'function') {
                 descriptor.value = function (...args) {
+                    let using = '.ROBLOSECURITY=' + Cookie.get() + ';';
                     // @ts-ignore
                     this.get = (url) => __awaiter(this, void 0, void 0, function* () {
-                        let using = '.ROBLOSECURITY=' + Cookie.get() + ';';
                         const request = yield axios_1.default.get(url, {
                             headers: {
                                 cookie: using,
@@ -54,6 +56,12 @@ class ServicesBase extends HTTPExceptions_1.default {
                         });
                         return request.data;
                     });
+                    // @ts-ignore
+                    this.axios = AxiosSetup_1.default(axios_1.default.create({
+                        headers: {
+                            cookie: using,
+                        }
+                    }));
                     return original.apply(this, args);
                 };
             }

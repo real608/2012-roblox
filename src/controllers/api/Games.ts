@@ -17,6 +17,11 @@ export class GamesController extends base {
         if (accessFilter !== 'Public') {
             accessFilter = 'Public';
         }
-        return this.Games.getGamesByUser(userId, accessFilter as any, cursor);
+        return this.Games.getGamesByUser(userId, accessFilter as any, cursor).then(games => {
+            if (games.data.length === 0) {
+                return [];
+            }
+            return this.Games.multiGetGameInfo(games.data.map(val => { return val.id }))
+        });
     }
 }

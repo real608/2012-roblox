@@ -7,6 +7,7 @@ import * as methodOverride from "method-override";
 import { ejs } from "consolidate";
 import { GlobalErrorHandlerMiddleware } from './helpers/ErrorHandle';
 import { static as eStatic } from 'express';
+import "@tsed/swagger"; // import swagger Ts.ED module
 
 import config from './helpers/Config';
 const port = config.port || process.env.PORT || 3000;
@@ -28,6 +29,11 @@ const rootDir = __dirname;
         logStart: false,
         level: 'off',
     },
+    swagger: [
+        {
+            path: "/docs"
+        }
+    ]
 })
 export class Server {
     @Inject()
