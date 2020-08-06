@@ -25,6 +25,7 @@
         "@types/lodash": "^4.14.158",
         "@types/method-override": "0.0.31",
         "@types/redis": "^2.8.25",
+        "chalk": "^4.1.0",
         "compression": "^1.7.4",
         "cookie-parser": "^1.4.5",
         "cryptr": "^6.0.2",
