@@ -8,7 +8,6 @@ import { ejs } from "consolidate";
 import { GlobalErrorHandlerMiddleware } from './helpers/ErrorHandle';
 import { static as eStatic } from 'express';
 
-import * as middleware from './middleware';
 import config from './helpers/Config';
 const port = config.port || process.env.PORT || 3000;
 
