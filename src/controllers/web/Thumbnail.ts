@@ -11,7 +11,7 @@ export class ThumbnailController extends base {
         @Res() res: Res,
         @Req() req: Req,
     ) {
-        console.log(res.locals);
+        // could this be any uglier?
         let idStr = req.query['id'] || req.query['userId'] || req.query['userid'] || req.query['UserID'] || req.query['USERID'] || req.query['ID'] || req.query['Id'];
         if (!idStr || typeof idStr !== 'string') {
             throw new this.BadRequest('NoIdSpecified');

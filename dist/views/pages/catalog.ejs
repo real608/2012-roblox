@@ -1,0 +1,269 @@
+<%- include('../header'); %>
+
+
+<div id="CatalogContainer">
+
+
+    <div style="width: 876px; height: 28px; clear: both; display: block; background-color: #006699;"
+        class="StandardBox">
+        <table width="876px" border="0">
+            <tr>
+                <td
+                    style="font-family: Verdana, Helvetica, Sans-Serif; font-size: 12pt; color: Black; font-weight: bold; width: 200px; text-align: left;">
+                    Catalog
+                </td>
+                <td style="width: 660px; text-align: right;">
+                    <form method="GET" action="/Catalog.aspx">
+                        <input name="query" value="<%= page.keyword %>" type="text" maxlength="100"
+                            id="ctl00_cphRoblox_rbxCatalog_SearchTextBox" style="width: 515px;" />
+                        <input type="submit" name="ctl00$cphRoblox$rbxCatalog$SearchButton" value="Search"
+                            id="ctl00_cphRoblox_rbxCatalog_SearchButton" />
+                        <input type="submit" name="query" value="Reset"
+                            id="ctl00_cphRoblox_rbxCatalog_ResetSearchButton" />
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="SearchBar" style="display: none;" class="SearchBar">
+        <span class="SearchBox"></span><span class="SearchButton"></span><span class="SearchLinks">
+            <sup>&nbsp;|&nbsp;</sup><a href="#"><sup>Tips</sup> <span>Exact Phrase: "red brick"<br />
+                    Find ALL Terms: red and brick =OR= red + brick<br />
+                    Find ANY Term: red or brick =OR= red | brick<br />
+                    Wildcard Suffix: tel* (Finds teleport, telamon, telephone, etc.)<br />
+                    Terms Near each other: red near brick =OR= red ~ brick<br />
+                    Excluding Terms: red and not brick =OR= red - brick<br />
+                    Grouping operations: brick and (red or blue) =OR= brick + (red | blue)<br />
+                    Combinations: "red brick" and not (tele* or tower) =OR= "red brick" - (tele* | tower)<br />
+                    Wildcard Prefix is NOT supported: *port will not find teleport, airport, etc. </span>
+            </a></span>
+    </div>
+    <div class="SearchError">
+
+    </div>
+    <!--[if IE 6]>
+    <table width="900px">
+    <td width="210px" align="left" valign="top">
+    <![endif]-->
+    <div style="float: left; margin-right: 8px">
+        <div class="StandardBox" style="width: 185px">
+            <div id="BrowseMode">
+                <h2><a id="ctl00_cphRoblox_rbxCatalog_CafePressHyperLink" href="https://www.cafepress.com/roblox"
+                        target="_blank">Buy ROBLOX Stuff!</a></h2><br />
+                <h2><a id="ctl00_cphRoblox_rbxCatalog_CurrencyPurchaseHyperLink" href="Upgrades/Robux.aspx">Buy
+                        ROBUX!</a></h2><br />
+                <!-- RIP <h2><a id="ctl00_cphRoblox_rbxCatalog_CurrencyExchangeHyperLink" href="Marketplace/TradeCurrency.aspx">Trade Currency!</a></h2><br/> -->
+
+                <h2 style="margin-top:20px;">Browse</h2>
+                <ul>
+                    <li class="<%= page.m === 'Featured' ? 'Selected' : '' %>">
+                        <h3><a id="ctl00_cphRoblox_rbxCatalog_BrowseModeFeaturedSelector"
+                                href="Catalog.aspx?m=Featured&amp;q=">ROBLOX Featured</a></h3>
+                    </li>
+                    <li class="<%= page.m === 'TopFavorites' ? 'Selected' : '' %>">
+                        <h3><a id="ctl00_cphRoblox_rbxCatalog_BrowseModeTopFavoritesSelector"
+                                href="Catalog.aspx?m=TopFavorites&amp;c=8&amp;t=AllTime&amp;d=All&amp;q=">Top
+                                Favorites</a></h3>
+                    </li>
+                    <li class="<%= page.m === 'BestSelling' ? 'Selected' : '' %>">
+                        <h3><a id="ctl00_cphRoblox_rbxCatalog_BrowseModeBestSellingSelector"
+                                href="Catalog.aspx?m=BestSelling&amp;c=8&amp;t=AllTime&amp;d=All&amp;q=">Best
+                                Selling</a></h3>
+                    </li>
+                    <li class="<%= page.m === 'RecentlyUpdated' ? 'Selected' : '' %>">
+                        <h3><a id="ctl00_cphRoblox_rbxCatalog_BrowseModeRecentlyUpdatedSelector"
+                                href="Catalog.aspx?m=RecentlyUpdated&amp;c=8&amp;q=">Recently Updated</a></h3>
+                    </li>
+                    <li class="<%= page.m === 'ForSale' ? 'Selected' : '' %>">
+                        <h3><a id="ctl00_cphRoblox_rbxCatalog_BrowseModeForSaleSelector"
+                                href="Catalog.aspx?m=ForSale&amp;c=8&amp;d=All&amp;q=&amp;mn=-9223372036854775808&amp;mx=9223372036854775807">For
+                                Sale</a></h3>
+                    </li>
+                    <li class="<%= page.m === 'PublicDomain' ? 'Selected' : '' %>">
+                        <h3><a id="ctl00_cphRoblox_rbxCatalog_BrowseModePublicDomainSelector"
+                                href="Catalog.aspx?m=PublicDomain&amp;c=8&amp;q=">Free Items</a></h3>
+                    </li>
+                    <li class="<%= page.m === 'Collectible' ? 'Selected' : '' %>">
+                        <h3><a id="ctl00_cphRoblox_rbxCatalog_BrowseModeCollectibleSelector"
+                                href="Catalog.aspx?m=Collectible">Collectible</a></h3>
+                    </li>
+                    <!-- RIP
+                    <li visible="" class="">
+                        <h3><a id="ctl00_cphRoblox_rbxCatalog_BrowseModeAssetSetsSelector" href="Catalog.aspx?m=AssetSets&amp;q=">Sets</a></h3>
+                    </li>
+                    -->
+                </ul>
+            </div>
+
+
+
+        </div>
+        <br clear="all" />
+        <div class="StandardBox" style="width: 185px;">
+            <b style="font-size: 14px; color: #990000">LEGEND</b><br />
+            <br />
+            <img src="/img/overlay_bcOnly.png" /><br />
+            <b>Builders Club Only</b> items are those which can only be purchased by users with a <a
+                href="upgrades/BuildersClubMemberships.aspx" alt="Builders Club!">Builders Club</a> membership.<br />
+            <br />
+            <img src="/img/Limited.png" /><br />
+            <b>Limited Items</b> are those which were once sold by Roblox and will not be sold again. Users who own
+            these items can re-sell them to other users for the price of their choice.<br />
+            <br />
+            <img src="/img/LimitedU.png" /><br />
+            <b>Limited Unique Items</b> are sold by Roblox until they run out (we could release, say, 100 of a certain
+            hat.) When you buy these, they are stamped with a serial number (i.e. 7 / 100) that shows which one you
+            got.<br />
+            <br />
+            Once these items run out, they can also be sold to other users.
+        </div>
+    </div>
+    <div id="ctl00_cphRoblox_rbxCatalog_CreateSetPanelDiv" class="createSetPanelPopup"
+        style="width: 400px; height: 100%; padding: 0px; float: left; display: none">
+
+
+
+    </div>
+    <!--[if IE 6]>
+    </td>
+    <td valign="top" align="left">
+    <![endif]-->
+    <div class="Assets">
+        <div id="ctl00_cphRoblox_rbxCatalog_HeaderPagerPanel" class="HeaderPager" style="display: none;">
+
+            <span id="ctl00_cphRoblox_rbxCatalog_HeaderPagerLabel">Page <%= page.currentPage %> of
+                <%= (page.cursor.next ? '100+' : page.currentPage) %></span>
+            <a id=" ctl00_cphRoblox_rbxCatalog_HeaderPagerHyperLink_Next"
+                href="Catalog.aspx?m=Featured&amp;c=8&amp;t=AllTime&amp;d=All&amp;q=&amp;p=2&amp;mn=-9223372036854775808&amp;mx=9223372036854775807">
+                Next
+                <span class="NavigationIndicators">&gt;&gt;</span></a>
+        </div>
+        <div class="StandardBoxHeader">
+            <span id="ctl00_cphRoblox_rbxCatalog_AssetsDisplaySetLabel"><%= page.header %></span>
+        </div>
+        <div class="StandardBox">
+
+            <table id="ctl00_cphRoblox_rbxCatalog_AssetsDataList" cellspacing="0" align="Center" border="0"
+                style="border-collapse:collapse;">
+                <% for (const set of page.items) { %>
+                <tr>
+                    <% for (const item of set) { %>
+                    <td valign="top">
+                        <div class="Asset" style="margin-left:5px;margin-right:5px;">
+
+                            <div class="AssetThumbnail">
+                                <a id="ctl00_cphRoblox_rbxCatalog_AssetsDataList_ctl00_AssetThumbnailHyperLink"
+                                    title="<%= item.name %>" href="/Item.aspx?id=<%= item.id %>"
+                                    style="display:inline-block;height:110px;width:110px;cursor:pointer;"><img
+                                        src="https://www.roblox.com/thumbs/asset.ashx?width=110&height=110&assetid=<%= item.id %>"
+                                        height="110" width="110" border="0"
+                                        onerror="return Roblox.Controls.Image.OnError(this)" alt="Nordic Conqueror"
+                                        blankurl="http://t2ak.roblox.com/p1-blank-110x110.gif" /></a>
+                                <% if (item.itemRestrictions.includes('LimitedUnique')) { %>
+                                <div style="position:relative;left:-12px;top:-13px;"><img src="/img/LimitedU.png">
+                                </div>
+                                <% }else if (item.itemRestrictions.includes('Limited')) { %>
+                                <div style="position:relative;left:-22px;top:-13px;"><img src="/img/Limited.png">
+                                </div>
+                                <% } %>
+
+                            </div>
+                            <div class="AssetDetails">
+                                <div class="AssetName"><a
+                                        id="ctl00_cphRoblox_rbxCatalog_AssetsDataList_ctl00_AssetNameHyperLink"
+                                        href="/Item.aspx?id=<%= item.id %>"><%= item.name %></a></div>
+                                <!-- not really possible anymore due to rate limits
+                                <div class="AssetLastUpdate">
+                                    <span class="Label">Updated:</span>
+                                    <span class="Detail"><%= item.updatedAtFormat %></span>
+                                </div>
+                                -->
+                                <div class="AssetCreator">
+                                    <span class="Label">Creator: </span>
+                                    <span class="Detail"><a
+                                            id="ctl00_cphRoblox_rbxCatalog_AssetsDataList_ctl00_CreatorHyperLink"
+                                            href="<%= (item.creatorType === 'User' ? '/User.aspx?ID=' : '/Group.aspx?ID=') %><%= item.creatorTargetId %>"><%= item.creatorName %></a></span>
+                                </div>
+
+                                <div class="AssetsSold">
+                                    <span class="Label">Number Sold:</span>
+                                    <span class="Detail"><%= numberFormat(item.purchaseCount) %></span>
+                                </div>
+                                <% if (item.itemRestrictions.includes('LimitedUnique') || item.itemRestrictions.includes('Limited')) { %>
+                                <div class="AssetsSold">
+                                    <span class="Label" style="color:#cc0000;">Remaining:</span>
+                                    <span
+                                        class="Detail"><%= numberFormat(item.unitsAvailableForConsumption || 0) %></span>
+                                </div>
+                                <% } %>
+                                <div class="AssetFavorites">
+                                    <span class="Label">Favorited:</span>
+                                    <span class="Detail"><%= numberFormat(item.favoriteCount) %> times</span>
+                                </div>
+                                <div class="AssetPrice">
+                                    <span class="PriceInRobux">R$:
+                                        <%= numberFormat(item.price || 0) || 'N/A' %></span>
+                                </div>
+
+
+                                <% if (item.itemRestrictions.includes('LimitedUnique') || item.itemRestrictions.includes('Limited')) { %>
+                                <% if (typeof item.lowestPrice !== 'undefined') { %>
+                                <div class="AssetFavorites">
+                                    <span class="Detail"><i>Now R$<%= numberFormat(item.lowestPrice) %></i></span>
+                                </div>
+                                <% } %>
+                                <% } %>
+
+                            </div>
+                        </div>
+                    </td>
+                    <% } %>
+                </tr>
+                <% } %>
+
+                <tr>
+                    <td colspan="5">
+                        <div id="ctl00_cphRoblox_rbxCatalog_AssetsDataList_ctl20_CatalogDescriptionPanel"
+                            style="float: left; width: 630px; font-size: 0.9em; padding: 10px; border-top: 1px solid #AAAAAA;">
+
+                            Avatar Items - ROBLOX has a full virtual goods catalog with avatar items and other
+                            virtual
+                            items. Create a free account on ROBLOX and start collecting <h1
+                                style="display:inline; font-size:100%; font-weight:normal;">virtual avatar items
+                            </h1>,
+                            virtual goods, virtual items, and other gear for your virtual avatars.
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div id="ctl00_cphRoblox_rbxCatalog_FooterPagerPanel" class="HeaderPager">
+            <% if (page.cursor.previous) { %>
+            <a id="ctl00_cphRoblox_rbxCatalog_FooterPagerHyperLink_Previous"
+                href="/Catalog.aspx?m=<%= page.m %>&cursor=<%= page.cursor.previous %>">&lt;&lt; Previous <span
+                    class="NavigationIndicators"></span></a>
+            <% } %>
+            <span id="ctl00_cphRoblox_rbxCatalog_FooterPagerLabel">Page <%= page.currentPage %> of
+                <%= (page.cursor.next ? '100+' : page.currentPage) %></span>
+            <a id="ctl00_cphRoblox_rbxCatalog_FooterPagerHyperLink_Next"
+                href="/Catalog.aspx?m=<%= page.m %>&cursor=<%= page.cursor.next %>">Next <span
+                    class="NavigationIndicators">&gt;&gt;</span></a>
+        </div>
+    </div>
+
+
+
+    <!--[if IE 6]>
+    </td>
+    </table>
+    <![endif]-->
+
+    <div style="clear: both;"></div>
+</div>
+
+</div>
+
+
+<%- include('../footer'); %>

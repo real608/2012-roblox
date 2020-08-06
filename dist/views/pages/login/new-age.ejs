@@ -1,0 +1,158 @@
+<%- include('../../header'); %>
+
+
+<div style="float: left; width: 620px; margin-top: 10px;">
+    <div class="StandardBoxHeader" style="width: 620px;"><span>Create a Free ROBLOX Account</span></div>
+    <div class="StandardBox" style="width: 620px;">
+        <h3>Enter your birthday:</h3><br />
+        <center>
+            <select name="ctl00$cphRoblox$lstMonths" id="lstMonths" style="font-size: 18px;">
+                <option value="0">Select Month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+
+            </select>
+            &nbsp;&nbsp;
+
+            &nbsp;&nbsp;
+            <select name="ctl00$cphRoblox$lstDays" id="lstDays" style="font-size: 18px;">
+                <option value="0">Select Day</option>
+                <% for (let until = 1; until < 31; until++) { %>
+                <option value="<%= until %>"><%= until %></option>
+                <% } %>
+
+            </select>
+            &nbsp;&nbsp;
+
+            &nbsp;&nbsp;
+            <select name="ctl00$cphRoblox$lstYears" id="lstYears" style="font-size: 18px;">
+                <option value="0">Select Year</option>
+                <% for (let until = page.currentYear; until > (page.currentYear - 100); until--) { %>
+                <option value="<%= until %>"><%= until %></option>
+                <% } %>
+            </select>
+            <div id="lblError" style="display: none"><b>Please choose a valid date</b></div>
+            <br /><br />
+            <i>Your birthday will not be given out to any third party!</i>
+        </center>
+        <div style="text-align:center">
+
+
+            <div style="text-align:left">Are you a boy or a girl?</div>
+            <div style="text-align:center;position:relative;height:250px">
+                <div style="position:absolute;left:50%;margin-left:-175px">
+                    <label for="MaleBtn"><img src="/img/Boy.png" id="ctl00_cphRoblox_SelectGenderPane_BoyThumbnail"
+                            style="cursor:pointer" /><br /></label>
+                    <input id="MaleBtn" type="radio" name="ctl00$cphRoblox$SelectGenderPane$Gender"
+                        value="MaleBtn" /><label for="MaleBtn">Boy</label>
+                </div>
+                <div style="position:absolute;left:50%;margin-left:25px">
+                    <label for="FemaleBtn"><img src="/img/Girl.png" id="ctl00_cphRoblox_SelectGenderPane_GirlThumbnail"
+                            style="cursor:pointer" /><br /></label>
+                    <input id="FemaleBtn" type="radio" name="ctl00$cphRoblox$SelectGenderPane$Gender"
+                        value="FemaleBtn" /><label for="FemaleBtn">Girl</label>
+                </div>
+            </div>
+            <div id="genderError" style="color:Red;font-weight:bold;margin-bottom:10px;display:none">Please select a
+                gender</div>
+            <a id="btnSignup2" class="MediumButton" onclick="CheckDateAndGender()">Continue</a>
+            <input type="submit" name="ctl00$cphRoblox$btnHidden" value="" id="ctl00_cphRoblox_btnHidden"
+                style="display: none" />
+        </div>
+        <br />
+    </div>
+
+    <!--
+    <div class="StandardBoxHeader" style="width: 620px;"><span>Create a Parent Account</span></div>
+    <div class="StandardBox" style="width: 620px;">
+        <h3>Create an administrative account to control a child's access to ROBLOX</h3>
+
+        <div class="AgeOptions">
+            <div id="ParentAccount">
+                <div class="BuildersClubButton"><a id="ctl00_cphRoblox_HyperLink1"
+                        href="https://www.roblox.com/Parents/Register.aspx"><img src="/img/ParentAccount.png" alt=""
+                            style="border-width:0px;" /></a></div>
+                <div class="Label"><a id="ctl00_cphRoblox_HyperLink2"
+                        href="https://www.roblox.com/Parents/Register.aspx">Parent Account</a></div>
+            </div>
+        </div>
+    </div>
+    -->
+</div>
+
+<div id="Sidebars" style="margin-top: 10px;">
+    <div class="StandardBoxHeader" style="width: 230px;"><span>Already Registered?</span></div>
+    <div class="StandardBox" style="width:230px;">
+        <p>If you just need to login, go to the <a id="ctl00_cphRoblox_HyperLinkLogin"
+                href="https://www.roblox.com/Login">Login</a> page.</p>
+        <p>If you have already registered but you still need to download the game installer, go directly to <a
+                id="ctl00_cphRoblox_HyperLinkDownload" href="https://www.roblox.com/install/">download</a>.</p>
+    </div>
+    <div class="StandardBoxHeader" style="width: 230px;"><span>Hey Parents!</span></div>
+    <div class="StandardBox" style="width:230px;">
+        <p>Are you creating an account for your young child?</p>
+        <p>If so, you should select "Under 13"</p>
+        <p>ROBLOX has a variety of online safety features that help to prevent your child from disclosing personal
+            information to other players.
+            <!-- As a parent, you will have the option to override them later.-->
+        </p>
+        <p><a id="ctl00_cphRoblox_ParentsInfo" href="https://www.roblox.com/Parents.aspx">More
+                information for ROBLOX parents</a></p>
+        <!--
+        <p><a id="ctl00_cphRoblox_ParentsAccntLink" href="https://www.roblox.com/Parents/Login.aspx">Create/Manage
+                Parent Account</a>
+            -->
+        </p>
+        <p><a id="ctl00_cphRoblox_hlTruste" href="http://www.truste.org/ivalidate.php?url=www.roblox.com&amp;sealid=105"
+                style="display:inline-block;width:140px;"><img src="/img/truste_seal_kids.gif" alt=""
+                    style="border-width:0px;" /></a></p>
+        <p><a target="_blank" href="https://www.bbb.org/online/consumer/cks.aspx?id=109111915116750"><img
+                    title="Click to verify BBB accreditation and to see a BBB report." border="0"
+                    src="https://www.roblox.com/images/bbbsealh1US.gif"
+                    alt="Click to verify BBB accreditation and to see a BBB report." /></a>
+        </p>
+    </div>
+</div><br clear="all" />
+
+<script type="text/javascript">
+    function CheckDateAndGender() {
+        $('#lblError').attr('style', 'display: none');
+        var year = parseInt($('#lstYears option:selected').val());
+        var month = parseInt($('#lstMonths option:selected').val());
+        var day = parseInt($('#lstDays option:selected').val());
+
+        var isValid = true;
+        if (year <= 0 || month <= 0 || day <= 0 || day > new Date(year, month, 0).getDate()) {
+            $('#lblError').attr('style', 'color: Red;');
+            isValid = false;
+        }
+
+        var gender = $('#MaleBtn').is(':checked');
+        if (!gender) {
+            gender = 'female';
+        } else {
+            gender = 'male';
+        }
+
+
+        if (isValid) {
+            window.location.href = '/login/NewNameAndPassword.aspx?day=' + day + '&month=' + month + '&year=' + year + '&gender=' + gender
+        }
+    }
+</script>
+
+
+</div>
+</div>
+
+<%- include('../../footer'); %>
