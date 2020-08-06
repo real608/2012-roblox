@@ -6,6 +6,7 @@ import * as cookieParser from "cookie-parser";
 import * as methodOverride from "method-override";
 import { ejs } from "consolidate";
 import { GlobalErrorHandlerMiddleware } from './helpers/ErrorHandle';
+import NotFoundMiddleware from './middleware/NotFound';
 import { static as eStatic } from 'express';
 import "@tsed/swagger"; // import swagger Ts.ED module
 
@@ -31,7 +32,7 @@ const rootDir = __dirname;
     },
     swagger: [
         {
-            path: "/docs"
+            path: "/docs",
         }
     ]
 })
@@ -72,6 +73,7 @@ export class Server {
     }
 
     $afterRoutesInit() {
+        this.app.use(NotFoundMiddleware);
         this.app.use(GlobalErrorHandlerMiddleware);
     }
 }

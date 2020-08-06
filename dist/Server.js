@@ -18,6 +18,7 @@ const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
 const consolidate_1 = require("consolidate");
 const ErrorHandle_1 = require("./helpers/ErrorHandle");
+const NotFound_1 = require("./middleware/NotFound");
 const express_1 = require("express");
 require("@tsed/swagger"); // import swagger Ts.ED module
 const Config_1 = require("./helpers/Config");
@@ -50,6 +51,7 @@ let Server = class Server {
         };
     }
     $afterRoutesInit() {
+        this.app.use(NotFound_1.default);
         this.app.use(ErrorHandle_1.GlobalErrorHandlerMiddleware);
     }
 };
@@ -80,7 +82,7 @@ Server = __decorate([
         },
         swagger: [
             {
-                path: "/docs"
+                path: "/docs",
             }
         ]
     })
