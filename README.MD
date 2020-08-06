@@ -16,7 +16,7 @@ The goal of this project is to completely recreate the 2012 Roblox website with 
     - ✅ Password reset email form
 - Economy
     - ✅ Item page
-    - Item purchase system (for collectibles and normal items)
+    - ✅ Item purchase system (for collectibles and normal items)
     - Item selling system (for collectibles)
     - Item trading system/page
 - Builders Club
