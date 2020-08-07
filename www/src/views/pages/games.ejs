@@ -1,0 +1,292 @@
+<%- include('../header'); %>
+
+
+
+<div id="PlaceTemplate" style="display: none">
+    <div style="float:left;">
+        <div class="GameItem">
+            <div class="AlwaysShown">
+                THUMBNAIL
+                <div class="GameName" style="font-weight:bold;font-size:12px;overflow: hidden;white-space: nowrap;">
+                    <a href="GAMENAVIGATEURL">GAMENAME</a>
+                </div>
+                <div class="PlayerCount" style="color:Red;float:left;">
+                    CURRENTPLAYERSCOUNT
+                </div>
+                <div class="GenreIcons" style="float:right;">
+                    <img class="GenreIcon" alt="GENREICONALT" />
+                    <img class="GearIcon" alt="GEARICONALT" />
+                </div>
+                <div class="CreatorName" style="clear:both;display:none;">
+                    by <a href="CREATORURL">CREATORNAME</a>
+                </div>
+            </div>
+            <div class="HoverShown">
+                <div class="StatsPlayed">
+                    Played PLAYSCOUNT
+                </div>
+                <div class="StatsFavorited">
+                    Favorited FAVORITESCOUNT
+                </div>
+                <div class="StatsUpdated">
+                    Updated LASTUPDATED
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Column1e">
+    <div class="StandardBoxHeader">
+        <span>Games&nbsp;<a id="ctl00_cphRoblox_hlNewsFeed" href="/Games.aspx?feed=rss"><img src="/img/topNav_rss.png"
+                    alt="RSS" style="border-width:0px;" /></a>
+        </span>
+    </div>
+    <div class="StandardBox" id="GamesLeftColumn" style="padding: 20px 5px;">
+        <!--
+            // Sorted by is likely only temporarily disabled
+            // Im not sure if you can still sort by these categories, but even if you can't, Roblox still has newer sorts we can use
+        <div id="Sort" class="GameFilter">
+            <div>Sorted By:</div>
+            <ul>
+
+                <li><a class="GamesSort SelectedSort" sort="Relevance" href="?m=Relevance">Relevance</a></li>
+
+                <li><a class="GamesSort " sort="MostPopular" href="?m=MostPoplular">Popular</a></li>
+                <li><a class="GamesSort " sort="TopFavorites" href="?m=TopFavorites">Most Favorited</a></li>
+                <li><a class="GamesSort " sort="Featured" href="?m=Featured">Featured</a></li>
+
+            </ul>
+        </div>
+
+        // This might have to be disabled forever - I'm not sure if Roblox lets you sort through stuff like this anymore
+        <div id="Timespan" class="GameFilter" style="margin-top:20px;">
+            <div>Time:</div>
+            <ul>
+                <li><a class="GamesFilter SelectedFilter" filter="Now" href="?t=Now">Now</a></li>
+                <li><a class="GamesFilter " filter="PastDay" href="?t=PastDay">Past Day</a></li>
+                <li><a class="GamesFilter " filter="PastWeek" href="?t=PastWeek">Past Week</a></li>
+                <li><a class="GamesFilter " filter="AllTime" href="?t=AllTime">All Time</a></li>
+            </ul>
+        </div>
+
+        // originally below was only "padding: 20px 5px;"
+        -->
+        <div id="Genres" class="GameFilter" style="margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 20px;">
+            <div>Genres:</div>
+            <ul>
+
+                <li>
+                    <a class="GamesGenre SelectedGenre" genre="all" href="/all-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online wild west cowboy games with their friends while also meeting new friends. Whether you are interested in Wild West Cowboy games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="All Games">
+                        <h3>All</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="gametutorials" href="/gametutorials-games"
+                        genresinfotext="Game Tutorials - Learn more about ROBLOX virtual world and online games through useful games with game tutorials. ROBLOX also provides game design software to let users design and make a 3D game. Play ROBLOX and the millions of free virtual world and online games now. It's always free to play games at ROBLOX!"
+                        title="Tutorial Games">
+                        <h3>Tutorial</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="scary" href="/scary-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of scary games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online scary games with their friends while also meeting new friends. Whether you are interested in scary games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="Scary Games">
+                        <h3>Scary</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="town-and-city" href="/town-and-city-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of town and city games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online town and city games with their friends while also meeting new friends. Whether you are interested in Town and City games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="Town and City Games">
+                        <h3>Town and City</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="war" href="/war-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of war games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online war games with their friends while also meeting new friends. Whether you are interested in War games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="War Games">
+                        <h3>War</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="funny" href="/funny-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of funny games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online funny games with their friends while also meeting new friends. Whether you are interested in Funny games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="Funny Games">
+                        <h3>Funny</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="medieval" href="/medieval-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of medieval games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online medieval games with their friends while also meeting new friends. Whether you are interested in Medieval games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience."
+                        title="Fantasy Games">
+                        <h3>Fantasy</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="adventure" href="/adventure-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of adventure games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online adventure games with their friends while also meeting new friends. Whether you are interested in Adventure games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="Adventure Games">
+                        <h3>Adventure</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="sci-fi" href="/sci-fi-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of sci-fi games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online sci-fi games with their friends while also meeting new friends. Whether you are interested in Sci-Fi games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="Sci-Fi Games">
+                        <h3>Sci-Fi</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="pirate" href="/pirate-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of pirate games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online pirate games with their friends while also meeting new friends. Whether you are interested in Pirate games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="Pirate Games">
+                        <h3>Pirate</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="fps" href="/fps-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of FPS games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online FPS games with their friends while also meeting new friends. Whether you are interested in FPS games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="FPS Games">
+                        <h3>FPS</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="rpg" href="/rpg-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of RPG games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online RPG games with their friends while also meeting new friends. Whether you are interested in RPG games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="RPG Games">
+                        <h3>RPG</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="sports" href="/sports-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of sports games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online sports games with their friends while also meeting new friends. Whether you are interested in Sports games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="Sports Games">
+                        <h3>Sports</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="ninja" href="/ninja-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of ninja games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play ninja games online with their friends while also meeting new friends. Whether you are interested in Ninja games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="Ninja Games">
+                        <h3>Ninja</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="GamesGenre " genre="wild-west-cowboy" href="/wild-west-cowboy-games"
+                        genresinfotext="Roblox is proud to offer the web's best collection of wild west cowboy games, other free online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun and safe. Roblox members can create their own virtual world online games; customize their avatar character with the best virtual goods like hats, shirts and gear; and play free online wild west cowboy games with their friends while also meeting new friends. Whether you are interested in Wild West Cowboy games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to deliver the best free online games for you to play. Check out our Builders Club membership service for an enhanced building games experience. "
+                        title="Wild West Games">
+                        <h3>Wild West</h3>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- Filters / genres -->
+</div>
+<div class="Column2e">
+    <div id="PlayTabs" style="float:left;">
+        <!-- DO NOT PUT NEW LINES IN BETWEEN TABS... This will add a 4px margin because of the display: inline-block -->
+        <div id="PlayGamesTab" class="StandardTabGrayActive GamesType" type="Play"><span><a href="">
+                    <h2>Games</h2>
+                </a></span></div>
+        <div id="ctl00_cphRoblox_PlayPersonalServersTab" class="StandardTabGray GamesType" type="Build"><span><a
+                    href="?GameType=Build">
+                    <h2>Personal Servers</h2>
+                </a></span></div>
+    </div>
+    <div style="position:relative;float:right;"><input id="searchbox" type="text" name="search" placeholder="Search"
+            style="color:#888;height:20px;" onkeypress="if (event.keyCode == 13) { return Search(); }" />
+        <div class="SearchIconButton" onclick="Search()"></div>
+    </div>
+    <div class="StandardBoxGray" style="float: left">
+        <div id="Games">
+            <div id="BCOnlyPlaces" style="display: none">
+                <div class="StandardBoxHeaderGray"><span style="text-align: center; padding-top: 3px; height: 33px;">
+                        <div class="BCHat" style="position: relative; vertical-align: middle"></div>
+                        <div id="BCOnlyPlacesTitle">Builders Club Games</div>
+                    </span></div>
+                <div class="StandardBox" style="width: 410px; padding-top: 20px;">
+                    <div id="BCOnlyGamesContentPrevNavButton" class="SkinnyLeftArrow"></div>
+                    <div id="BCOnlyGamesContent"></div>
+                    <div id="BCOnlyGamesContentNextNavButton" class="SkinnyRightArrow"></div>
+                </div>
+            </div>
+            <div id="GamePageAdDiv" style="width: 300px; height: 300px;float: right;display: inline">
+
+                <iframe id="ctl00_cphRoblox_GamesPageAd_AsyncUserAdIFrame" allowtransparency="true" frameborder="0"
+                    scrolling="no" height="270" src="/user-sponsorship/3" width="300"></iframe>
+
+
+            </div>
+            <div id="GamesContent">
+                <noscript>
+                    <span style="font-size: 18px; font-weight: bold">You must have javascript enabled to view this
+                        page.</span>
+                </noscript>
+                <div id="games-inner-content">
+
+                </div>
+            </div>
+            <div style="text-align:center; padding-bottom:20px;color:#888;font-size:14px; clear:both">
+                <div id="GamesContentPrevNavButton" class="BlueLeftArrow"
+                    style="position:relative;top:12px;display:none;"></div>
+                <span style="margin:0 5px;"><span id="GamesContentCurrPageNum">Page 1</span> <span
+                        id="GamesContentTotalPageNums"></span></span>
+                <div id="GamesContentNextNavButton" class="BlueRightArrow" style="position:relative;top:12px;"></div>
+            </div>
+        </div>
+        <div id="GenreDescriptionPanel">
+            <span id="GenreDescriptionPanelGenresInfoText">Roblox is proud to offer the web's best collection of free
+                online games and 3D virtual worlds. We are committed to making sure that all of our free games are fun
+                and safe. Roblox members can create their own virtual world online games; customize their avatar
+                character with the best virtual goods like hats, shirts and gear; and play free online wild west cowboy
+                games with their friends while also meeting new friends. Whether you are interested in Wild West Cowboy
+                games, Action games, Adventure games, Funny games, Car games, or even Tycoon games, count on Roblox to
+                deliver the best free online games for you to play. Check out our Builders Club membership service for
+                an enhanced building games experience. </span>
+        </div>
+    </div>
+</div>
+
+<!--
+<script type="text/javascript">
+    var defaultParamData = { "FilterString": "Now", "GameTypeString": "Play", "GenreString": "all", "MinBCLevelString": "None", "PageNumString": "1", "PageSizeString": "16", "SortString": "Relevance" };
+    var defaultSeedData = { "TotalPages": "73", "Count": "16", "Items": [{ "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "brandon58590", "Url": "~\/User.aspx?ID=230837" }, "GearIcon": { "Alt": "Genre specific gear only", "Url": "~\/images\/GenreSuitcase16x16.png" }, "GenreIcon": { "Alt": "Pirate", "Url": "~\/images\/GenreIcons\/Pirate.png" }, "ItemID": 3137940, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "~ Pirates ~ *Fixed*", "NavigateUrl": "\/Pirates-Fixed-place?id=3137940", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 458, "FavoritesCount": "1,344 times", "LastUpdated": "2 hours ago", "PlaysCount": "40,267 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t4ak.roblox.com\/a98822ca2d594704be44a34b128065f1", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "rainycity", "Url": "~\/User.aspx?ID=5021669" }, "GearIcon": { "Alt": "All gear allowed", "Url": "~\/images\/Suitcase16x16.png" }, "GenreIcon": { "Alt": "Tutorial", "Url": "~\/images\/GenreIcons\/Tutorial.gif" }, "ItemID": 28495766, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Destroy the noob", "NavigateUrl": "\/Destroy-the-noob-place?id=28495766", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 266, "FavoritesCount": "24,976 times", "LastUpdated": "2 months ago", "PlaysCount": "532,839 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t2ak.roblox.com\/fceece88efb7796ddc07516261482508", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "d4rk886", "Url": "~\/User.aspx?ID=5239900" }, "GearIcon": { "Alt": "Genre specific gear only", "Url": "~\/images\/GenreSuitcase16x16.png" }, "GenreIcon": { "Alt": "FPS", "Url": "~\/images\/GenreIcons\/FPS.png" }, "ItemID": 18164449, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Base wars:The Land(since 2009) ", "NavigateUrl": "\/Base-wars-The-Land-since-2009-place?id=18164449", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 250, "FavoritesCount": "164,073 times", "LastUpdated": "1 day ago", "PlaysCount": "8,585,618 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t3ak.roblox.com\/0a11fe94e543f1d20238ca3fd55ac9e1", "YouTubeTrailerID": "pDPnBwyHG78" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "DANGERTIM112", "Url": "~\/User.aspx?ID=15140266" }, "GearIcon": { "Alt": "No gear allowed", "Url": "~\/images\/NoSuitcase16x16.png" }, "GenreIcon": { "Alt": "Scary", "Url": "~\/images\/GenreIcons\/Cthulu.png" }, "ItemID": 51955496, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Build to Survive the Zombies", "NavigateUrl": "\/Build-to-Survive-the-Zombies-place?id=51955496", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 206, "FavoritesCount": "62,051 times", "LastUpdated": "5 days ago", "PlaysCount": "3,177,569 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t4ak.roblox.com\/99f8efccdf8759c66e83c7f089c570d4", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "Linkmon99", "Url": "~\/User.aspx?ID=2207291" }, "GearIcon": { "Alt": "No gear allowed", "Url": "~\/images\/NoSuitcase16x16.png" }, "GenreIcon": { "Alt": "Town and City", "Url": "~\/images\/GenreIcons\/City.png" }, "ItemID": 35720788, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Beachside! *TROPICAL RESORT TOWN!* *6...", "NavigateUrl": "\/Beachside-TROPICAL-RESORT-TOWN-6000-FAVS-place?id=35720788", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 194, "FavoritesCount": "6,266 times", "LastUpdated": "4 days ago", "PlaysCount": "124,458 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t3ak.roblox.com\/530b2e6786d51837134e3d51f9d18fa9", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "1dev2", "Url": "~\/User.aspx?ID=693850" }, "GearIcon": { "Alt": "All gear allowed", "Url": "~\/images\/Suitcase16x16.png" }, "GenreIcon": { "Alt": "Town and City", "Url": "~\/images\/GenreIcons\/City.png" }, "ItemID": 20723719, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Welcome to the Town of Robloxiaâ„¢ VIP ...", "NavigateUrl": "\/Welcome-to-the-Town-of-Robloxia-VIP-BACK-ON-SALE-place?id=20723719", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 188, "FavoritesCount": "289,722 times", "LastUpdated": "1 month ago", "PlaysCount": "13,175,664 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t1ak.roblox.com\/6b0da993096e8b5eef56b2404ab2f6d1", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "SDuke524", "Url": "~\/User.aspx?ID=739074" }, "GearIcon": { "Alt": "No gear allowed", "Url": "~\/images\/NoSuitcase16x16.png" }, "GenreIcon": { "Alt": "Sports", "Url": "~\/images\/GenreIcons\/Sports.png" }, "ItemID": 3228090, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Football Hero", "NavigateUrl": "\/Football-Hero-place?id=3228090", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 167, "FavoritesCount": "5,899 times", "LastUpdated": "1 day ago", "PlaysCount": "208,110 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t5ak.roblox.com\/03bb1c1b29ec54eac78f6070a5a171b3", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "SuperFantasticTony", "Url": "~\/User.aspx?ID=18670255" }, "GearIcon": { "Alt": "Genre specific gear only", "Url": "~\/images\/GenreSuitcase16x16.png" }, "GenreIcon": { "Alt": "Sports", "Url": "~\/images\/GenreIcons\/Sports.png" }, "ItemID": 59544749, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Lava Tag!! Free ADMIN\/VIP 8 NEW MAPS!...", "NavigateUrl": "\/Lava-Tag-Free-ADMIN-VIP-8-NEW-MAPS-FAV-IT-place?id=59544749", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 159, "FavoritesCount": "2,123 times", "LastUpdated": "7 months ago", "PlaysCount": "33,869 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t2ak.roblox.com\/87bcd0e67b2e978ee89b57f3fc38450c", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "Seranok", "Url": "~\/User.aspx?ID=5600283" }, "GearIcon": { "Alt": "No gear allowed", "Url": "~\/images\/NoSuitcase16x16.png" }, "GenreIcon": { "Alt": "Tutorial", "Url": "~\/images\/GenreIcons\/Tutorial.gif" }, "ItemID": 26838733, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Catalog Heaven | 3M Visits", "NavigateUrl": "\/Catalog-Heaven-3M-Visits-place?id=26838733", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 158, "FavoritesCount": "100,743 times", "LastUpdated": "5 days ago", "PlaysCount": "3,303,448 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t1ak.roblox.com\/27ddad43a1b303facf18d7668528ccc7", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "ROBLOX", "Url": "~\/User.aspx?ID=1" }, "GearIcon": { "Alt": "Genre specific gear only", "Url": "~\/images\/GenreSuitcase16x16.png" }, "GenreIcon": { "Alt": "All", "Url": "~\/images\/GenreIcons\/Classic.png" }, "ItemID": 41324860, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Welcome to ROBLOX Building", "NavigateUrl": "\/Welcome-to-ROBLOX-Building-place?id=41324860", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 133, "FavoritesCount": "144,805 times", "LastUpdated": "4 months ago", "PlaysCount": "9,345,905 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t4ak.roblox.com\/cfe427c462f02314732afe2307e31a16", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "litozinnamon", "Url": "~\/User.aspx?ID=5725475" }, "GearIcon": { "Alt": "Genre specific gear only", "Url": "~\/images\/GenreSuitcase16x16.png" }, "GenreIcon": { "Alt": "War", "Url": "~\/images\/GenreIcons\/ModernMilitary.png" }, "ItemID": 19549795, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "[V2.9 Tests] Call of Robloxia 5 - Rob...", "NavigateUrl": "\/V2-9-Tests-Call-of-Robloxia-5-Roblox-At-War-place?id=19549795", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 130, "FavoritesCount": "243,940 times", "LastUpdated": "3 days ago", "PlaysCount": "9,731,617 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t4ak.roblox.com\/5515ff292c9d4712221d0a815847cf35", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "erikwesley96", "Url": "~\/User.aspx?ID=1852246" }, "GearIcon": { "Alt": "No gear allowed", "Url": "~\/images\/NoSuitcase16x16.png" }, "GenreIcon": { "Alt": "Funny", "Url": "~\/images\/GenreIcons\/LOL.png" }, "ItemID": 6602652, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Deathrun - Run or Die! -@- v1.7 [Brok...", "NavigateUrl": "\/Deathrun-Run-or-Die-v1-7-Broken-Read-Desc-place?id=6602652", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 128, "FavoritesCount": "61,568 times", "LastUpdated": "2 weeks ago", "PlaysCount": "1,397,245 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t7ak.roblox.com\/fc32350c86a1c5f65ce9b46ebb0af5bf", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "10cole10", "Url": "~\/User.aspx?ID=2239140" }, "GearIcon": { "Alt": "Genre specific gear only", "Url": "~\/images\/GenreSuitcase16x16.png" }, "GenreIcon": { "Alt": "All", "Url": "~\/images\/GenreIcons\/Classic.png" }, "ItemID": 76314523, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "The Hunger Games [Added the shop]", "NavigateUrl": "\/The-Hunger-Games-Added-the-shop-place?id=76314523", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 128, "FavoritesCount": "5,740 times", "LastUpdated": "5 hours ago", "PlaysCount": "193,840 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t6ak.roblox.com\/dd7cbec5422f114b308323fa9439bcee", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "TyeMan", "Url": "~\/User.aspx?ID=1077060" }, "GearIcon": { "Alt": "All gear allowed", "Url": "~\/images\/Suitcase16x16.png" }, "GenreIcon": { "Alt": "Adventure", "Url": "~\/images\/GenreIcons\/Adventure.png" }, "ItemID": 33151124, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "ALL NEW! | Survive 1043 Epic Disaster...", "NavigateUrl": "\/ALL-NEW-Survive-1043-Epic-Disasters-265-Maps-place?id=33151124", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 121, "FavoritesCount": "5,300 times", "LastUpdated": "4 hours ago", "PlaysCount": "98,863 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t5ak.roblox.com\/bb9a761c0875dbea3482a3c2e76b7cc6", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "spyro372", "Url": "~\/User.aspx?ID=5809416" }, "GearIcon": { "Alt": "Genre specific gear only", "Url": "~\/images\/GenreSuitcase16x16.png" }, "GenreIcon": { "Alt": "Town and City", "Url": "~\/images\/GenreIcons\/City.png" }, "ItemID": 63014010, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "The Complex V.4", "NavigateUrl": "\/The-Complex-V-4-place?id=63014010", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 109, "FavoritesCount": "38,865 times", "LastUpdated": "1 hour ago", "PlaysCount": "2,016,394 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t1ak.roblox.com\/cef5cabc113773e77133593676ab09d2", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": null, "Url": null }, "Creator": { "Name": "robotmega", "Url": "~\/User.aspx?ID=3095250" }, "GearIcon": { "Alt": "Genre specific gear only", "Url": "~\/images\/GenreSuitcase16x16.png" }, "GenreIcon": { "Alt": "Adventure", "Url": "~\/images\/GenreIcons\/Adventure.png" }, "ItemID": 70150175, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Kamikazi - Dragon Ball Z-The Ultimate...", "NavigateUrl": "\/Kamikazi-Dragon-Ball-Z-The-Ultimate-Adventures-place?id=70150175", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 96, "FavoritesCount": "8,244 times", "LastUpdated": "2 hours ago", "PlaysCount": "304,177 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t4ak.roblox.com\/ec8c651abd814b63ffd5ac88621cd9a8", "YouTubeTrailerID": "" }] };
+
+    var pageSize = 16;
+
+    var defaultBCOnlyParamData = { "FilterString": "Now", "GameTypeString": "Play", "GenreString": "all", "MinBCLevelString": "BuildersClub", "PageNumString": "1", "PageSizeString": "2", "SortString": "Relevance" };
+    var defaultBCOnlySeedData = { "TotalPages": "15", "Count": "2", "Items": [{ "BCOverlay": { "Alt": "Builders Club Only", "Url": "\/images\/icons\/overlay_bcOnly.png" }, "Creator": { "Name": "10cole10", "Url": "~\/User.aspx?ID=2239140" }, "GearIcon": { "Alt": "Genre specific gear only", "Url": "~\/images\/GenreSuitcase16x16.png" }, "GenreIcon": { "Alt": "Adventure", "Url": "~\/images\/GenreIcons\/Adventure.png" }, "ItemID": 79573386, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "The Hunger Games BC [Tribute Death GUI!]", "NavigateUrl": "\/The-Hunger-Games-BC-Tribute-Death-GUI-place?id=79573386", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 24, "FavoritesCount": "243 times", "LastUpdated": "15 hours ago", "PlaysCount": "4,133 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t6ak.roblox.com\/dd7cbec5422f114b308323fa9439bcee", "YouTubeTrailerID": "" }, { "BCOverlay": { "Alt": "Builders Club Only", "Url": "\/images\/icons\/overlay_bcOnly.png" }, "Creator": { "Name": "churchdrummer2", "Url": "~\/User.aspx?ID=18850509" }, "GearIcon": { "Alt": "No gear allowed", "Url": "~\/images\/NoSuitcase16x16.png" }, "GenreIcon": { "Alt": "Funny", "Url": "~\/images\/GenreIcons\/LOL.png" }, "ItemID": 61580981, "MegaOverlay": { "Alt": null, "Url": null }, "Name": "Robloxian Rap Battles VIP In the Desc.", "NavigateUrl": "\/Robloxian-Rap-Battles-VIP-In-the-Desc-place?id=61580981", "PersonalPlaceOverlay": { "Alt": null, "Url": null }, "Stats": { "CurrentPlayersCount": 18, "FavoritesCount": "10 times", "LastUpdated": "3 hours ago", "PlaysCount": "221 times" }, "ThumbnailFinal": true, "ThumbnailUrl": "https:\/\/web.archive.org\/web\/20120511041547\/http:\/\/t5ak.roblox.com\/6938b31aaabb865ca543b29a318ea983", "YouTubeTrailerID": "" }] };
+    var BCOnlyPageSize = 2;
+
+
+</script>
+-->
+<br style="clear: both" />
+
+</div>
+</div>
+
+<script src="/js/pages/games.js"></script>
+
+<%- include('../footer'); %>

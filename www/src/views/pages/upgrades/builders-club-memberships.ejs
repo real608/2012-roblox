@@ -1,0 +1,790 @@
+<%- include('../../header'); %>
+<style>
+    .BCColumn,
+    #BCRow {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    function showBC() {
+        $('#BCRow').slideToggle(1000, function () {
+            $('.BCColumn').slideToggle(1000);
+        });
+    }
+</script>
+<div id="BuildersClubContainer">
+    <!--<div id="JoinBuildersClubNow"><img id="ctl00_cphRoblox_HeaderImage" src="../images/JoinBuildersClubNow.png" alt="Join Builders Club Now!" style="border-width:0px;" /></div>!-->
+    <div id="LeftColumn" class="StandardBox">
+        <div id="ctl00_cphRoblox_MembershipPanelStyle2">
+
+            <div id="MembershipOptions" style="margin-bottom: 18px; position: relative; float: left">
+                <span style="position: absolute; top: 10px; right: 0px">
+                    <input type="image" name="ctl00$cphRoblox$ctl00" src="/img/questionmark-25x25.png"
+                        onclick="window.open('/Parents/BuildersClub.aspx');" style="width:25px;border-width:0px;position: absolute;
+                            right: 35px; top: 3px" />
+                    <div onclick="showBC();" class="bc_iconset bc_icon" style="position: absolute; right: 0px;
+                            cursor: pointer; border: none" title="Classic Builders Club">
+                    </div>
+                </span>
+
+                <input type="hidden" id="HasBCMembership" value="False" />
+
+                <div id="BCRow" style="float: left; margin-bottom: 10px">
+                    <div style="height: 35px;">
+                        <h1 id="BuildersClubTitle" style="width: 480px; margin: 0;">
+                            Builders Club</h1>
+                    </div>
+                    <div id="OneMonth" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_BCMonthlyImageLinkButton"
+                                href="/upgrades/paymentmethods.aspx?ap=<%= page.bcId %>">
+                                <div id="ctl00_cphRoblox_BCMonthlyImageLink" class="upgrades_enabled bcmonthly">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+
+                    <div id="SixMonths" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_BC6MonthsImageLinkButton" href="#"
+                                title="This membership option is no longer available!">
+                                <div id="ctl00_cphRoblox_BC6MonthsImageLink" class="upgrades_disabled bc6">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+                    <div id="TwelveMonths" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_BC12MonthsImageLinkButton" href="#"
+                                title="This membership option is no longer available!">
+                                <div id="ctl00_cphRoblox_BC12MonthsImageLink" class="upgrades_disabled bc12">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+                    <div id="Lifetime" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_BCLifetimeImageLinkButton" href="#"
+                                title="This membership option is no longer available!">
+                                <div id="ctl00_cphRoblox_BCLifetimeImageLink" class="upgrades_disabled bclife">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div id="TBCRow" style="float: left; margin-bottom: 10px">
+                    <div style="clear: both; height: 35px;">
+                        <h1 id="TurboBuildersClubTitle" style="margin: 0;">
+                            <span class="TurboSpan">Turbo</span> Builders Club</h1>
+                    </div>
+                    <div id="TurboMonthly" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_TBCMonthlyImageLinkButton"
+                                href="/upgrades/paymentmethods.aspx?ap=<%= page.tbcId %>">
+                                <div id="ctl00_cphRoblox_TBCMonthlyImageLink" class="upgrades_enabled tbcmonthly">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+
+                    <div id="TurboSixMonths" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_TBC6MonthsImageLinkButton"
+                                title="This membership option is no longer available!" href="#">
+                                <div id="ctl00_cphRoblox_TBC6MonthsImageLink" class="upgrades_disabled tbc6">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+                    <div id="TurboTwelveMonths" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_TBC12MonthsImageLinkButton" href="#"
+                                title="This membership option is no longer available!">
+                                <div id="ctl00_cphRoblox_TBC12MonthsImageLink" class="upgrades_disabled tbc12">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+                    <div id="TurboLifetime" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_TBCLifetimeImageLinkButton" href="#"
+                                title="This membership option is no longer available!">
+                                <div id="ctl00_cphRoblox_TBCLifetimeImageLink" class="upgrades_disabled tbclife">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div id="OBCRow" style="float: left; margin-bottom: 10px">
+                    <div style="clear: both; height: 35px;">
+                        <h1 id="OutrageousBuildersClubTitle" style="margin: 0;">
+                            <span class="OutrageousSpan">Outrageous</span> Builders Club
+                        </h1>
+                    </div>
+                    <div id="OutrageousMonthly" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_OBCMonthlyImageLinkButton"
+                                href="/upgrades/paymentmethods.aspx?ap=<%= page.obcId %>">
+                                <div id="ctl00_cphRoblox_OBCMonthlyImageLink" class="upgrades_enabled obcmonthly">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+
+                    <div id="OutrageousSixMonths" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_OBC6MonthsImageLinkButton" href="#"
+                                title="This membership option is no longer available!">
+                                <div id="ctl00_cphRoblox_OBC6MonthsImageLink" class="upgrades_disabled obc6">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+                    <div id="OutrageousTwelveMonths" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_OBC12MonthsImageLinkButton" href="#"
+                                title="This membership option is no longer available!">
+                                <div id="ctl00_cphRoblox_OBC12MonthsImageLink" class="upgrades_disabled obc12">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+                    <div id="OutrageousLifetime" class="MembershipButton">
+                        <div class="BuildersClubButton">
+                            <a id="ctl00_cphRoblox_OBCLifetimeImageLinkButton" href="#"
+                                title="This membership option is no longer available!">
+                                <div id="ctl00_cphRoblox_OBCLifetimeImageLink" class="upgrades_disabled obclife">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="BCButtonLabel">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <br />
+        <br />
+        <div style="height: 15px; clear: both">
+            &nbsp;</div>
+        <!-- Spacer -->
+        <table id="upgrades-membership-options" style="padding-top: 10px;">
+            <thead>
+                <tr>
+                    <th scope="col">
+                    </th>
+                    <th scope="col" class="LeftText">
+                        Benefits
+                    </th>
+                    <th scope="col" class="leftBorder">
+                        <p style="line-height: 20px">
+                            Free Account</p>
+                    </th>
+                    <th scope="col" class="leftBorder BCColumn">
+                        <div>
+                            <p style="line-height: 20px">
+                                Builders Club</p>
+                        </div>
+                    </th>
+                    <th scope="col" class="leftBorder">
+                        <div>
+                            <p style="line-height: 20px">
+                                Turbo Builders Club</p>
+                        </div>
+                    </th>
+                    <th scope="col" class="leftBorder">
+                        <div>
+                            <p style="line-height: 20px">
+                                Outrageous Builders Club</p>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="odd">
+                    <td>
+                        <div class="icons money_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Monthly ROBUX
+                    </td>
+                    <td class="leftBorder">
+                        None
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        450 R$
+                    </td>
+                    <td class="leftBorder">
+                        1,000 R$
+                    </td>
+                    <td class="leftBorder">
+                        <span style="font-weight:700;">2,200 R$</span>
+                    </td>
+                </tr>
+                <tr class="even">
+                    <td>
+                        <div class="icons personalserver_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Personal Servers
+                    </td>
+                    <td class="leftBorder">
+                        No
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        Yes
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                </tr>
+                <!--
+                <tr>
+                    <td>
+                        <div class="icons maps_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Active Places
+                    </td>
+                    <td class="leftBorder">
+                        100
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        100
+                    </td>
+                    <td class="leftBorder">
+                        100
+                    </td>
+                    <td class="leftBorder">
+                        100
+                    </td>
+                </tr>
+                -->
+                <tr class="odd">
+                    <td>
+                        <div class="icons shirt_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Sell Stuff
+                    </td>
+                    <td class="leftBorder">
+                        No
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        Yes
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="icons ads_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        See Ads
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        No
+                    </td>
+                    <td class="leftBorder">
+                        No
+                    </td>
+                    <td class="leftBorder">
+                        No
+                    </td>
+                </tr>
+                <tr class="odd">
+                    <td>
+                        <div class="icons bc_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Virtual Hat
+                    </td>
+                    <td class="leftBorder">
+                        None
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        <div class="icons bc_icon">
+                        </div>
+                    </td>
+                    <td class="leftBorder">
+                        <div class="icons tbc_icon">
+                        </div>
+                    </td>
+                    <td class="leftBorder">
+                        <div class="icons obc_icon">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="icons gear_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Bonus Gear Item
+                    </td>
+                    <td class="leftBorder">
+                        No
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        No
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                </tr>
+                <tr class="odd">
+                    <td>
+                        <div class="icons money_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Signing Bonus
+                    </td>
+                    <td class="leftBorder">
+                        None
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        100 R$
+                    </td>
+                    <td class="leftBorder">
+                        100 R$
+                    </td>
+                    <td class="leftBorder">
+                        100 R$
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="icons groups_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Create Groups
+                    </td>
+                    <td class="leftBorder">
+                        No
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        Yes (100)
+                    </td>
+                    <td class="leftBorder">
+                        Yes (100)
+                    </td>
+                    <td class="leftBorder">
+                        Yes (100)
+                    </td>
+                </tr>
+                <tr class="odd">
+                    <td>
+                        <div class="icons groups_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Join Groups
+                    </td>
+                    <td class="leftBorder">
+                        Yes (5)
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        Yes (100)
+                    </td>
+                    <td class="leftBorder">
+                        Yes (100)
+                    </td>
+                    <td class="leftBorder">
+                        Yes (100)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="icons badges_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        Create Badges
+                    </td>
+                    <td class="leftBorder">
+                        No
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        Yes
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                </tr>
+                <tr class="odd">
+                    <td>
+                        <div class="icons beta_icon">
+                        </div>
+                    </td>
+                    <td class="LeftText">
+                        BC Beta Features
+                    </td>
+                    <td class="leftBorder">
+                        No
+                    </td>
+                    <td class="leftBorder BCColumn">
+                        Yes
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                    <td class="leftBorder">
+                        Yes
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div id="WindowsOnlyWarning">
+            <p>
+                For more information, read our
+                <a id="ctl00_cphRoblox_FAQHyperLink" href="/Parents/BuildersClub.aspx">Builders Club FAQs</a>.
+            </p>
+            <p>
+                All items and gear are virtual.</p>
+            </p>
+            <p>
+                All Sales are final. Please see our <a href="/info/TermsOfService.aspx">Terms &amp;
+                    Conditions</a> for more information.
+            </p>
+        </div>
+    </div>
+    <div id="RightColumn">
+        <div class="StandardTabWhite">
+            <span>Manage Account</span></div>
+        <div class="StandardBoxWhite" style="float: none">
+
+            <div id="ctl00_cphRoblox_LoggedOutPanel">
+
+                <div id="ManageAccountButton">
+                    <a href="/My/Account.aspx">
+                        <img src="/img/ManageAccountButton.png?v=2" name="manageaccountbuttonimg" />
+                    </a>
+                </div>
+                <p>
+                    If you forgot your username or password, or you want to cancel the membership of
+                    one or more accounts, please contact customer service at info@roblox.com.
+                </p>
+
+            </div>
+
+
+            <div id="bcPromo" class="modalPopup blueAndWhite"
+                style="width: 410px; min-height: 200px; display: none; *position:absolute; *top: -200px;">
+                <div id="Div1" class="simplemodal-close">
+                    <a onclick="BCPromo.close()" class="ImageButton closeBtnCircle_35h"
+                        style="cursor: pointer; margin-left:415px; position:absolute; top:-18px; left:-10px"></a>
+                </div>
+                <div style="padding: 0px 0px 10px 0px; text-align:center;">
+                    <div class="titleBar">
+                        Recurring Builders Club 1 cent Promo
+                    </div>
+                    <div style="padding: 0px 10px;">
+                        <div style="margin-top: 20px;">
+                            <div id="modal_success" class="SuccessBox"><img src="/img/thumbs-up.png"
+                                    alt="Success" /><span class="BoxTextAligned">You have successfully upgraded your
+                                    account!</span></div>
+                            <div style="float:left; padding-right:5px;">
+
+                                <img src="/img/bcmonthly.png" alt="Buy BC" />
+
+                            </div>
+                            <div style="display:inline; line-height:15px; margin-top:20px;">
+                                Sign up for recurring Builders Club and you will receive the first month for $0.01.
+                                Following the first month your credit card will be automatically billed for 5.95 per
+                                month for continuing Builders Club.
+                                You may cancel any time after trying Builders Club for 10 days.
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div style="clear: left; padding-top: 10px;">
+                            <a onclick="BCPromo.close()" style="color: Green; padding-right: 25px;">
+                                <span>No Thanks.</span>
+                            </a>
+                            <a href="/web/20120509194739/https://www.roblox.com/Upgrades/Payment.aspx?ap=1&amp;promo=473-4-31"
+                                class="GreenButton">
+                                <span>Take Me There NOW!</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <input name="ctl00$cphRoblox$BCPromo$PrepaidRedeemed" type="button"
+                    id="ctl00_cphRoblox_BCPromo_PrepaidRedeemed" style="display:none" />
+            </div>
+
+
+            <script type="text/javascript" language="javascript">
+                BCPromo = new Object();
+                BCPromo.open = function () {
+                    var modalProperties = { overlayClose: true, escClose: true, opacity: 80, overlayCss: { backgroundColor: "#000" } };
+                    $("#bcPromo").modal(modalProperties);
+                }
+                BCPromo.close = function () {
+                    $.modal.close(".bcPromo");
+                }
+                $(function () {
+                    if ("False" == "True") { BCPromo.open(); }
+                });
+
+            </script>
+
+
+        </div>
+
+
+        <div class="StandardBoxWhite" style="text-align:center;margin-bottom:8px;"><a class="BuyRobuxBtn"
+                href="https://www.roblox.com/Upgrades/Robux.aspx"></a></div>
+
+        <div id="RobuxBCPane" class="StandardBoxWhite" style="text-align:center;">
+            <div class="cardPanelLeft">
+                <a href="https://www.roblox.com/Gamecard"><img src="/img/gift-card.png" /></a>
+            </div>
+            <div class="cardPanelRight">
+
+                <a href="https://www.roblox.com/Gamecard"><img class="centeredImage" src="/img/walmart.png" /></a><br />
+
+                <a href="https://www.roblox.com/Gamecard"><img class="centeredImage"
+                        src="/img/gamestop.png" /></a><br />
+
+                <a href="https://www.roblox.com/Gamecard"><img class="centeredImage" src="/img/target.png" /></a><br />
+
+                <a href="https://www.roblox.com/Gamecard"><img class="centeredImage" src="/img/711.png" /></a>
+                <a href="https://www.roblox.com/Gamecard" style="margin-left:8px;"><img class="centeredImage"
+                        src="/img/best-buy.png" /></a><br />
+
+                <a href="https://www.roblox.com/Gamecard"><img class="centeredImage" src="/img/cvs.png" /></a><br />
+
+            </div>
+            <div id="GameCardButtonContainer">
+                <a href="https://www.roblox.com/Gamecard" class="GreenButton"><span>ROBLOX
+                        Card</span></a>
+            </div>
+        </div>
+
+
+        <a href="https://www.roblox.com/Upgrades/GiftCards.aspx">
+            <div id="BCGiftCardXLink" style="height:90px; width:285px;"></div>
+        </a>
+
+
+        <div class="StandardBoxWhite" style="text-align:center; overflow:hidden;">
+            <div id="ctl00_cphRoblox_rbxMicroPayBCPane_MicroPayLink" class="PayTypesLeftColumn"
+                style="padding-top: 8px;">
+                <a href="/web/20120509194739/https://www.roblox.com/Micropay"><img alt="Boku" src="/img/boku.png" /></a>
+            </div>
+            <div class="PayTypesLeftColumn">
+                <a href="https://www.roblox.com/RixtyPIN"><img alt="Rixty" src="/img/rixty.png" /></a>
+            </div>
+            <div class="PayTypesRightColumn" style="float:none; margin-left:auto;margin-right:auto;">
+                <a href="https://itunes.apple.com/us/app/roblox-mobile/id431946152?mt=8"><img alt="iTunes"
+                        src="/img/itunes.png" /></a>
+            </div>
+            <div class="PayTypesCenter"></div>
+        </div>
+
+
+        <div class="StandardTabWhite"><span>Parents</span></div>
+        <div id="ParentsBCPane" class="StandardBoxWhite">
+            <p style="clear: left;">Learn more about builders club and how we help keep kids safe.</p>
+            <p style="text-align:center;"><a href="/Parents/BuildersClub.aspx" class="GreenButton"
+                    style="margin:15px 0;"><span>ROBLOX Parents</span></a></p>
+            <h3>Other Accounts</h3>
+            <p>To cancel the membership for one or more other accounts, please contact customer service at <a
+                    href="mailto:info@roblox.com">info@roblox.com</a>.</p>
+            <p><span class="StrongRed">Please Note:</span> You can cancel monthly recurring membership any time before
+                the renewal date. 6 and 12 month memberships cannot be canceled. Memberships are not refundable.</p>
+
+        </div>
+        <!-- 
+        <div class="StandardTabWhite">
+            <span>Refer a Friend</span></div>
+        <div id="ctl00_cphRoblox_ReferAFriend" class="StandardBoxWhite">
+            <a href="/https://www.roblox.com/My/Share/ReferralLeaderboards.aspx" title="Referral Leaderboards" style="text-decoration: none;
+                    cursor: pointer"></a>
+            <p style="clear: left">
+                Win a <span class="StrongRed">
+                    400
+                    ROBUX bonus</span> when you invite friends to join the Builders Club. Remember
+                to give them your account name: your friends will need to tell us who referred them.
+            </p>
+        </div>
+        -->
+
+
+        <div class="StandardTabWhite"><span>Please Upgrade Me!!</span></div>
+        <div id="UpgradeMeBCPane" class="StandardBoxWhite">
+            <h3>Need Builders Club Now?</h3>
+            <p style="clear: left">Fill out our fun, interactive form, and print it out or send it to your friends and
+                family!</p>
+            <p style="text-align:center"><a
+                    href="/web/20120509194739/https://www.roblox.com/My/Share/PleaseUpgradeMe.aspx" class="GreenButton"
+                    style="margin:6px 0;"><span>Please Upgrade Me!</span></a></p>
+            <p><span class="StrongRed">Warning:</span> "Please Upgrade Me!" may be very convincing.</p>
+        </div>
+
+
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>
+
+
+<div id="BuyBCComparePanel" class="modalPopup blueAndWhite"
+    style="width: 450px; min-height: 100px; display: none; *position:relative; *top:-150px;">
+    <div class="titleBar">
+        Product Selected
+    </div>
+    <div id="merker"></div>
+    <div id="simplemodal-close" class="simplemodal-close">
+        <a id="ctl00_cphRoblox_BCCompareModal_A3" class="ImageButton closeBtnCircle_35h"
+            style="cursor: pointer; margin-left:437px; position:absolute; top:-15px;"></a>
+    </div>
+    <div id="BCCompareModal">
+
+
+        <div id="ctl00_cphRoblox_BCCompareModal_OldBCCompareModalUpdatePanel" class="BCCompareModalUpdatePanel">
+
+
+
+            <div id="BuyBCComparePanelTopInfo">
+                <div id="ComparePanelImg" style="text-align: center;">
+                    <img id="ctl00_cphRoblox_BCCompareModal_BuyBCComparePanelImageOld" src="#"
+                        style="border-width:0px;" />
+                </div>
+                <span id="ctl00_cphRoblox_BCCompareModal_BCCompareConversionInfoOld"></span>
+            </div>
+
+            <div style="height:10px;" visible="False"></div>
+
+            <table id="ctl00_cphRoblox_BCCompareModal_BuyBCComparePanelTable" class="BuyBCComparePanelTable"
+                cellspacing="0" cellpadding="0" align="Center" border="0" style="border-collapse:collapse;">
+                <tr class="BCCompareHeaderRow">
+                    <th></th>
+                    <th>Current Membership</th>
+                    <th style="width:110px;">New Membership</th>
+                </tr>
+                <tr class="BCCompareRowOdd">
+                    <td>
+                        Recurring
+                        <image style="width: 25px; border-width: 0px; margin-left:15px;"
+                            src="/img/questionmark-25x25.png" id="RecurHelp" class="RecurHelpTipsy" title=""
+                            visible="False"></image>
+                    </td>
+                    <td id="ctl00_cphRoblox_BCCompareModal_recurringCurrent">No</td>
+                    <td id="ctl00_cphRoblox_BCCompareModal_recurringNew">No</td>
+                </tr>
+                <tr class="BCCompareRowEven">
+                    <td>Expiration / Renewal Date</td>
+                    <td id="ctl00_cphRoblox_BCCompareModal_expireCurrent">xx/xx/xx</td>
+                    <td id="ctl00_cphRoblox_BCCompareModal_expireNew">xx/xx/xx</td>
+                </tr>
+                <tr class="BCCompareRowOdd">
+                    <td>Turbo</td>
+                    <td id="ctl00_cphRoblox_BCCompareModal_turboCurrent"></td>
+                    <td id="ctl00_cphRoblox_BCCompareModal_turboNew"></td>
+                </tr>
+                <tr class="BCCompareRowEven">
+                    <td>Outrageous</td>
+                    <td id="ctl00_cphRoblox_BCCompareModal_outrageousCurrent"></td>
+                    <td id="ctl00_cphRoblox_BCCompareModal_outrageousNew"></td>
+                </tr>
+            </table>
+
+            <div id="BCCompareButtons" style="height:50px">
+                <a href="PaymentMethods.aspx?ap=0" id="ctl00_cphRoblox_BCCompareModal_OldPurchaseLink"
+                    class="MediumButton" style="cursor: pointer; text-decoration:none;">Purchase</a>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    function BCCompareClick(preloaded) {
+        if (preloaded == null) { preloaded = false; }
+        if ($('#HasBCMembership').length > 0 && $('#HasBCMembership')[0].value == "False") { return; }
+        var modalProperties = { overlayClose: true, escClose: true, opacity: 80, overlayCss: { backgroundColor: "#000" } };
+        if (!preloaded) {
+            $('.BCCompareModalUpdatePanel').html('<div style="background: url(/images/Spinners/spinner100x100.gif) center no-repeat;height:420px;width:100%;" >&nbsp;</div>');
+        }
+        $("#BuyBCComparePanel").modal(modalProperties);
+    }
+</script>
+
+
+</div>
+</div>
+
+<%- include('../../footer'); %>

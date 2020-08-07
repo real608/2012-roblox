@@ -1,0 +1,56 @@
+<%- include('../header-empty'); %>
+<% 
+let eTit = 'Unexpected error with your request';
+let eDesc = 'Please try again after a few moments.';
+let extraData = '';
+let stackTrace = '';
+let contactCs = true;
+
+if (typeof page === 'object' && page && typeof page.code === 'number') {
+    let code = page.code;
+    if (code === 404 || code === 410) {
+        eTit = 'Requested page not found';
+        eDesc = 'You may have clicked an expired link or mistyped the address.';
+        extraData = 'Request URL: '+(typeof page.url === 'string'  ? page.url : '/')
+        contactCs = false;
+    }
+}
+
+if (typeof page === 'object' && typeof page.error === 'object' && page.error)  {
+    stackTrace = page.error;
+    if (typeof stackTrace.stack === 'string') {
+        stackTrace = stackTrace.stack;
+    }else if (typeof stackTrace.message === 'string') {
+        stackTrace = stackTrace.message;
+    }else{
+        stackTrace = JSON.stringify(stackTrace);
+    }
+}
+if (process.env.NODE_ENV === 'production')  {
+    stackTrace = '';
+}
+
+%>
+<div id="ErrorPage">
+    <img src="/img/alert.png" alt="Alert" class="ErrorAlert" />
+
+    <h1><%= eTit %></h1>
+    <h3><%= eDesc %></h3>
+    <h4 style="display:block;"><br><%= extraData %></h4>
+    <p style="display:block;text-align:left;white-space:pre-wrap;"><%= stackTrace %></p>
+    <% if (typeof contactCs === 'boolean' && contactCs) { %>
+    <p>If you continue to receive this page, please contact customer service at <a
+            href="mailto:info@roblox.com">info@roblox.com</a>.</p>
+    <% } %>
+    <pre><span id="ctl00_cphRoblox_errorMsgLbl"></span></pre>
+
+
+    <div class="divideTitleAndBackButtons">&nbsp;</div>
+
+    <div class="CenterNavigationButtonsForFloat">
+        <a class="GoToPreviousPageButton" title="Go to Previous Page Button" onclick="history.back();return false;"
+            href="#"></a>
+        <a class="ReturnHomeButton" title="Return Home" href="/Default.aspx"></a>
+    </div>
+</div>
+<%- include('../footer'); %>

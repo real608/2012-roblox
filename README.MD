@@ -26,6 +26,11 @@ The goal of this project is to completely recreate the 2012 Roblox website with 
     - Allow project to use a custom base URL for the forums service, so that all projects hosted independantly can connect to one centralized forum
 - Item comment and game comment system
     - Same base URL idea as forum system (above)
+- Games
+    - ✅ Games.aspx (sort, discovery, search, etc)
+    - Game.aspx (info for games)
+    - Join games without visiting roblox.com
+        - This might be impossible (without a browser extension) - i have to investigate more
 - Misc
     - ✅ OBC theme
     - Force avatars renders to be R6 (and prevent rthro) through new try on endpoints (or through ThreeJS)
@@ -43,11 +48,11 @@ These are features that some people would love this project to have, however, th
 - Parent accounts (Although likely not impossible, I don't want to bother with this)
 
 ## Get Started
-1. Install node, install redis, clone this repo, and run `npm install`.
+1. Install node, install redis, clone this repo, cd into "www" and run `npm install`.
 
-2. Next, create a file called "cookies.txt" in the root directory of the project with at least one ".ROBLOSECURITY" cookie (with each cookie seperated by `\n` or `\r\n`).
+2. Next, create a file called "cookies.txt" in the root directory of the repo with at least one ".ROBLOSECURITY" cookie (with each cookie seperated by `\n` or `\r\n`).
 
-3. Create a file called `config.json`. Read `src/helpers/Config.ts` IWebsiteConfiguration for more information, but here's the gist of it:
+3. Create a file called `config.json`in the "www" folder. Read `src/helpers/Config.ts` IWebsiteConfiguration for more information, but here's the gist of it:
 
 ```json
     {

@@ -1,0 +1,22 @@
+{
+    "name": "avatar-render",
+    "version": "1.0.0",
+    "description": "Avatar render service based off roblox web endpoints",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "GPL-3.0",
+    "dependencies": {
+        "@tsed/common": "^5.62.0",
+        "@tsed/platform-express": "^5.62.0",
+        "@types/compression": "^1.7.0",
+        "@types/cookie-parser": "^1.4.2",
+        "@types/method-override": "0.0.31",
+        "compression": "^1.7.4",
+        "cookie-parser": "^1.4.5",
+        "method-override": "^3.0.0"
+    }
+}
