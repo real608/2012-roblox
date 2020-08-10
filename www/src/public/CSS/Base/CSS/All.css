@@ -7180,7 +7180,7 @@ div.GamesInfoIcon {
 }
 
 .AllowedGearRepeater_Container div.GamesInfoIcon {
-    background: url(/web/20120511032300im_/http://www.roblox.com/images/CategoryIcons/CategorySprite.png);
+    background: url(/img/CategorySprite.png);
 }
 
 .AssetGenreRepeater_Container div.GamesInfoIcon {
@@ -9341,7 +9341,7 @@ div.VisitButtonsRight a.BuildSolo {
     cursor: pointer;
 }
 .SignupRedButton {
-    background-image: url("/web/20120511032300im_/http://www.roblox.com/images/Buttons/btn-signup.png");
+    background-image: url("/img/btn-signup.png");
     height: 50px;
     width: 111px;
 }
@@ -10052,7 +10052,7 @@ a.seemoregames:hover {
     padding-bottom: 2px;
 }
 .ReportAbuse .AbuseButton a:hover {
-    background: url("/web/20120511032300im_/http://www.roblox.com/images/cssspecific/rbx2/abuse.png") no-repeat scroll 0 2px transparent;
+    background: url("/img/abuse-2.png") no-repeat scroll 0 2px transparent;
     color: #F00;
 }
 .ReportAbuse img {
@@ -14610,7 +14610,7 @@ div.GiftCards {
     padding-bottom: 2px;
 }
 .ReportAbuse .AbuseButton a:hover {
-    background: url("/web/20120511032300im_/http://www.roblox.com/images/cssspecific/rbx2/abuse.png") no-repeat scroll 0 2px transparent;
+    background: url("/img/abuse-2.png") no-repeat scroll 0 2px transparent;
     color: #F00;
 }
 .ReportAbuse img {

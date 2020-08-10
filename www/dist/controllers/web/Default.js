@@ -164,6 +164,47 @@ let DefaultController = class DefaultController extends base_1.default {
             });
         });
     }
+    gamePage(res, req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let keys = Object.getOwnPropertyNames(req.query).filter(model.FilterVars);
+            // @ts-ignore
+            let placeId = parseInt(req.query[keys[0]], 10);
+            if (!Number.isInteger(placeId)) {
+                throw new this.BadRequest('InvalidPlaceId');
+            }
+            const productInfo = yield this.Catalog.getProductInfo(placeId);
+            if (productInfo.AssetTypeId !== 9) {
+                return res.redirect(301, '/Item.aspx?id=' + placeId);
+            }
+            let dateFormat = `M[/]D[/]YYYY h:mm:ss A`;
+            let updatedAtFormat = this.moment(productInfo.Updated).format(dateFormat);
+            const title = `${productInfo.Name}, a Free Game by ${productInfo.Creator.Name} - ROBLOX (updated ${updatedAtFormat})`;
+            const desc = `${title}: ${productInfo.Description}`;
+            let univData = yield this.Games.getPlaceInfo(placeId);
+            let extraInfo = (yield this.Games.multiGetGameInfo([univData.universeId]))[0];
+            let favorites = yield this.Catalog.countFavorites(placeId);
+            let similarGames = yield this.Catalog.getSimilar(placeId, 9, 5);
+            let similarRandom = yield this.Catalog.getSimilar(placeId);
+            return new vm.Default({
+                name: productInfo.Name,
+                description: productInfo.Description,
+                creatorId: productInfo.Creator.Id,
+                creatorName: productInfo.Creator.Name,
+                creatorType: productInfo.Creator.CreatorType,
+                placeId,
+                created: this.moment(productInfo.Created).format(`M/D/YYYY`),
+                updated: this.moment(productInfo.Updated).fromNow(),
+                visits: extraInfo.visits,
+                favorites,
+                similarGames,
+                similarRandom,
+            }, {
+                title: title,
+                description: desc,
+                keywords: `virtual good ${title} items, ROBLOX ${title}`,
+            });
+        });
+    }
     itemPage(res, assetId, backupAssetIdOne, backupAssetIdTwo, backupAssetIdThree, backupAssetIdFour, backupAssetIdFive, cookie) {
         return __awaiter(this, void 0, void 0, function* () {
             assetId = assetId || backupAssetIdOne || backupAssetIdTwo || backupAssetIdThree || backupAssetIdFour || backupAssetIdFive;
@@ -273,7 +314,7 @@ let DefaultController = class DefaultController extends base_1.default {
             data.createdAtFormat = createdAtFormat;
             data.title = `${data.name}, a ${data.category} by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat})`;
             data.keywords = `virtual good ${data.name}, a ${data.category} by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat}) items, ROBLOX ${data.name}, a ${data.category} by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat})`;
-            data.description = `${data.name}, a Hat by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat}): ${data.description}`;
+            data.description = `${data.name}, a ${data.category} by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat}): ${data.description}`;
             data.image = false;
             const newVm = new vm.Default({});
             for (const entry of Object.getOwnPropertyNames(data)) {
@@ -401,6 +442,18 @@ __decorate([
     __metadata("design:paramtypes", [String, String, String]),
     __metadata("design:returntype", Promise)
 ], DefaultController.prototype, "GamesPage", null);
+__decorate([
+    common_1.Get('/Game.aspx'),
+    common_1.Get('/Game/Default.aspx'),
+    common_1.Render('pages/game.ejs'),
+    swagger_1.Summary('Game page'),
+    common_1.Use(middleware.Auth.AuthenticateRequest),
+    __param(0, common_1.Res()),
+    __param(1, common_1.Req()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], DefaultController.prototype, "gamePage", null);
 __decorate([
     common_1.Get('/Item.aspx'),
     swagger_1.Summary('Item page'),

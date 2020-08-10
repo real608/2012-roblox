@@ -49,4 +49,10 @@ export default class GamesService extends base {
         return this.get(`https://games.roblox.com/v1/games/list?${params}`);
     }
 
+    @base.AddCookie()
+    public async getPlaceInfo(placeId: number): Promise<{ universeId: number; isPlayable: boolean; reasonProhibited: string; }> {
+        let univData = (await this.get('https://games.roblox.com/v1/games/multiget-place-details?placeIds=' + placeId))[0]
+        return univData;
+    }
+
 }

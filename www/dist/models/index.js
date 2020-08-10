@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Economy = exports.BuildersClub = exports.Users = exports.Catalog = exports.Auth = exports.Error = void 0;
+exports.Economy = exports.BuildersClub = exports.Users = exports.Catalog = exports.Auth = exports.FilterVars = exports.Error = void 0;
 const Auth = require("./Auth");
 exports.Auth = Auth;
 const Catalog = require("./Catalog");
@@ -38,4 +38,16 @@ __decorate([
     __metadata("design:type", ErrorDetails)
 ], Error.prototype, "error", void 0);
 exports.Error = Error;
+let okIdTypes = [
+    'id',
+    'gameid',
+    'universeid',
+    'placeid',
+    'itemid',
+    'assetid',
+    'productid',
+];
+exports.FilterVars = (key) => {
+    return okIdTypes.includes(key.toLowerCase());
+};
 //# sourceMappingURL=index.js.map

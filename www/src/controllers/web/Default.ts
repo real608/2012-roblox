@@ -1,4 +1,4 @@
-import { Controller, Get, QueryParams, Res, Render, PathParams, Required, UseBefore, Locals, Use } from '@tsed/common';
+import { Controller, Get, QueryParams, Res, Render, PathParams, Required, UseBefore, Locals, Use, Req } from '@tsed/common';
 import { Summary, Description } from '@tsed/swagger'
 import base from '../base';
 import * as vm from '../../viewmodels';
@@ -195,6 +195,55 @@ export class DefaultController extends base {
         });
     }
 
+    @Get('/Game.aspx')
+    @Get('/Game/Default.aspx')
+    @Render('pages/game.ejs')
+    @Summary('Game page')
+    @Use(middleware.Auth.AuthenticateRequest)
+    public async gamePage(
+        @Res() res: Res,
+        @Req() req: Req,
+    ) {
+        let keys = Object.getOwnPropertyNames(req.query).filter(model.FilterVars);
+        // @ts-ignore
+        let placeId = parseInt(req.query[keys[0]], 10);
+        if (!Number.isInteger(placeId)) {
+            throw new this.BadRequest('InvalidPlaceId')
+        }
+        const productInfo = await this.Catalog.getProductInfo(placeId);
+        if (productInfo.AssetTypeId !== 9) {
+            return res.redirect(301, '/Item.aspx?id=' + placeId);
+        }
+        let dateFormat = `M[/]D[/]YYYY h:mm:ss A`;
+        let updatedAtFormat = this.moment(productInfo.Updated).format(dateFormat);
+        const title = `${productInfo.Name}, a Free Game by ${productInfo.Creator.Name} - ROBLOX (updated ${updatedAtFormat})`;
+        const desc = `${title}: ${productInfo.Description}`
+        let univData = await this.Games.getPlaceInfo(placeId)
+        let extraInfo = (await this.Games.multiGetGameInfo([univData.universeId]))[0];
+        let favorites = await this.Catalog.countFavorites(placeId);
+
+        let similarGames = await this.Catalog.getSimilar(placeId, 9, 5)
+        let similarRandom = await this.Catalog.getSimilar(placeId)
+        return new vm.Default({
+            name: productInfo.Name,
+            description: productInfo.Description,
+            creatorId: productInfo.Creator.Id,
+            creatorName: productInfo.Creator.Name,
+            creatorType: productInfo.Creator.CreatorType,
+            placeId,
+            created: this.moment(productInfo.Created).format(`M/D/YYYY`),
+            updated: this.moment(productInfo.Updated).fromNow(),
+            visits: extraInfo.visits,
+            favorites,
+            similarGames,
+            similarRandom,
+        }, {
+            title: title,
+            description: desc,
+            keywords: `virtual good ${title} items, ROBLOX ${title}`,
+        });
+    }
+
     @Get('/Item.aspx')
     @Summary('Item page')
     @Render('pages/item.ejs')
@@ -324,7 +373,7 @@ export class DefaultController extends base {
 
         data.title = `${data.name}, a ${data.category} by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat})`;
         data.keywords = `virtual good ${data.name}, a ${data.category} by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat}) items, ROBLOX ${data.name}, a ${data.category} by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat})`;
-        data.description = `${data.name}, a Hat by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat}): ${data.description}`;
+        data.description = `${data.name}, a ${data.category} by ${data.creatorName} - ROBLOX (updated ${updatedAtFormat}): ${data.description}`;
         data.image = false;
 
         const newVm = new vm.Default({});

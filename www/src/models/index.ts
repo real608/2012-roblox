@@ -17,6 +17,19 @@ export class Error {
     error: ErrorDetails;
 }
 
+let okIdTypes = [
+    'id',
+    'gameid',
+    'universeid',
+    'placeid',
+    'itemid',
+    'assetid',
+    'productid',
+]
+export const FilterVars = (key: string): boolean => {
+    return okIdTypes.includes(key.toLowerCase());
+}
+
 export {
     Auth,
     Catalog,

@@ -1,0 +1,529 @@
+<%- include('../header'); %>
+
+
+
+<div id="ItemContainer" class="PlaceItemContainer">
+    <div id="Item" class="StandardBox PlaceItem" style="width: 709px; min-height:350px;">
+        <div id="Details" style="margin: 5px 10px">
+            <div id="placeContainer">
+                <div class="item-header">
+                    <div style="float:left;width: 350px;overflow:hidden;">
+                        <%= page.name %>
+                    </div>
+
+                </div>
+                <div style="clear:both;height:1px;"></div>
+                <div id="Thumbnail_Place" style="margin-bottom:12px;cursor:pointer;position:relative;"
+                    placeid="<%= page.placeId %>">
+
+
+                    <style type="text/css">
+                        .youTubeVideoOverlay {
+                            position: absolute;
+                            top: 0px;
+                            left: 0px;
+                            width: 120px;
+                            height: 70px;
+                            z-index: 5;
+                            cursor: pointer;
+                            background: white;
+                            opacity: 0.0;
+                            filter: alpha(opacity=0.0);
+                        }
+
+                        .SelectedYouTubeGalleryIcon {
+                            top: -3px;
+                            margin: 2px !important;
+                            /** !important makes sure we override the margin in divSmallGalleryItem **/
+                            border: 3px solid black;
+                            /** If you change this border size, you need to change the margin, as well as the top value **/
+                        }
+
+                        .RemoveYouTubeGalleryImage {
+                            cursor: pointer;
+                            position: absolute;
+                            top: -10px;
+                            right: -10px;
+                            z-index: 6;
+                            /** Make sure this is higher than z-index of youTubeVideoOverlay **/
+                        }
+
+                        .divSmallGalleryItem {
+                            height: 70px;
+                            width: 120px;
+                            float: left;
+                            position: relative;
+                            margin: 5px;
+                        }
+
+                        #divSmallGalleryItemBox {
+                            width: 420px;
+                            height: 100px;
+                            position: relative;
+                            overflow-x: auto;
+                            overflow-y: hidden;
+                        }
+
+                        #divSmallGalleryScrollContainer {
+                            margin: 0px auto;
+                            margin-top: 5px;
+                            margin-bottom: 5px;
+                            /** Allows for scroll bar **/
+                            display: inline-block;
+                            width: 0px;
+                            *display: inline;
+                            *zoom: 1;
+                        }
+
+                        .smallGalleryThumbItem {
+                            float: left;
+                        }
+                    </style>
+
+                    <div style="margin: 0px auto; width: 420px">
+                        <div id="ItemThumbnail" style="height:230px; width: 420px">
+                            <div id="bigGalleryThumbItem" style="position: absolute;">
+
+
+                                <a id="ctl00_cphRoblox_rbxRichMediaThumbDisplay_rbxGalleryAssetThumbnail_rbxAssetImage"
+                                    title="<%= page.name %>"
+                                    onclick="__doPostBack('ctl00$cphRoblox$rbxRichMediaThumbDisplay$rbxGalleryAssetThumbnail$rbxAssetImage','')"
+                                    style="display:inline-block;height:230px;width:420px;cursor:pointer;"><img
+                                        src="https://www.roblox.com/thumbs/asset.ashx?width=420&height=230&assetid=<%= page.placeId %>"
+                                        height="230" width="420" border="0"
+                                        onerror="return Roblox.Controls.Image.OnError(this)"
+                                        alt="<%= page.name %>" /></a>
+
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+                <div id="ctl00_cphRoblox_PlayGames" class="PlayGames">
+                    <div class="alignCenter">
+
+                        <div class="VisitButtonsLeftCentered">
+                            <div id="ctl00_cphRoblox_VisitButtons_MultiplayerVisitButton"
+                                class="VisitButton VisitButtonPlay" placeid="<%= page.placeId %>">
+                                <a class="ImageButton MultiplayerVisit"></a>
+                            </div>
+                        </div>
+                        <div class="VisitButtonsRight">
+
+
+
+                        </div>
+
+
+                        <script type="text/javascript">
+                            var play_placeId = <%= page.placeId %>;
+                            function redirectPlaceLauncherToLogin() {
+                                location.href = "/login/default.aspx?ReturnUrl=" + encodeURIComponent("/PlaceItem.aspx?seoname=Welcome-to-the-Town-of-Robloxia-VIP-BACK-ON-SALE&id=<%= page.placeId %>");
+                            }
+                            function redirectPlaceLauncherToRegister() {
+                                location.href = "/login/NewAge.aspx?ReturnUrl=" + encodeURIComponent("/PlaceItem.aspx?seoname=Welcome-to-the-Town-of-Robloxia-VIP-BACK-ON-SALE&id=<%= page.placeId %>");
+                            }
+                            function fireEventAction(action) {
+                                RobloxEventManager.triggerEvent('rbx_evt_popup_action', { action: action });
+                            }
+                            $(function () {
+                                if (Roblox.Client.isIDE()) {
+                                    $('.VisitButtonEdit').show();
+                                }
+                            });
+                        </script>
+
+
+                        <div id="BCOnlyModal"
+                            style="width:470px;padding:10px;background:white;display:none;*position:absolute;*top:-150px">
+                            <div class="simplemodal-close">
+                                <a class="ImageButton closeBtnCircle_35h"
+                                    style="cursor: pointer;position:absolute; top:-15px; right:-15px"></a>
+                            </div>
+                            <div>
+                                <div style="margin-bottom:15px;font-size:16px">
+                                    <div style="float:left;width:150px">
+                                        <img src="/img/bc-only.png" />
+                                    </div>
+                                    <div style="float:left;width:295px;margin-left:5px">
+                                        <div style="font-size: 18px; font-weight: bold; padding:30px 0 10px;">
+                                            You need Builders Club for this!
+                                        </div>
+                                        <div>
+                                            Builders Club membership is required to play in this place.
+                                        </div>
+                                    </div>
+                                    <div style="clear:both; text-align:center;">
+                                        <a class="GreenButton"
+                                            href="/Upgrades/BuildersClubMemberships.aspx"><span>Upgrade
+                                                Now</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script type="text/javascript">
+                            function showBCOnlyModal(modalId) {
+                                var modalProperties = { overlayClose: true, escClose: true, opacity: 80, overlayCss: { backgroundColor: "#000" } };
+                                if (typeof modalId === "undefined")
+                                    $("#BCOnlyModal").modal(modalProperties);
+                                else
+                                    $("#" + modalId).modal(modalProperties);
+                            }
+                            $(document).ready(function () {
+                                $('#VOID').click(function () {
+                                    showBCOnlyModal("BCOnlyModal");
+                                    return false;
+                                });
+                            });
+                        </script>
+
+
+
+                    </div>
+                    <div style="clear:both; height:10px;"></div>
+                </div>
+
+
+
+            </div>
+
+            <div id="Summary" style="float: right; padding: 0px 7px 7px;">
+
+                <div style="height: 10px; padding-top: 10px;">
+
+                </div>
+
+
+                <div style="width: 250px; height: 135px;">
+                    <span id="Creator" class="Creator section" style="float:left;">
+                        <span class="Avatar">
+
+                            <a id="ctl00_cphRoblox_AvatarImage" class="tooltip-right" title="1dev2"
+                                href="<%= page.creatorType === "User" ? "/User" : "/Group/Group" %>.aspx?ID=<%= page.creatorId %>"
+                                style="display:inline-block;height:100px;width:100px;cursor:pointer;"><img
+                                    src="/Thumbnail/<%= page.creatorType %>.ashx?id=<%= page.creatorId %>" height="100"
+                                    width="100" border="0" onerror="return Roblox.Controls.Image.OnError(this)"
+                                    alt="<%= page.creatorName %>"
+                                    blankurl="http://t2ak.roblox.com/p1-blank-100x100.gif" />
+                                <% if (page.creatorType === 'User') { %>
+                                <img src="/api/v1/builders-club/users/<%= page.creatorId %>/redirect-to-icon"
+                                    align="left" style="position:relative;top:-19px;" />
+                                <% } %>
+                            </a>
+
+                        </span>
+                    </span>
+                    <span class="item-detail"
+                        style="display:inline-block; padding: 15px 0px 0px 12px; width:130px; overflow:hidden; font-family: Arial, Helvetica, Sans-Serif">
+                        <div>
+                            <span class="label creator-name">Creator:</span> <a id="ctl00_cphRoblox_CreatorHyperLink"
+                                href="<%= page.creatorType === "User" ? "/User" : "/Group/Group" %>.aspx?ID=<%= page.creatorId %>"><%= page.creatorName %></a>
+                        </div>
+                        <div>
+                            <span class="label">Created:</span> <%= page.created %>
+                        </div>
+                        <div id="LastUpdate">
+                            <span class="label">Updated:</span>
+                            <%= page.updated %></div>
+                        <div id="Favorited">
+                            <span class="label">Favorited:</span>
+                            <%= numberFormat(page.favorites) %> times</div>
+                        <div id="ctl00_cphRoblox_VisitedPanel" class="Visited">
+                            <span class="label">Visited:</span>
+                            <%= numberFormat(page.visits) %> times
+                        </div>
+
+                    </span>
+                </div>
+                <hr class="PlaceItemHR" style="margin-top:-20px;" />
+
+
+                <div id="GenresDiv" class="box section" style="display:inline-block;width:110px;float:left;">
+                    <div id="ctl00_cphRoblox_Genres">
+
+                        <div class="head label" style="font-weight:bold">Genres:</div>
+
+
+                        <div>
+
+
+
+
+
+
+
+                            <div id="ctl00_cphRoblox_GenresDisplayTest_AssetGenreRepeater_ctl03_AssetGenreRepeaterPanel"
+                                class="AssetGenreRepeater_Container">
+
+                                <div class="GamesInfoIcon Town and City"></div>
+                                <div><a href="/web/20120505135859/http://www.roblox.com/town-and-city-games">Town and
+                                        City</a></div>
+
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="ctl00_cphRoblox_GearAttributes" class="box section" style="display:inline-block;width:125px;">
+
+                    <div class="head label" style="font-weight:bold">Allowed Gear Types:</div>
+                    <div id="AllowedGearTypes">
+                        <div>
+
+
+
+
+                            <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div id="ctl00_cphRoblox_GearOptionsDisplay_AllowedGearRepeater_ctl06_AllowGearRepeaterPanel"
+                                    class="AllowedGearRepeater_Container">
+
+                                    <div class="GamesInfoIcon Music"></div>
+                                    <div>Musical Instrument</div>
+
+                                </div>
+
+
+
+
+
+                                <div id="ctl00_cphRoblox_GearOptionsDisplay_AllowedGearRepeater_ctl09_AllowGearRepeaterPanel"
+                                    class="AllowedGearRepeater_Container">
+
+                                    <div class="GamesInfoIcon PersonalTransport"></div>
+                                    <div>Personal Transport</div>
+
+                                </div>
+
+                                <div style="clear:both;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            if ($("#AllowedGearTypes").html().indexOf('GamesInfoIcon') == -1)
+                                $("#AllowedGearTypes").html('No Gear Allowed');
+                        });
+                    </script>
+
+                </div>
+
+
+
+
+
+                <div id="ctl00_cphRoblox_DescriptionPanel" class="section">
+
+                    <div id="DescriptionText" style="display:none"><%= page.description %></div>
+                    <pre id="PlaceDescription" class="body"
+                        style="max-height:54px; overflow: show; font-family: arial, helvetica, sans-serif;"><%= page.description.slice(0,50) %></pre>
+                    <script type="text/javascript">
+                        $(function () {
+                            var text = $("#DescriptionText").text();
+                            var maxChars = 82;
+                            var placeDesc = $("#PlaceDescription");
+
+                            function descShowMore() {
+                                placeDesc.html(text + '<div><a class="DescriptionSeeMore">See Less</a></div>')
+                                placeDesc.css("max-height", "5000px");
+                                $(".DescriptionSeeMore").click(descShowLess);
+                            }
+                            function descShowLess() {
+                                var newDescHtml = text.slice(0, maxChars) + '... ' + '<br /><a class="DescriptionSeeMore">See More</a>';
+                                placeDesc.css("max-height", "54px")
+                                placeDesc.html(newDescHtml);
+                                $(".DescriptionSeeMore").click(descShowMore);
+                            }
+                            if (text.length > maxChars) {
+                                descShowLess();
+                            }
+                        });
+                    </script>
+
+                </div>
+                <span class="ReportAbuse">
+                    <div id="ctl00_cphRoblox_AbuseReportButton1_AbuseReportPanel" class="ReportAbuse">
+
+                        <span class="AbuseIcon"><a id="ctl00_cphRoblox_AbuseReportButton1_ReportAbuseIconHyperLink"
+                                href="AbuseReport/Asset.aspx?ID=<%= page.placeId %>&amp;RedirectUrl=http%3a%2f%2fwww.roblox.com%2fPlaceItem.aspx%3fseoname%3dWelcome-to-the-Town-of-Robloxia-VIP-BACK-ON-SALE%26id%3d<%= page.placeId %>"><img
+                                    src="/web/20120505135859im_/http://www.roblox.com/images/abuse.PNG?v=2"
+                                    alt="Report Abuse" style="border-width:0px;" /></a></span>
+                        <span class="AbuseButton"><a id="ctl00_cphRoblox_AbuseReportButton1_ReportAbuseTextHyperLink"
+                                href="AbuseReport/Asset.aspx?ID=<%= page.placeId %>&amp;RedirectUrl=http%3a%2f%2fwww.roblox.com%2fPlaceItem.aspx%3fseoname%3dWelcome-to-the-Town-of-Robloxia-VIP-BACK-ON-SALE%26id%3d<%= page.placeId %>">Report
+                                Abuse</a></span>
+
+                    </div>
+                </span>
+
+            </div>
+            <div class="clear"></div>
+
+
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+
+    <div id="JoinRoblox" class="Ads_WideSkyscraper"
+        style="float:right; height:350px; width:160px; border: 1px solid #888; text-align:center; margin-bottom:10px;">
+        <div style="padding:20px 7px;">
+            <div style="font:normal 18px Arial, Helvetica, Sans-Serif; color:#666">Join ROBLOX</div>
+            <hr class="PlaceItemHR" />
+            <div style="text-align:left; font-size:13px;">
+                <div style="font-weight:bold;margin-top:15px;">By joining ROBLOX, you can:</div>
+                <ul style="padding-left:15px;line-height:1.5em;">
+                    <li>Make friends</li>
+                    <li>Change your character</li>
+                    <li>Make your own game</li>
+                    <li>Join groups</li>
+                    <li>Use gear items</li>
+                </ul>
+            </div>
+            <div style="margin-top:50px; text-align:center">
+                <a href="/login/NewAge.aspx">
+                    <div class="SignupRedButton" style="margin: 0 auto;"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () { $("#JoinRoblox").height($("#Item").height()); });
+    </script>
+    <div class="clear"></div>
+
+
+
+
+    <div>
+        <div>
+            <div style="margin-top: 10px;">
+
+                <div class="RecommendationHeader2">
+                    Recommended Games
+                    <a href="/Games.aspx" style="margin-left: 13px; font-size:.9em;">See All <span
+                            style="font-size:1.25em;">&#187;</span></a>
+                </div>
+                <hr style="width:890px;*margin-left:-10px;" class="PlaceItemHR" />
+                <div style="width:890px">
+
+                    <div style="font-size: x-small;"></div>
+                    <table id="ctl00_cphRoblox_AssetRec_dlAssets" cellspacing="0" align="Center" border="0"
+                        style="height:175px;width:890px;border-collapse:collapse;">
+                        <tr>
+                            <% for (const game of page.similarGames) { %>
+                            <td>
+                                <div class="WideAspectRatio" style="width: 140px; height: 165px; overflow: hidden;"
+                                    visible="False">
+                                    <div class="AssetThumbnail">
+                                        <a id="ctl00_cphRoblox_AssetRec_dlAssets_ctl00_AssetThumbnailHyperLink"
+                                            title="game.item.name" href="/Game.aspx?ID=<%= game.item.assetId %>"
+                                            style="display:inline-block;height:100px;width:160px;cursor:pointer;"><img
+                                                src="https://www.roblox.com/thumbs/asset.ashx?width=160&height=100&assetid=<%= game.item.assetId %>"
+                                                height="100" width="160" border="0"
+                                                onerror="return Roblox.Controls.Image.OnError(this)"
+                                                alt="<%= game.item.name %>" /></a>
+                                    </div>
+                                    <div class="AssetDetails">
+                                        <div class="AssetName">
+                                            <a id="ctl00_cphRoblox_AssetRec_dlAssets_ctl00_AssetNameHyperLinkPortrait"
+                                                href="/Game.aspx?ID=<%= game.item.assetId %>"><%= game.item.name %></a>
+                                        </div>
+                                        <div class="AssetCreator">
+                                            <span class="Label">Creator:</span> <span class="Detail"><a
+                                                    id="ctl00_cphRoblox_AssetRec_dlAssets_ctl00_CreatorHyperLinkPortrait"
+                                                    href="/<%= game.creator.creatorType === "User" ? "User" : "Group/Group" %>.aspx?ID=<%= game.creator.creatorId %>"><%= game.creator.name %>
+
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <% } %>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div id="FreeGames"><span><b>Other free games and items:</b></span>
+                <ul class="freegames" style="list-style: none; text-align: center;">
+                    <% for (const game of page.similarRandom) { %>
+                    <li style="display: inline; margin-right: 10px;">
+                        <a href="/item.aspx?ID=<%= game.item.assetId %>" title="<%= game.item.name %>">
+                            <%= game.item.name %>
+                        </a>
+                        <% } %>
+                </ul><span><b>Other game genres you may like:</b></span>
+                <ul class="freegames" style="list-style: none; text-align: center;">
+                    <li style="display: inline; margin-right: 10px;"><a href="adventure-games"
+                            title="Adventure games">Adventure games</a></li>
+                    <li style="display: inline; margin-right: 10px;"><a href="sports-games" title="Sports games">Sports
+                            games</a></li>
+                    <li style="display: inline; margin-right: 10px;"><a href="funny-games" title="Funny games">Funny
+                            games</a></li>
+                    <li style="display: inline; margin-right: 10px;"><a href="wild-west-cowboy-games"
+                            title="Wild West games">Wild West games</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+<script src="/js/pages/game.js"></script>
+<%- include('../footer'); %>
